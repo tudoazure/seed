@@ -16,22 +16,18 @@ app.configure(function () {
 // all environments
     app.set('port', process.env.PORT || 4199);
     app.use(connectAssets()); 
-    //app.set('views', path.join(__dirname, 'views'));
-    app.set('views', __dirname + '/app/views');
-    app.set('view engine', 'jade');
+    app.set('views', path.join(__dirname, 'app/views'));
+    app.engine('.html', require('ejs').renderFile);
+    app.set('view engine', 'html');
     app.use(express.favicon());
     app.use(express.logger('dev'));
     app.use(express.bodyParser());
-
     app.use(express.cookieParser());
-
-
-
     app.use(express.methodOverride());
 
     app.configure('development', function() {
     app.use(express.session({
-        secret: '1a2b3c4d5e6f',
+        secret: '4a5b6c7d8e9f',
         key: 'bargain.sid'
       }));
     });
@@ -41,7 +37,7 @@ app.configure(function () {
       app.use(express.session({
         key: 'bargain.sid',
         store: new RedisStore(),
-        secret: '1a2b3c4d5e6f'
+        secret: '4a5b6c7d8e9f'
       }));
     });
 
@@ -53,11 +49,6 @@ app.configure(function () {
     if ('development' == app.get('env')) {
         app.use(express.errorHandler());
     }
-
-
-  //  app.use(express.logger({ format: ':istDate :method :url :status :res[Content-Length] :response-time ms' }));
-    //app.use('/v1', require('./routes/lib/authenticate'));
-    //app.use(require('./routes/lib/error')); // defines route to handle errors for all requests
     
     require('./routes')(app); // initializes all routes(executes routes/index.js)
 
