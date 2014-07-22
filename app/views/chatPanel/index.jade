@@ -1,0 +1,28 @@
+html(lang='en')
+  head
+    title Paytm Marketplace Chat Panel
+    != css('paytmAdmin')
+    script.
+      ChatPanelUser = !{ user ? JSON.stringify(user) : false };
+  body
+    #main
+      div.tabbable.tabs-left
+        div#leftNav.leftNav
+        div#headerBar.profile-bar
+        #tabContent.tab-content
+          #bargainChat.tab-pane.in.active(style="height: 600px;")
+          include bargainChat/bargainChat
+          include bargainChat/itemDetail
+
+    div.md-overlay.hidden
+      img(src='/images/spinner-big.gif')
+      include common/leftNav
+      include common/header
+
+      
+
+      != js('chatPanelMain')
+      != js('chatPanel')
+      != js('chatlib')
+      != js('vendor/chat/chatClientUI')
+

@@ -1,0 +1,106 @@
+script#itemDetail-template(type='text/template')
+    .All-padd
+        
+        // CHOOSE DEFAULT IMAGE box Start
+        .cot-box.T-marg10
+            .edit-box
+                .media
+                    a.pull-left(href='#')
+                        img.img-size.border(src='{{=imageSrc}}')
+                    .media-body
+                        h4.media-heading.T-pad10#productHeading {{=name}}
+                        p.bold.font13 {{=categoryPath}}
+                        div.form-horizontal.clear.span6
+                            .T-pad10
+                                .text-left Paytm SKU ID :  {{=paytmSkuId}}
+                                
+                            .T-pad10
+                                .text-left Merchant SKU ID :  {{=merchantSkuId}}
+                                
+        div
+            // Product Details Start
+            
+            div.form-horizontal.clear.span8
+                .control-group.font13.bold.offset1
+                    .T-pad10
+                        label.control-label  MRP :
+                        .controls
+                            | {{=mrp}}
+                    .T-pad10
+                        label.control-label  Selling Price :
+                        .controls
+                            | {{=sellingPrice}}
+                    .T-pad10
+                        label.control-label  Visibility :
+                        .controls
+                            | {{=status}}
+                    |{{ for(var key in attributes){ }}
+                    |{{ var attribute = attributes[key]; }}
+                    |{{ if(attribute.value) { }}
+                    .T-pad10
+                        label.control-label(style='text-transform: capitalize;')  {{=attribute.name}} :
+                        .controls {{=attribute.value || "-"}}
+                    |{{}}}
+                    |{{}}}
+
+                    .T-pad10
+                        label.control-label Shipping Detail : 
+                        .controls.gray-font
+                            | Product will shipped in {{=shipDays}}  days 
+                    .T-pad10
+                        label.control-label Return Policy :
+                        .controls.gray-font
+                            | We will gladly accept returns for any reason within {{=returnDays}} days
+                            | of delivery of the product
+            // BRAND & PRODUCT FILTERS End
+            
+            div#descriptionContainer
+                |{{ if(description && description.length > 0 ) { }}
+                |{{ for(var k in description){ }}
+                |{{if(!isNaN(k)) { }}
+                |{{ var j = parseInt(k)+1}}
+                div.descCount(id='description{{=j}}')
+                    .edit-headline.clear
+                        | PRODUCT DESCRIPTION {{=j }}
+                       
+                        |{{ var desc = description[k]; }}
+                        
+                    div.form-horizontal.clear.span8
+                        .control-group.font13.bold.offset1
+                            .T-marg10.T-pad10
+                                label.control-label  Title {{=j }} :
+                                .controls
+                                    | {{=desc.title}}
+                                    
+                            .T-marg10.T-pad10
+                                label.control-label  Description {{=j }} :
+                                .controls
+                                    | {{=desc.description}}
+                            div.attributeContainer
+                                |{{if(desc.attributes && desc.attributes.length){ }}
+                                |{{ for(i in desc.attributes) { }}
+                                |{{if(!isNaN(i)) { }}
+                                |{{ var index = parseInt(i)+1 }}
+                                | {{ var productAttr = desc.attributes[i]}}
+                                div.attrCount
+                                    .T-pad10
+                                        label.control-label  Attribute {{=index}} :
+                                        .controls
+                                            | {{=productAttr.name}}
+                                    .T-pad10
+                                        label.control-label Description {{=index}} :
+                                        .controls
+                                            | {{=productAttr.value}}
+                                |{{} }}
+                                |{{}}}
+                                |{{}}}
+                            
+                |{{ } }}
+                |{{}}}
+                |{{}}}
+                // PRODUCT DESCRIPTION End
+                
+        
+                
+                
+            .clear

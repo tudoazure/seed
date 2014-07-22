@@ -1,0 +1,40 @@
+{
+    "name": "market-bargain",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "express": "3.4.8",
+        "jade": "0.35.0",
+        "openid": "*",
+        "validator":"*",
+        "ya-csv":"*",
+        "mkdirp": "*",
+        "underscore": "*",
+        "useragent": "2.0.0",
+        "ptmproc": "git+ssh://git@paytm.unfuddle.com:paytm/proc.git",
+        "minifyjs": "git+ssh://git@paytm.unfuddle.com:paytm/minifyjs.git",
+        "market-oauth":"git+ssh://git@paytm.unfuddle.com:paytm/market-oauth.git#production",
+        "connect-assets": "2.5.2",
+        "less": "1.4.1",
+        "connect": "2.9.0",
+        "connect-redis": "*",
+        "mashape-oauth": "~0.1.6"
+    },
+    "devDependencies": {
+        "amon": "*",
+        "request": "2.27.0",
+        "promise": "git://github.com/kriszyp/node-promise.git",
+        "grunt": "0.4.1",
+        "grunt-contrib-concat": "~0.3.0",
+        "grunt-contrib-watch": "~0.4.4",
+        "grunt-contrib-jshint": "~0.6.0",
+        "grunt-contrib-uglify": "~0.2.2",
+        "express-trace": "git://github.com/qzaidi/express-trace"
+    },
+    "repository": "git+ssh@paytm.unfuddle.com:paytm/market-bargain.git",
+    "author": "Paytm",
+    "license": "Private"
+}
