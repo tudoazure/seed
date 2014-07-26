@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="chatPanel">
+<html lang="en" ng-app="bargain">
 
 <head>
     <meta charset="utf-8">
@@ -21,12 +21,13 @@
     <script src="app/scripts/vendor/angular.js"></script>
     <script src="app/scripts/vendor/angular-route.js"></script>
     <script src="app/scripts/vendor/angular-cookies.js"></script>
+    <script src="app/scripts/vendor/strophe.js"></script>
     <script src="app/scripts/app.js"></script>
-    <script src="app/scripts/controllers/mainCtrl.js"></script>
-    <script src="app/scripts/controllers/chatCtrl.js"></script>   
+    <script src="app/scripts/controllers/MainCtrl.js"></script>
+    <script src="app/scripts/controllers/ChatCtrl.js"></script>   
 </head>
 
-<body ng-controller="mainCtrl">
+<body ng-controller="MainCtrl">
 
     <input type="text" ng-init="userData =JSON.stringify(user)" ng-model="session" style="display:none;">
     <div id="header" class="header col-md-12">

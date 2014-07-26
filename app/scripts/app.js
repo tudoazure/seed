@@ -1,6 +1,6 @@
 "use strict;"
-var chatPanel = angular.module('chatPanel', ['ngRoute']);
-chatPanel.config(function($routeProvider , $locationProvider){
+var app = angular.module('bargain', ['ngRoute']);
+app.config(function($routeProvider , $locationProvider){
 	$routeProvider
 		.when('/',{
 			templateUrl:'app/views/partials/chatview.html',
