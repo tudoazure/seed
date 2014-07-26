@@ -1,7 +1,7 @@
 "use strict";
 
 var request = require('request');
-var config = require('../environment');
+var config = require('../../environment');
 var oauth = require('market-oauth');
 var auth = oauth.auth;
 var user = require('market-oauth/user');
@@ -24,7 +24,7 @@ var oauth = {
 
   isLogin: function(req, res, next) {
 
-    if ((['/', '/chat', '/adminlogout', '/userDetail', '/authorize', '/token'].indexOf(req.path) > -1) || (req.session && req.session.user && req.session.user && req.session.user.activeMerchant)) {
+    if ((['/', '/chat', '/logout', '/userDetail', '/authorize', '/token'].indexOf(req.path) > -1) || (req.session && req.session.user && req.session.user && req.session.user.activeMerchant)) {
       return next();
     }
 
@@ -114,18 +114,9 @@ var oauth = {
         req.session.user = body.admin;
         req.session.user.token = token;
         if (SERVER.DOMAIN == 'bargain') {
-          res.redirect('/chat');
+          res.redirect('/');
           req.session.user.domain = 'bargain';
-        } else if (SERVER.DOMAIN == 'admin') {
-          res.redirect('/admin');
-          req.session.user.domain = 'admin';
         }
-      } else {
-        req.session.user.merchant_ids = body.merchant_ids;
-        req.session.user.merchants = body.merchants;
-        req.session.user.activeMerchant = body.merchants[0];
-        req.session.user.domain = 'merchant';
-        res.redirect('/');
       }
     });
   },
@@ -142,23 +133,6 @@ var oauth = {
       req.session.destroy(function() {
         res.clearCookie(COOKIE);
         res.redirect('/');
-      });
-
-    });
-  },
-  adminlogout: function(req, res, next) {
-    var fulfillment_cookie = req.cookies[COOKIE];
-    var jar = request.jar();
-    var cookie = request.cookie(COOKIE + '=' + fulfillment_cookie);
-    jar.add(cookie);
-    request.get({
-      url: SERVER.FULFILLMENT + '/logout',
-      jar: jar
-    }, function(err, resp, body) {
-      req.session.destroy(function() {
-        res.clearCookie(COOKIE);
-        res.clearCookie('bargain.sid');
-        res.redirect('/admin');
       });
 
     });

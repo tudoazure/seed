@@ -1,5 +1,5 @@
 {
-    "name": "market-bargain",
+    "name": "marketplace-bargain-panel",
     "version": "0.0.1",
     "private": true,
     "scripts": {
@@ -27,14 +27,9 @@
         "amon": "*",
         "request": "2.27.0",
         "promise": "git://github.com/kriszyp/node-promise.git",
-        "grunt": "0.4.1",
-        "grunt-contrib-concat": "~0.3.0",
-        "grunt-contrib-watch": "~0.4.4",
-        "grunt-contrib-jshint": "~0.6.0",
-        "grunt-contrib-uglify": "~0.2.2",
-        "express-trace": "git://github.com/qzaidi/express-trace"
+        "grunt": "0.4.1"
     },
-    "repository": "git+ssh@paytm.unfuddle.com:paytm/market-bargain.git",
+    "repository": "git+ssh@paytm.unfuddle.com:paytm/marketplace-bargain-panel.git",
     "author": "Paytm",
     "license": "Private"
 }

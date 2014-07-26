@@ -43,7 +43,7 @@ app.configure(function () {
 
     app.use(oauth.isLogin);
     app.use(app.router);
-    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.static(path.join(__dirname, 'app')));
 
 // development only
     if ('development' == app.get('env')) {

@@ -21,7 +21,7 @@ var chat = {
     user.loginName = "";
     renderData.auth_info = req.auth_info;
 
-    view = 'chatPanel/index';
+    view = 'chat/index';
     if(!req.session.user) {
       view = 'login/index';
     }
@@ -39,7 +39,6 @@ var chat = {
         user.type = req.session.user.type;
         user.apiUrl = SERVER.FULFILLMENT + '/v1/';
       }
-      view = 'chatPanel/index';
     }
 
     renderData.user = user;
