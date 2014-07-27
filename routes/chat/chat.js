@@ -17,10 +17,10 @@ var chat = {
     else{
        if(req.session.user){
         if(req.session.user.username && req.session.user.username != ""){
-          user.loginName = req.session.user.username;
+          user.name = req.session.user.username;
         }
         else{
-          user.loginName = req.session.user.email;
+          user.name = req.session.user.email;
         }
         user.email = req.session.user.email;
         user.mobile = req.session.user.mobile;
