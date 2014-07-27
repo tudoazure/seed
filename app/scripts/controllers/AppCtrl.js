@@ -31,6 +31,8 @@
 						$rootScope.sessionid = response.data['session_id'];
 						$rootScope.plustxtid = response.data['tego_id'] + "@" + Globals.AppConfig.ChatHostURI;
 						$rootScope.password = response.data['password'] + response.data['tego_id'].substring(0, 3);
+						StropheService.connection($rootScope.plustxtid, $rootScope.password);
+
 					}, function failure(error){
 						console.log("Error", error);
 					})

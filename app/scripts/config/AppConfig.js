@@ -6,6 +6,7 @@ var Globals = {
   var fulfillmentBaseURI  = fulfillmentHost;
   Globals.AppConfig = {
   	ChatHostURI : chatHostBaseURI,
-    ChatServerConnect : "https://" + chatHostBaseURI + "/accounts/connect/"
+    ChatServerConnect : "https://" + chatHostBaseURI + "/accounts/connect/",
+    StropheConnect : "https://" + chatHostBaseURI  + "/http-bind/",
   }        
 })();
