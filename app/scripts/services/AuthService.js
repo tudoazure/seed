@@ -15,7 +15,7 @@
 		    }
 		    return str.join("&");
 		};
-		var chatServerLogin = $resource("https://chat-staging.paytm.com/accounts/connect/", {}, {
+		var chatServerLogin = $resource(Globals.AppConfig.ChatServerConnect, {}, {
 		  query: {
 		    method:'POST', 
 		    isArray: false, 

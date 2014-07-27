@@ -8,20 +8,9 @@ var SERVER = require('../lib/oauth').SERVER;
 var chat = {
   /* Default handler for / page */
   index : function(req, res, next) {
-  	var renderData = {};
-    renderData.metainfo = {
-      "title": "",
-      "keywords": "",
-      "description": ""
-    };
-
-    var view;
+    var view ='chat/index';
+    var renderData = {};
     var user = {};
-    user.userId = "";
-    user.loginName = "";
-    renderData.auth_info = req.auth_info;
-
-    view = 'chat/index';
     if(!req.session.user) {
       view = 'login/index';
     }
@@ -37,11 +26,11 @@ var chat = {
         user.mobile = req.session.user.mobile;
         user.token = req.session.user.token;
         user.type = req.session.user.type;
-        user.apiUrl = SERVER.FULFILLMENT + '/v1/';
       }
     }
-
     renderData.user = user;
+    renderData.fulfillementHost = SERVER.FULFILLMENT + '/v1/';
+    renderData.chatHost = SERVER.CHATHOST;
     res.render(view, renderData);
   }
 };

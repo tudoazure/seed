@@ -11,6 +11,7 @@ var SERVER = {
   SELF: config.host,
   OAUTH: config.oauth.baseUrl, //http://10.0.20.55',
   FULFILLMENT: config.fulfillment.host,
+  CHATHOST: config.chatServer.host,
   DOMAIN: config.domain
 };
 
