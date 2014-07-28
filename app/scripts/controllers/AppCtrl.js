@@ -47,17 +47,17 @@
 							// $rootScope.chatSDK.connection = connect;
 							// $rootScope.chatSDK.connection.addHandler($rootScope.chatSDK.ping_handler, null, "iq", null, "ping1"); 
 						} else if (status === Strophe.Status.DISCONNECTED) {
-
+							$rootScope.chatSDK.connection = connect;
 						} else if (status === Strophe.Status.CONNECTING) {
-
+							$rootScope.chatSDK.connection = connect;
 						} else if (status === Strophe.Status.AUTHENTICATING) {
-
+							$rootScope.chatSDK.connection = connect;
 						} else if (status === Strophe.Status.DISCONNECTING) {
-
+							$rootScope.chatSDK.connection = connect;
 						} else if (status === Strophe.Status.CONNFAIL) {
-
+							$rootScope.chatSDK.connection = connect;
 						} else if (status === Strophe.Status.AUTHFAIL) {
-
+							$rootScope.chatSDK.connection = connect;
 						}
 						console.log(status);
 					})
@@ -82,9 +82,9 @@
 				    // Register listeners from roster change and new message
 				    // $rootScope.chatSDK.connection.addHandler($rootScope.chatSDK.on_roster_changed, "jabber:iq:roster", "iq", "set");
 				    $rootScope.chatSDK.connection.addHandler($rootScope.chatSDK.on_message, null, "message", "chat");
-				    // var ping = $iq({to: to,type: "get",id: "ping1"}).c("ping", {xmlns: "urn:xmpp:ping"});
-				    // utility.comn.consoleLogger('ping message sent to : ' + to)
-				    // $rootScope.chatSDK.connection.send(ping);
+				     var ping = $iq({to: to,type: "get",id: "ping1"}).c("ping", {xmlns: "urn:xmpp:ping"});
+				     console.log('ping message sent to : ' + to)
+				     $rootScope.chatSDK.connection.send(ping);
 				};
 
 				$scope.init();

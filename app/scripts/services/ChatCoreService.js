@@ -98,50 +98,41 @@
             //Check cache has plustxt reference object
             //If cache object exists use that object else get details from
             //API and create local cache object for the reference
-            var plustxtref = "Plustx_" + LocalCache.plustxtid;
-            var value = $.jStorage.get(plustxtref, null);
-            // Set the localcache since cache is empty
-            if (value == null)
-                self.setDataToLocalCache(JsonResponse);
+            //var plustxtref = "Plustx_" + LocalCache.plustxtid;
+            // var value = $.jStorage.get(plustxtref, null);
+            // // Set the localcache since cache is empty
+            // if (value == null)
+            //     self.setDataToLocalCache(JsonResponse);
             //  utility.comn.consoleLogger('start fetching from storage');
             // get roster from cache 
-            var JsonResponse = self.getAllRosters();
+            // var JsonResponse = self.getAllRosters();
             //  utility.comn.consoleLogger('start fetching from storage completed');
             //  utility.comn.consoleLogger('start inserting contact to li');
             // Hide the home page 
-            if(self.chatSDK.uIExist === "No") {
-            self.chatSDK.uIExist = "Yes";
-            hideHomePageDiv();
+            // if($rootScope.chatSDK.uIExist === "No") {
+            // $rootScope.chatSDK.uIExist = "Yes";
+            // hideHomePageDiv();
             // Populate the roster-contact with new contact
-            self.on_roster_Get_Contact(JsonResponse);
+            //self.on_roster_Get_Contact(JsonResponse);
             // Create Left Side history panel for conact who habe chat history
-            self.on_roster_Create_ChatDiv(JsonResponse);
-            }
+            //self.on_roster_Create_ChatDiv(JsonResponse);
+            //}
             
-            if( self.chatSDK.reLoad != null){
-                if(self.chatSDK.reLoad['displayedWindow']!= null){
-                   //   utility.comn.consoleLogger(self.chatSDK.reLoad['jid_id']+'^^^'+ self.chatSDK.reLoad['jid']+'^^^^'+ self.chatSDK.reLoad['name']+'^^^^^'+self.chatSDK.reLoad['jid'].substring(0,self.chatSDK.reLoad['jid'].indexOf('@'))); 
-                    self.addChatAreaAndChatList(self.chatSDK.reLoad['jid_id'],self.chatSDK.reLoad['name'],self.chatSDK.reLoad['jid']);
-                  //   utility.comn.consoleLogger(self.chatSDK.reLoad['jid_id']+'^^^'+ self.chatSDK.reLoad['jid']+'^^^^'+ self.chatSDK.reLoad['name']+'^^^^^'+self.chatSDK.reLoad['jid'].substring(0,self.chatSDK.reLoad['jid'].indexOf('@')));
-                     self.insert_Message(self.chatSDK.reLoad['jid_id'], self.chatSDK.reLoad['jid'], self.chatSDK.reLoad['name'],self.chatSDK.reLoad['jid'].substring(0,self.chatSDK.reLoad['jid'].indexOf('@')));
-                 }
-            }
-            $.jStorage.deleteKey('reLoadObject');
+            // if( $rootScope.chatSDK.reLoad != null){
+            //     if($rootScope.chatSDK.reLoad['displayedWindow']!= null){
+            //        //   utility.comn.consoleLogger($rootScope.chatSDK.reLoad['jid_id']+'^^^'+ $rootScope.chatSDK.reLoad['jid']+'^^^^'+ $rootScope.chatSDK.reLoad['name']+'^^^^^'+$rootScope.chatSDK.reLoad['jid'].substring(0,$rootScope.chatSDK.reLoad['jid'].indexOf('@'))); 
+            //         self.addChatAreaAndChatList($rootScope.chatSDK.reLoad['jid_id'],$rootScope.chatSDK.reLoad['name'],$rootScope.chatSDK.reLoad['jid']);
+            //       //   utility.comn.consoleLogger($rootScope.chatSDK.reLoad['jid_id']+'^^^'+ $rootScope.chatSDK.reLoad['jid']+'^^^^'+ $rootScope.chatSDK.reLoad['name']+'^^^^^'+$rootScope.chatSDK.reLoad['jid'].substring(0,$rootScope.chatSDK.reLoad['jid'].indexOf('@')));
+            //          self.insert_Message($rootScope.chatSDK.reLoad['jid_id'], $rootScope.chatSDK.reLoad['jid'], $rootScope.chatSDK.reLoad['name'],$rootScope.chatSDK.reLoad['jid'].substring(0,$rootScope.chatSDK.reLoad['jid'].indexOf('@')));
+            //      }
+            // }
+            //$.jStorage.deleteKey('reLoadObject');
             
           //   utility.comn.consoleLogger('start inserting contact to li completed');
             // set up presence handler and send initial presence
-            self.chatSDK.connection.addHandler(self.chatSDK.on_presence, null, "presence");
+            $rootScope.chatSDK.connection.addHandler($rootScope.chatSDK.on_presence, null, "presence");
             // Send the presence information
-            self.chatSDK.connection.send($pres());
-            try
-            {
-                //Used to display progress bar until roster gets loaderd
-                disableProgress();
-                //Used to show/hide top menu tab links based on the tegi_id and sessionid
-                enableOrDisableTabLink();
-            }
-            catch (e) {
-            }
+            $rootScope.chatSDK.connection.send($pres());
         },
         /*
          function                : insert_contact()
@@ -154,8 +145,8 @@
          */
         insert_contact: function(elem) {
           var jid = elem.find('.roster-jid').text();
-          var pres = self.chatSDK.presence_value(elem.find('.roster-contact'));
-          self.chatSDK.write_to_log('insert contact called ' + jid + '  ' + pres);
+          var pres = $rootScope.chatSDK.presence_value(elem.find('.roster-contact'));
+          $rootScope.chatSDK.write_to_log('insert contact called ' + jid + '  ' + pres);
           var contacts = $('#roster-area li');
           // utility.comn.consoleLogger('contact length ' + contacts.length);
           // If Ul contain contacts
@@ -163,7 +154,7 @@
               var inserted = false;
               // Sort the insert the new contact 
               contacts.each(function() {
-                  var cmp_pres = self.chatSDK.presence_value(
+                  var cmp_pres = $rootScope.chatSDK.presence_value(
                           $(this).find('.roster-contact'));
                   var cmp_jid = $(this).find('.roster-jid').text();
                //    utility.comn.consoleLogger('pres  ' + pres + 'cmp_pres ' + cmp_pres);
@@ -176,13 +167,13 @@
                   }
               });
               if (!inserted) {
-                  self.chatSDK.write_to_log('inside insert contact  !inserted called');
+                  $rootScope.chatSDK.write_to_log('inside insert contact  !inserted called');
                   $('#roster-area ul').append(elem);
               }
           }
           // No new contatc , insert the contact directly.
           else {
-              self.chatSDK.write_to_log('inside insert contact  inserted called');
+              $rootScope.chatSDK.write_to_log('inside insert contact  inserted called');
               $('#roster-area ul').append(elem);
           }
         },
@@ -265,6 +256,7 @@
          If a normal text message , then send an delivery acknowldement back to jabber Client
          */
         on_message: function(message) {
+            console.log("on_message called");
             var body = $(message).find("html > body");
             if (body.length === 0) {
                 body = $(message).find('body');
@@ -330,7 +322,7 @@
                 {
                     LocalCache.updateMessageStatus(deliveryAckID, 2, Strophe.getNodeFromJid(jid), timeInMilliSecond);
                     $('#mid-'+deliveryAckID).html('Delivered');
-                    self.chatSDK.write_to_log("New STATUS Message ARRIVED! mid:" + message.id + " " + "Status: Delivered From: " + JsonResponse['full_jid']);
+                    $rootScope.chatSDK.write_to_log("New STATUS Message ARRIVED! mid:" + message.id + " " + "Status: Delivered From: " + JsonResponse['full_jid']);
                 }
                 //read  acknoledment
                 if (readAckID == undefined || readAckID == "" || readAckID == null) {
@@ -340,7 +332,7 @@
                     utility.comn.consoleLogger('message read message id ' + readAckID + ' from ' + JsonResponse['full_jid']);
                     LocalCache.updateMessageStatus(readAckID, 3, Strophe.getNodeFromJid(jid), timeInMilliSecond);
                     $('#mid-'+readAckID).html('Read&nbsp;');
-                    self.chatSDK.write_to_log("New STATUS Message ARRIVED! mid:" + message.id + " " + "Status: Read From: " + JsonResponse['full_jid']);
+                    $rootScope.chatSDK.write_to_log("New STATUS Message ARRIVED! mid:" + message.id + " " + "Status: Read From: " + JsonResponse['full_jid']);
                 }
             }
             else if(readMessageAcknow != -1){
@@ -359,16 +351,16 @@
                 }
             }
              else {
-                self.chatSDK.write_to_log('New Message ARRIVED! mid:' + messageID + " " + "Text: " + message.textContent);
+                $rootScope.chatSDK.write_to_log('New Message ARRIVED! mid:' + messageID + " " + "Text: " + message.textContent);
                 var timeInMilliSecond = self.getTimeInLongString();
                 var strTimeMii = timeInMilliSecond.toString();
                 var messageId = LocalCache.tigoid + "-dv-" + strTimeMii;
                 var mid = messageId.toString();
                 // Sending delivery acknowledment back.
                 var message2 = $msg({to: JsonResponse['full_jid'], "type": "chat", "id": mid}).c('delivered').t(messageID).up().c('meta');
-                $('#mid-'+messageID).html('Delivered&nbsp;');
-                self.on_Message_Update_Chat(JsonResponse);
-                self.chatSDK.connection.send(message2);
+                // $('#mid-'+messageID).html('Delivered&nbsp;');
+                //self.on_Message_Update_Chat(JsonResponse);
+                $rootScope.chatSDK.connection.send(message2);
                 utility.comn.consoleLogger('Delivery Acknowledment Sent ' + message2);
             }
             return true;
@@ -388,7 +380,7 @@
          
          */
         on_roster_changed: function(iq) {
-            self.chatSDK.write_to_log('on_roster_changed called');
+            $rootScope.chatSDK.write_to_log('on_roster_changed called');
             var JsonResponse = {};
             $(iq).find('item').each(function() {
                 var Items = {};
@@ -398,19 +390,19 @@
                 Items['name'] = $(this).attr('name') || jid;
                 JsonResponse[jid] = Items;
             });
-            self.on_Roster_Changed_Update_Contact(JsonResponse);
+            //self.on_Roster_Changed_Update_Contact(JsonResponse);
             return true;
         },
 
        ping_handler : function (iq){
-          utility.comn.consoleLogger('ping_handler Called');
-         if(self.chatSDK.kill=="Yes"){
+          console.log('ping_handler Called');
+         if($rootScope.chatSDK.kill=="Yes"){
                    return false;
          }
            // function  will be called to sent all message with status -1 .(status displayed should be sent .
            // and modify the status sent .
     //     // set variable to fixed value 
-          self.chatSDK.PingCount=0;
+          $rootScope.chatSDK.PingCount=0;
           var offmessageArray= LocalCache.getAllPendingMessages();       
            var jid;
            var mid;
@@ -431,7 +423,7 @@
                 body=offmessageArray[i]['body'];
                 message = $msg({to: jid, "type": "chat", "id": mid}).c('body').t(body).up().c('active', {xmlns: "http://jabber.org/protocol/chatstates"}).up()
                 .c('request', {xmlns: 'urn:xmpp:receipts'}).up().c('meta').c('acl', {deleteafter: "-1", canforward: "1", candownload: "1"});
-                self.chatSDK.connection.send(message);
+                $rootScope.chatSDK.connection.send(message);
                timeInMilliSecond = getTimeInLongString();
                strTimeMii = timeInMilliSecond.toString();
              //   utility.comn.consoleLogger(' local cache message status upadted from mid '+mid);
@@ -445,17 +437,17 @@
             var ping = $iq({to: to,type: "get",id: "ping1"}).c("ping", {xmlns: "urn:xmpp:ping"});
              utility.comn.consoleLogger('send_ping Called :' +  "to: " + to );
             
-           self.chatSDK.pingRef= setInterval(function (){
-                 self.chatSDK.connection.send(ping);                
+           $rootScope.chatSDK.pingRef= setInterval(function (){
+                 $rootScope.chatSDK.connection.send(ping);                
              },1000);
             
        },
         ping_handler_readACK : function (iq){
-               if(self.chatSDK.kill=="Yes"){
+               if($rootScope.chatSDK.kill=="Yes"){
                    return false;
                }
-                if (self.chatSDK.readACKO.length > 0 ) {
-                var infoObjec=self.chatSDK.readACKO.shift();
+                if ($rootScope.chatSDK.readACKO.length > 0 ) {
+                var infoObjec=$rootScope.chatSDK.readACKO.shift();
                 var tigo_id=infoObjec['tigoid'];
                 var timeStamp=infoObjec['timeStamp'];
                 var jid=infoObjec['jid'];
@@ -478,9 +470,9 @@
                     var message2 = $msg({to: jid, "type": "chat", "id": mid}).c('read').t(midreadArray[i]).up().c('meta');
                     $('#mid-'+midreadArray[i]).html('Read&nbsp;');
                     utility.comn.consoleLogger('Read Acknowledgement Sent: ' + message2);
-                    self.chatSDK.connection.send(message2);
+                    $rootScope.chatSDK.connection.send(message2);
                 }
-                self.chatSDK.scroll_chat(jid_id);
+                $rootScope.chatSDK.scroll_chat(jid_id);
                 }
                 
         return true;
