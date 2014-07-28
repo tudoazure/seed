@@ -1,7 +1,8 @@
 (function (angular){
 	"use strict;"
 
-	angular.module('bargain').factory('ChatCoreService', ['$resource', function ($resource) {
+	angular.module('bargain').factory('ChatCoreService', [ '$rootScope', '$resource',
+     function ( $rootScope, $resource ) {
 
 		var ChatCoreService;
 		
@@ -60,7 +61,7 @@
          function  description   : Used to write the string to conole
          */
         write_to_log: function(message) {
-             utility.comn.consoleLogger(message);
+             console.log(message);
         },
         /*
          function                : on_roster()
@@ -72,10 +73,12 @@
          Function get called when new roster information available from server 
          */
         on_roster: function(iq) {
-            self.chatSDK.write_to_log('on_roster called');
+            $rootScope.chatSDK.write_to_log('on_roster called');
             var JsonResponse = {};
             // Function iterate each roster contact and prepare it as JSON object and
             // Call the update roster function with created JSON Object
+            
+            
             $(iq).find('item').each(function() {
                 var Item = {};
                 var jid = $(this).attr('jid');
@@ -87,7 +90,7 @@
                 else{
                    Item['name'] = $(this).attr('name')
                 }
-                 utility.comn.consoleLogger('name: ' + Item['name'] + ' jid: ' + jid);
+                 // utility.comn.consoleLogger('name: ' + Item['name'] + ' jid: ' + jid);
                 Item['tegoid'] = Strophe.getNodeFromJid(Item['plustxtid']);
                 JsonResponse[jid] = Item;
             });

@@ -17,15 +17,16 @@
 			});
 	}]);
 
+
 	app.config(['$httpProvider', function($httpProvider){
 	  $httpProvider.defaults.useXDomain = true;
-	}])
+	}]);
 
 	app.config(['$resourceProvider', function($resourceProvider){
 	  $resourceProvider.defaults.stripTrailingSlashes = false;
-	}])
+	}]);
 
 	app.config(['localStorageServiceProvider', function(localStorageServiceProvider){
 	  localStorageServiceProvider.setPrefix('bargain');
-	}])
+	}]);
 })(angular);
