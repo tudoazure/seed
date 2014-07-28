@@ -1,20 +1,20 @@
 (function (angular){
 	"use strict;"
 	angular.module('bargain')
-		.controller('AppCtrl', ['$scope', '$rootScope', 'AuthService', 'StropheService',
-			function ($scope, $rootScope, AuthService, StropheService) {
+		.controller('AppCtrl', ['$scope', '$rootScope', 'AuthService', 'StropheService', 'ChatCoreService',
+			function ($scope, $rootScope, AuthService, StropheService, ChatCoreService) {
 				init();
 				loginToChatServer();
 
 				function init(){
-					$rootScope.bargainAgent = null;
+					$rootScope.bargainAgent = user;
+					$rootScope.chatSDK = ChatCoreService.chatSDK;
 					$rootScope.plustxtid = null;
 					$rootScope.sessionid = null;
 					$rootScope.tigoid = null;
 					$rootScope.plustxtcacheobj = null;
 					$rootScope.loginusername = null;
 					$rootScope.password = null;
-					$rootScope.bargainAgent = user;
 				}
 
 				function loginToChatServer(){
