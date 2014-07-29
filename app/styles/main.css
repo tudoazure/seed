@@ -162,7 +162,7 @@ ul li{
 
 .cross{
     margin-left:15px;
-	background: url(../images/cross.png);
+	/*background: url(../images/cross.png);*/
 	display: block;
 	width: 20px;
 	height: 20px;

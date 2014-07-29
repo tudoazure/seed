@@ -11,34 +11,34 @@
         //it keeps Connection string
         connection: null,
         //it keeps Currenlty Displayed Div name 
-        displayedChatDiv: null,
-        reconnectInProgress : "No",
-        reconnectEnabled: "No",
-        networkConnection :"DOWN",
-        sendPingRef : null,
-        connectionStatus: "NA",
-        upTime : 0,
+        /// displayedChatDiv: null,
+        // reconnectInProgress : "No",
+        // reconnectEnabled: "No",
+        //networkConnection :"DOWN",
+        // sendPingRef : null,
+       // connectionStatus: "NA",
+        //upTime : 0,
         pingRef : null,
-        downTime : 0,
+        // downTime : 0,
         PingCount: 0,
-        uIExist :"No",
+        //uIExist :"No",
         reLoad: null,
         readACKO : [],
         kill:"No",
         // It keeps already Opened ChatDiv 
-        openedChatDiv: {},
+        //openedChatDiv: {},
         // Connection url
-        connectionurl: null,
+        //connectionurl: null,
         // List of pending subscription
-        contact_subsription: {},
+        //contact_subsription: {},
         // it keeps track of Name and jid_id mapping
-        nameList: {},
+       // nameList: {},
         // Mode of Operation 
-        XMPPorAPIXMPP: 0,
+        //XMPPorAPIXMPP: 0,
         // it keeps pending subscriber jid
-        pending_subscriber: null,
+        //pending_subscriber: null,
         //it keeps lastly performed ajax request
-        jqueryStore: null,
+        //jqueryStore: null,
         /*
          function                : jid_to_id()
          parameters     input    : jid
@@ -73,7 +73,7 @@
          Function get called when new roster information available from server 
          */
         on_roster: function(iq) {
-            $rootScope.chatSDK.write_to_log('on_roster called');
+            $rootScope.chatSDK.write_to_log('ChatCoreService: on_roster called');
             var JsonResponse = {};
             // Function iterate each roster contact and prepare it as JSON object and
             // Call the update roster function with created JSON Object
@@ -94,42 +94,6 @@
                 Item['tegoid'] = Strophe.getNodeFromJid(Item['plustxtid']);
                 JsonResponse[jid] = Item;
             });
-            //on_roster_Get_Contact(JsonResponse);
-            //Check cache has plustxt reference object
-            //If cache object exists use that object else get details from
-            //API and create local cache object for the reference
-            //var plustxtref = "Plustx_" + LocalCache.plustxtid;
-            // var value = $.jStorage.get(plustxtref, null);
-            // // Set the localcache since cache is empty
-            // if (value == null)
-            //     self.setDataToLocalCache(JsonResponse);
-            //  utility.comn.consoleLogger('start fetching from storage');
-            // get roster from cache 
-            // var JsonResponse = self.getAllRosters();
-            //  utility.comn.consoleLogger('start fetching from storage completed');
-            //  utility.comn.consoleLogger('start inserting contact to li');
-            // Hide the home page 
-            // if($rootScope.chatSDK.uIExist === "No") {
-            // $rootScope.chatSDK.uIExist = "Yes";
-            // hideHomePageDiv();
-            // Populate the roster-contact with new contact
-            //self.on_roster_Get_Contact(JsonResponse);
-            // Create Left Side history panel for conact who habe chat history
-            //self.on_roster_Create_ChatDiv(JsonResponse);
-            //}
-            
-            // if( $rootScope.chatSDK.reLoad != null){
-            //     if($rootScope.chatSDK.reLoad['displayedWindow']!= null){
-            //        //   utility.comn.consoleLogger($rootScope.chatSDK.reLoad['jid_id']+'^^^'+ $rootScope.chatSDK.reLoad['jid']+'^^^^'+ $rootScope.chatSDK.reLoad['name']+'^^^^^'+$rootScope.chatSDK.reLoad['jid'].substring(0,$rootScope.chatSDK.reLoad['jid'].indexOf('@'))); 
-            //         self.addChatAreaAndChatList($rootScope.chatSDK.reLoad['jid_id'],$rootScope.chatSDK.reLoad['name'],$rootScope.chatSDK.reLoad['jid']);
-            //       //   utility.comn.consoleLogger($rootScope.chatSDK.reLoad['jid_id']+'^^^'+ $rootScope.chatSDK.reLoad['jid']+'^^^^'+ $rootScope.chatSDK.reLoad['name']+'^^^^^'+$rootScope.chatSDK.reLoad['jid'].substring(0,$rootScope.chatSDK.reLoad['jid'].indexOf('@')));
-            //          self.insert_Message($rootScope.chatSDK.reLoad['jid_id'], $rootScope.chatSDK.reLoad['jid'], $rootScope.chatSDK.reLoad['name'],$rootScope.chatSDK.reLoad['jid'].substring(0,$rootScope.chatSDK.reLoad['jid'].indexOf('@')));
-            //      }
-            // }
-            //$.jStorage.deleteKey('reLoadObject');
-            
-          //   utility.comn.consoleLogger('start inserting contact to li completed');
-            // set up presence handler and send initial presence
             $rootScope.chatSDK.connection.addHandler($rootScope.chatSDK.on_presence, null, "presence");
             // Send the presence information
             $rootScope.chatSDK.connection.send($pres());
@@ -208,19 +172,15 @@
          
          */
         on_presence: function(presence) {
-          //   utility.comn.consoleLogger(' new subsription message came ');
+
             var ptype = $(presence).attr('type');
             var from = $(presence).attr('from');
             var show = $(presence).find("show").text();
-           //  utility.comn.consoleLogger(' new subsription message came type' + ptype + ' from ' + from + ' show' + show);
             var JsonResponse = {};
             JsonResponse['jid'] = from;
             JsonResponse['type'] = ptype;
             JsonResponse['show'] = show;
-
-
-            // Pradeep Bhati : Commented for now to not make call to add To Contacts.
-            //self.on_Presence_Update_Contact(JsonResponse);
+            console.log("ChatCoreService @on_presence", JsonResponse);
             return true;
 
         },
