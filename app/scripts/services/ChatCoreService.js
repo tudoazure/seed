@@ -1,8 +1,8 @@
 (function (angular){
 	"use strict;"
 
-	angular.module('bargain').factory('ChatCoreService', [ '$rootScope', '$resource',
-     function ( $rootScope, $resource ) {
+	angular.module('bargain').factory('ChatCoreService', [ '$rootScope', 'UtilService',
+     function ( $rootScope, UtilService ) {
 
 		var ChatCoreService;
 		
@@ -216,7 +216,7 @@
          If a normal text message , then send an delivery acknowldement back to jabber Client
          */
         on_message: function(message) {
-            console.log("on_message called");
+            console.log("ChatCoreService @on_message called :");
             var body = $(message).find("html > body");
             if (body.length === 0) {
                 body = $(message).find('body');
@@ -236,16 +236,14 @@
                         span.append(this.xml);
                     }
                 });
-
                 body = span;
             }
+            console.log("ChatCoreService  @on_message - Message Text :", body);
             var JsonResponse = {};
-
             JsonResponse['full_jid'] = $(message).attr('from');
             JsonResponse['id'] = $(message).attr('id');
             var jid = $(message).attr('from');
             var messageID = $(message).attr('id');
-           //  utility.comn.consoleLogger(' message id ------>' + $(message).attr('id'));
             JsonResponse['composing'] = $(message).find('composing');
             JsonResponse['body'] = body;
             try{
@@ -261,7 +259,6 @@
             // Message stanze is an acknowledment 
 
             if (DeliveryMessgae != -1) {
-
                 // code for update/ inform the user regarding delivered or read information
                 var delivered = $(message).find("delivered");
                 try {
@@ -274,25 +271,19 @@
                     var readAckID = $(read).text();
                 } catch (err) {
                 }
-                //Delivery acknoledment
-                if (deliveryAckID == undefined || deliveryAckID == "" || deliveryAckID == null) {
-
-                }
-                else
-                {
-                    LocalCache.updateMessageStatus(deliveryAckID, 2, Strophe.getNodeFromJid(jid), timeInMilliSecond);
-                    $('#mid-'+deliveryAckID).html('Delivered');
-                    $rootScope.chatSDK.write_to_log("New STATUS Message ARRIVED! mid:" + message.id + " " + "Status: Delivered From: " + JsonResponse['full_jid']);
+                // Delivery Acknowledgment
+                if (deliveryAckID){
+                  console.log("@on_message : Status -- DELIVERED From : " + JsonResponse['full_jid']);
+                  // LocalCache.updateMessageStatus(deliveryAckID, 2, Strophe.getNodeFromJid(jid), timeInMilliSecond);
+                  // $('#mid-'+deliveryAckID).html('Delivered');
+                  //$rootScope.chatSDK.write_to_log("New STATUS Message ARRIVED! mid:" + message.id + " " + "Status: Delivered From: " + JsonResponse['full_jid']);
                 }
                 //read  acknoledment
-                if (readAckID == undefined || readAckID == "" || readAckID == null) {
-
-                }
-                else {
-                    utility.comn.consoleLogger('message read message id ' + readAckID + ' from ' + JsonResponse['full_jid']);
-                    LocalCache.updateMessageStatus(readAckID, 3, Strophe.getNodeFromJid(jid), timeInMilliSecond);
-                    $('#mid-'+readAckID).html('Read&nbsp;');
-                    $rootScope.chatSDK.write_to_log("New STATUS Message ARRIVED! mid:" + message.id + " " + "Status: Read From: " + JsonResponse['full_jid']);
+                if (readAckID){
+                  console.log("@on_message : Status -- READ From : " + JsonResponse['full_jid']);
+                  // LocalCache.updateMessageStatus(readAckID, 3, Strophe.getNodeFromJid(jid), timeInMilliSecond);
+                  // $('#mid-'+readAckID).html('Read&nbsp;');
+                  //$rootScope.chatSDK.write_to_log("New STATUS Message ARRIVED! mid:" + message.id + " " + "Status: Read From: " + JsonResponse['full_jid']);
                 }
             }
             else if(readMessageAcknow != -1){
@@ -301,27 +292,24 @@
                     var readAckID = $(read).text();
                 } catch (err) {
                 }
-                if (readAckID == undefined || readAckID == "" || readAckID == null) {
-
-                }
-                else {
-                    LocalCache.updateMessageStatus(readAckID, 3, Strophe.getNodeFromJid(jid), timeInMilliSecond);
-                    $('#mid-'+readAckID).html('Read&nbsp;');
-                    utility.comn.consoleLogger("New READ STATUS Message ARRIVED! Message Read: " + readAckID +  " From: " + JsonResponse['full_jid']);
+                if (readAckID){
+                  console.log("@on_message : Status -- READ From : " + JsonResponse['full_jid']);
+                  // LocalCache.updateMessageStatus(readAckID, 3, Strophe.getNodeFromJid(jid), timeInMilliSecond);
+                  // $('#mid-'+readAckID).html('Read&nbsp;');
+                  //utility.comn.consoleLogger("New READ STATUS Message ARRIVED! Message Read: " + readAckID +  " From: " + JsonResponse['full_jid']);
                 }
             }
              else {
-                $rootScope.chatSDK.write_to_log('New Message ARRIVED! mid:' + messageID + " " + "Text: " + message.textContent);
-                var timeInMilliSecond = self.getTimeInLongString();
-                var strTimeMii = timeInMilliSecond.toString();
-                var messageId = LocalCache.tigoid + "-dv-" + strTimeMii;
+                console.log("@on_message :New Text Message : " + message.textContent);
+                var strTimeMii = UtilService.getTimeInLongString().toString();
+                var messageId = $rootScope.tigoid + "-dv-" + strTimeMii;
                 var mid = messageId.toString();
                 // Sending delivery acknowledment back.
                 var message2 = $msg({to: JsonResponse['full_jid'], "type": "chat", "id": mid}).c('delivered').t(messageID).up().c('meta');
                 // $('#mid-'+messageID).html('Delivered&nbsp;');
                 //self.on_Message_Update_Chat(JsonResponse);
                 $rootScope.chatSDK.connection.send(message2);
-                utility.comn.consoleLogger('Delivery Acknowledment Sent ' + message2);
+                console.log('@on_message : Delivery Acknowledment Sent ' + message2);
             }
             return true;
         },
