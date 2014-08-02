@@ -6,6 +6,9 @@
 
 		var ChatCoreService;
 		
+    var on_Message_Update_Chat = function(){
+
+    };
 	
     var chatSDK = {
         //it keeps Connection string
@@ -232,26 +235,25 @@
                     if (document.importNode) {
                         $(document.importNode(this, true)).appendTo(span);
                     } else {
-                        // IE workaround
                         span.append(this.xml);
                     }
                 });
                 body = span;
             }
             console.log("ChatCoreService  @on_message - Message Text :", body);
-            var JsonResponse = {};
-            JsonResponse['full_jid'] = $(message).attr('from');
-            JsonResponse['id'] = $(message).attr('id');
+            var response = {};
+            response['full_jid'] = $(message).attr('from');
+            response['id'] = $(message).attr('id');
             var jid = $(message).attr('from');
             var messageID = $(message).attr('id');
-            JsonResponse['composing'] = $(message).find('composing');
-            JsonResponse['body'] = body;
+            response['composing'] = $(message).find('composing');
+            response['body'] = body;
             try{
               var productDetail = JSON.parse(body);
-              JsonResponse['isProductDetails'] = true;
+              response['isProductDetails'] = true;
             }
             catch(e){
-              JsonResponse['isProductDetails'] = false;
+              response['isProductDetails'] = false;
             }
 
             var DeliveryMessgae = messageID.search("-dv-");
@@ -273,17 +275,17 @@
                 }
                 // Delivery Acknowledgment
                 if (deliveryAckID){
-                  console.log("@on_message : Status -- DELIVERED From : " + JsonResponse['full_jid']);
+                  console.log("@on_message : Status -- DELIVERED From : " + response['full_jid']);
                   // LocalCache.updateMessageStatus(deliveryAckID, 2, Strophe.getNodeFromJid(jid), timeInMilliSecond);
                   // $('#mid-'+deliveryAckID).html('Delivered');
-                  //$rootScope.chatSDK.write_to_log("New STATUS Message ARRIVED! mid:" + message.id + " " + "Status: Delivered From: " + JsonResponse['full_jid']);
+                  //$rootScope.chatSDK.write_to_log("New STATUS Message ARRIVED! mid:" + message.id + " " + "Status: Delivered From: " + response['full_jid']);
                 }
                 //read  acknoledment
                 if (readAckID){
-                  console.log("@on_message : Status -- READ From : " + JsonResponse['full_jid']);
+                  console.log("@on_message : Status -- READ From : " + response['full_jid']);
                   // LocalCache.updateMessageStatus(readAckID, 3, Strophe.getNodeFromJid(jid), timeInMilliSecond);
                   // $('#mid-'+readAckID).html('Read&nbsp;');
-                  //$rootScope.chatSDK.write_to_log("New STATUS Message ARRIVED! mid:" + message.id + " " + "Status: Read From: " + JsonResponse['full_jid']);
+                  //$rootScope.chatSDK.write_to_log("New STATUS Message ARRIVED! mid:" + message.id + " " + "Status: Read From: " + response['full_jid']);
                 }
             }
             else if(readMessageAcknow != -1){
@@ -293,10 +295,10 @@
                 } catch (err) {
                 }
                 if (readAckID){
-                  console.log("@on_message : Status -- READ From : " + JsonResponse['full_jid']);
+                  console.log("@on_message : Status -- READ From : " + response['full_jid']);
                   // LocalCache.updateMessageStatus(readAckID, 3, Strophe.getNodeFromJid(jid), timeInMilliSecond);
                   // $('#mid-'+readAckID).html('Read&nbsp;');
-                  //utility.comn.consoleLogger("New READ STATUS Message ARRIVED! Message Read: " + readAckID +  " From: " + JsonResponse['full_jid']);
+                  //utility.comn.consoleLogger("New READ STATUS Message ARRIVED! Message Read: " + readAckID +  " From: " + response['full_jid']);
                 }
             }
              else {
@@ -305,14 +307,16 @@
                 var messageId = $rootScope.tigoid + "-dv-" + strTimeMii;
                 var mid = messageId.toString();
                 // Sending delivery acknowledment back.
-                var message2 = $msg({to: JsonResponse['full_jid'], "type": "chat", "id": mid}).c('delivered').t(messageID).up().c('meta');
+                var message2 = $msg({to: response['full_jid'], "type": "chat", "id": mid}).c('delivered').t(messageID).up().c('meta');
                 // $('#mid-'+messageID).html('Delivered&nbsp;');
-                //self.on_Message_Update_Chat(JsonResponse);
+                //self.on_Message_Update_Chat(response);
                 $rootScope.chatSDK.connection.send(message2);
                 console.log('@on_message : Delivery Acknowledment Sent ' + message2);
             }
             return true;
         },
+
+
 
 
         /*

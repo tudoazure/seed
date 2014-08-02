@@ -76,8 +76,6 @@
 					})
 				};
 
-				
-
 				$scope.init();
 				$scope.loginToChatServer();
 
