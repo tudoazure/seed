@@ -76,7 +76,6 @@
 	        	contactObj.id   = otherpartyid;
 	        	contactObj.lastActive = getTimeInLongString();
 	        	$rootScope.plustxtcacheobj['contact'][otherpartyid] = contactObj;
-	        	$rootScope.$emit("ContactChange", $rootScope.plustxtcacheobj.contact);
 	        } 
 
 	        if ($rootScope.plustxtcacheobj['message'].hasOwnProperty(otherpartyid))
@@ -89,6 +88,7 @@
 	            messagelist.push(messageobj);
 	        }          
 	        $rootScope.plustxtcacheobj['message'][otherpartyid] = messagelist;
+	        $rootScope.$broadcast("ChatObjectChanged", $rootScope.plustxtcacheobj); 
 
 	        //updating history
 	        // if (messageobj['sender'] != $rootScope.tigoid)
