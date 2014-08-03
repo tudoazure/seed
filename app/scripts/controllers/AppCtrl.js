@@ -12,6 +12,8 @@
 					$rootScope.sessionid = null;
 					$rootScope.tigoId = null;
 					$rootScope.plustxtcacheobj = {};
+					$rootScope.plustxtcacheobj.contact = {};
+					$rootScope.plustxtcacheobj.message = {};
 					$rootScope.loginusername = null;
 					$rootScope.password = null;
 					$rootScope.usersCount = 0;
@@ -70,8 +72,6 @@
 						$rootScope.sessionid = response.data['session_id'];
 						$rootScope.plustxtId = response.data['tego_id'] + "@" + Globals.AppConfig.ChatHostURI;
 						$rootScope.password = response.data['password'] + response.data['tego_id'].substring(0, 3);
-						$rootScope.plustxtcacheobj.message = {};
-						$rootScope.plustxtcacheobj.contact = {};
 						StropheService.connection($rootScope.plustxtId, $rootScope.password);
 					}, function failure(error){
 						console.log("Error", error);

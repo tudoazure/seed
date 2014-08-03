@@ -5,7 +5,7 @@
 	app.config(['$routeProvider', function($routeProvider){
 		$routeProvider
 			.when('/',{
-				templateUrl:'app/views/partials/chatview.html',
+				templateUrl:'app/views/partials/overallView.html',
 				controller : ''
 			})
 			.when('/chat',{

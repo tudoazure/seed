@@ -76,6 +76,7 @@
 	        	contactObj.id   = otherpartyid;
 	        	contactObj.lastActive = getTimeInLongString();
 	        	$rootScope.plustxtcacheobj['contact'][otherpartyid] = contactObj;
+	        	$rootScope.$emit("ContactChange", $rootScope.plustxtcacheobj.contact);
 	        } 
 
 	        if ($rootScope.plustxtcacheobj['message'].hasOwnProperty(otherpartyid))
