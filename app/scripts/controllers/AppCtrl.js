@@ -8,12 +8,13 @@
 				$scope.init =function(){
 					$rootScope.bargainAgent = user;
 					$rootScope.chatSDK = ChatCoreService.chatSDK;
-					$rootScope.plustxtid = null;
+					$rootScope.plustxtId = null;
 					$rootScope.sessionid = null;
-					$rootScope.tigoid = null;
-					$rootScope.plustxtcacheobj = null;
+					$rootScope.tigoId = null;
+					$rootScope.plustxtcacheobj = {};
 					$rootScope.loginusername = null;
 					$rootScope.password = null;
+					$rootScope.usersCount = 0;
 				};
 
 				$rootScope.$on('StropheStatusChange', function(event, status, connection){
@@ -65,12 +66,13 @@
 						device_token : "TOKEN",
 						device_detail : "none+details"
 					}, function success(response){
-						$rootScope.tigoid = response.data['tego_id'];
+						$rootScope.tigoId = response.data['tego_id'];
 						$rootScope.sessionid = response.data['session_id'];
-						$rootScope.plustxtid = response.data['tego_id'] + "@" + Globals.AppConfig.ChatHostURI;
+						$rootScope.plustxtId = response.data['tego_id'] + "@" + Globals.AppConfig.ChatHostURI;
 						$rootScope.password = response.data['password'] + response.data['tego_id'].substring(0, 3);
-						StropheService.connection($rootScope.plustxtid, $rootScope.password);
-
+						$rootScope.plustxtcacheobj.message = {};
+						$rootScope.plustxtcacheobj.contact = {};
+						StropheService.connection($rootScope.plustxtId, $rootScope.password);
 					}, function failure(error){
 						console.log("Error", error);
 					})

@@ -6,8 +6,30 @@
 
 		var ChatCoreService;
 		
-    var on_Message_Update_Chat = function(){
+    var on_Message_Update_Chat = function(response){
+      var full_jid = response['full_jid'];
+      var composing = response['composing'];
+      var body = response['body'];
+      var messageId = response['id'];
+      var isProductDetails = false;
+      if(response['id']){
+        isProductDetails = response['isProductDetails'];
+      }
+      var jid = Strophe.getBareJidFromJid(full_jid);
+      var jid_id = UtilService.getJidToId(jid);
 
+      var MessID='mid-'+messageId;
+       if (body) {
+        // remove notifications since user is now active
+        // Exact the timestamp from messageID
+
+
+        var timeInMilliSeconds = UtilService.getTimeInLongString();
+        //var timeInMilliSeconds = messageId.substr(messageId.lastIndexOf('-') + 1, messageId.length);
+       // var messageTimeDescription = UtilService.getMilliTimeToString(new Number(timeInMilliSeconds));
+        var strTimeMii = timeInMilliSeconds.toString().substring(0, 10);
+        UtilService.addMessage($rootScope.plustxtId, jid, body, strTimeMii, messageId);
+      }  
     };
 	
     var chatSDK = {
@@ -85,7 +107,7 @@
             $(iq).find('item').each(function() {
                 var Item = {};
                 var jid = $(this).attr('jid');
-                Item['plustxtid'] = $(this).attr('jid');
+                Item['plustxtId'] = $(this).attr('jid');
                 if($(this).attr('name') === undefined){
                   self.guestUserId = self.guestUserId + 1;
                   Item['name'] = "Guest User " + self.guestUserId;
@@ -94,7 +116,7 @@
                    Item['name'] = $(this).attr('name')
                 }
                  // utility.comn.consoleLogger('name: ' + Item['name'] + ' jid: ' + jid);
-                Item['tegoid'] = Strophe.getNodeFromJid(Item['plustxtid']);
+                Item['tegoid'] = Strophe.getNodeFromJid(Item['plustxtId']);
                 JsonResponse[jid] = Item;
             });
             $rootScope.chatSDK.connection.addHandler($rootScope.chatSDK.on_presence, null, "presence");
@@ -309,7 +331,7 @@
                 // Sending delivery acknowledment back.
                 var message2 = $msg({to: response['full_jid'], "type": "chat", "id": mid}).c('delivered').t(messageID).up().c('meta');
                 // $('#mid-'+messageID).html('Delivered&nbsp;');
-                //self.on_Message_Update_Chat(response);
+                on_Message_Update_Chat(response);
                 $rootScope.chatSDK.connection.send(message2);
                 console.log('@on_message : Delivery Acknowledment Sent ' + message2);
             }
