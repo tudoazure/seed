@@ -25,12 +25,19 @@
 			<li class="chatArea" >
 				<div style="margin-bottom:10px;">
 
-					<div class='chat-message fr reporter bgblue me', ng-repeat='message in messages', ng-class="message.sender== contact ? 'me' : 'then'">
+					<div class='chat-message fr reporter bgblue me', ng-repeat='message in chat'>
                 	<div class='chat-name'>
                 		{{message.txt}}
             		</div>
             			<span style='float:right;font-size:9px'>{{message.sent_on}}</span>
         			</div>
+
+        			<!-- <div class='chat-message fr reporter bgblue me', ng-repeat='message in chat', ng-class="message.sender== contact ? 'me' : 'then'">
+                	<div class='chat-name'>
+                		{{message.txt}}
+            		</div>
+            			<span style='float:right;font-size:9px'>{{message.sent_on}}</span>
+        			</div> -->
 
 
                 	

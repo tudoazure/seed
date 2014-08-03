@@ -7,7 +7,9 @@
         templateUrl: 'app/scripts/directives/chat-contact-list/chat-area-template.html',
         // transclude:true,
         // replace: true,
-        scope: false,
+        scope: {
+          chat : '='
+        },
         link: function(scope, element, attrs) {
             // console.log(scope.contact);
             // scope.$watch('contact', function(newValue, oldValue) {

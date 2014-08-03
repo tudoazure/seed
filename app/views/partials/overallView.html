@@ -1,3 +1,6 @@
 <div ng-controller='ChatCtrl' class="mt30">
 	<chat-contact-list contact="contact"></chat-contact-list>
+	<div ng-repeat= "chat in activeWindow">
+		<chat-area chat = "chat"></chat-area>
+	</div>
 </div>
