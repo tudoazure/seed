@@ -25,23 +25,12 @@
 			<li class="chatArea" >
 				<div style="margin-bottom:10px;">
 
-					<div class='chat-message fr reporter bgblue me', ng-repeat='message in chat'>
+					<div class='chat-message fr reporter bgblue me', ng-repeat='message in messages', ng-class="message.sender== contact ? 'me' : 'then'">
                 	<div class='chat-name'>
                 		{{message.txt}}
             		</div>
             			<span style='float:right;font-size:9px'>{{message.sent_on}}</span>
         			</div>
-
-        			<!-- <div class='chat-message fr reporter bgblue me', ng-repeat='message in chat', ng-class="message.sender== contact ? 'me' : 'then'">
-                	<div class='chat-name'>
-                		{{message.txt}}
-            		</div>
-            			<span style='float:right;font-size:9px'>{{message.sent_on}}</span>
-        			</div> -->
-
-
-                	
-            	
     			<div class="linkBtn">
     				<a > show new messages</a>
     			</div>
@@ -49,7 +38,7 @@
 			</li>
 			<li>
 				<div class="chatText">
-					<textarea type="text" placehoder="send message" class="txtArea" ng-enter="sendMessage()"></textarea>
+					<textarea type="text" placehoder="send message" class="chatTextArea" ng-enter="sendMessageClick()" ng-model="agentMessage"></textarea>
 				</div>
 			</li>
 		</ul>

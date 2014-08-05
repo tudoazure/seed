@@ -7,16 +7,28 @@
         templateUrl: 'app/scripts/directives/chat-area/chat-area-template.html',
         // transclude:true,
         // replace: true,
-        scope: {
-          chat : '='
-        },
+        scope: false,
         link: function(scope, element, attrs) {
-            // console.log(scope.contact);
-            // scope.$watch('contact', function(newValue, oldValue) {
-            //     console.log(newValue);
-            //     if (newValue)
-            //         console.log("I see a contact change!");
-            // }, true);
+          scope.sendMessageClick = function(){
+            var message = {
+              can_forward: "true",
+              delete_after: "-1",
+              deleted_on_sender: "false",
+              flags: 0,
+              id: "",
+              last_ts: "1407260564",
+              mid: "purple37c8c6a8",
+              receiver: "fmpwrn",
+              sender: "m0fwaq",
+              sent_on: "1407260564",
+              state: 0,
+              txt: scope.agentMessage
+            }
+            scope.messages.push(message);
+            scope.agentMessage = "";
+            scope.sendMessage(message);
+          }
+
           }
         }
     }]);

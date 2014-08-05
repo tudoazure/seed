@@ -1,8 +1,8 @@
 (function (angular){
 	"use strict;"
 	angular.module('bargain')
-		.controller('ChatCtrl', ['$scope', '$rootScope',
-			function ($scope, $rootScope) {
+		.controller('ChatCtrl', ['$scope', '$rootScope', 'ChatCoreService',
+			function ($scope, $rootScope, ChatCoreService) {
 				$scope.activeWindows = $rootScope.plustxtcacheobj.messages;
     			$scope.contact = $rootScope.plustxtcacheobj.contact;
 				$rootScope.$on('ChatObjectChanged', function(event, chatObj){
@@ -11,9 +11,10 @@
 				        $scope.activeWindows = chatObj.message;
 				    });
 				});
-				$scope.sendMessage = function(){
-					alert('Send Message');
-				}
+
+				$scope.sendMessage = function(message){
+					
+				};
       }]);
 })(angular);
 
