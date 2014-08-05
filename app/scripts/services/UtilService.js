@@ -13,7 +13,6 @@
 				var date = new Date (dateString);
 				var momentDate = moment(dateString);
 				parseDate = momentDate.format("h:mm a");
-
 			}
 			return parseDate;
 		};
@@ -38,6 +37,30 @@
         var jIdToId = function(jid) {
 	        return Strophe.getBareJidFromJid(jid).replace("@", "-").replace(/\./g, "-");
     	};
+
+    	var getAllPendingMessages = function(){
+	        // var plustxtid = "Plustx_" + LocalCache.plustxtid;
+	        // var plustxtobject = $.jStorage.get(plustxtid);
+	        var messagearray = [];
+	        var offlinemessage;
+	        var midread = new Array();
+	        var MessageList = $rootScope.plustxtcacheobj['message'];
+	        for (var key in MessageList)
+	        {
+	            messagearray = $rootScope.plustxtcacheobj['message'][key];
+	            for (var key1 in messagearray)
+	            {
+	                if (messagearray[key1]['state'] == -1) {      
+	                    offlinemessage = {};
+	                    offlinemessage['tegoid'] = messagearray[key1]['receiver'];
+	                    offlinemessage['body'] = messagearray[key1]['txt']
+	                    offlinemessage['mid'] = messagearray[key1]['mid'];
+	                    midread[midread.length] = offlinemessage;
+	                }
+	            }
+	        }
+	        return midread;
+	    };
 
     	var addMessage = function(inRecieverJID, inSenderJID, inMessage, inTime, mid) {
         	var otherpartyid;
@@ -88,26 +111,15 @@
 	            messagelist.push(messageobj);
 	        }          
 	        $rootScope.plustxtcacheobj['message'][otherpartyid] = messagelist;
-	        $rootScope.$broadcast("ChatObjectChanged", $rootScope.plustxtcacheobj); 
-
-	        //updating history
-	        // if (messageobj['sender'] != $rootScope.tigoid)
-	        // {
-	        //     var historyobj = {};
-	        //     historyobj['last_message'] = messageobj['txt'];
-	        //     historyobj['time_stamp'] = messageobj['sent_on'];
-	        //     $rootScope.plustxtcacheobj['history'][otherpartyid] = historyobj
-	        // }
-	        //console.log("MessageList after " + JSON.stringify($rootScope.plustxtcacheobj));
-	        //$.jStorage.set(plustxtid, $rootScope.plustxtcacheobj);
-	        //console.log(JSON.stringify($rootScope.plustxtcacheobj['message'][$rootScope.tigoid]))
+	        $rootScope.$broadcast("ChatObjectChanged", $rootScope.plustxtcacheobj);
 	    };
 
 		UtilService = {
       		getTimeInLongString: getTimeInLongString,
       		getMilliTimeToString : milliTimeToString,
       		getJidToId : jIdToId,
-      		addMessage : addMessage, 
+      		addMessage : addMessage,
+      		getAllPendingMessages : getAllPendingMessages 
 
       	}
 

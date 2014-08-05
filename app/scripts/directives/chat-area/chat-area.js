@@ -18,15 +18,15 @@
               id: "",
               last_ts: "1407260564",
               mid: "purple37c8c6a8",
-              receiver: "fmpwrn",
-              sender: "m0fwaq",
+              receiver: "piayrq",
+              sender: "fmpwrn",
               sent_on: "1407260564",
-              state: 0,
+              state: -1,
               txt: scope.agentMessage
             }
             scope.messages.push(message);
             scope.agentMessage = "";
-            scope.sendMessage(message);
+            scope.sendMessage(message, "piayrq@chat-staging.paytm.com" , "piayrq-chat-staging-paytm-com");
           }
 
           }

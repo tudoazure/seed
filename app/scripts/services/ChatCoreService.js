@@ -377,7 +377,7 @@
            // and modify the status sent .
     //     // set variable to fixed value 
           $rootScope.chatSDK.PingCount=0;
-          var offmessageArray= LocalCache.getAllPendingMessages();       
+          var offmessageArray= UtilService.getAllPendingMessages();       
            var jid;
            var mid;
            var body;
@@ -386,22 +386,22 @@
            var message;
 
            if(offmessageArray == null || offmessageArray === undefined ){
-                utility.comn.consoleLogger("All Pending Messages Count:" + "0");
+                console.log("All Pending Messages Count:" + "0");
            }
            else{
-             utility.comn.consoleLogger("All Pending Messages Count : " + offmessageArray.length);
+              console.log("All Pending Messages Count : " + offmessageArray.length);
             for (var i=0 ; i < offmessageArray.length ; i++){
-                 utility.comn.consoleLogger('tegoid ' + offmessageArray[i]['tegoid']+ ' mid '+offmessageArray[i]['mid']+ 'body '+ offmessageArray[i]['body'])
-                jid=offmessageArray[i]['tegoid']+'@' + constants.Url.chatServerURl;
+                 console.log('tegoid ' + offmessageArray[i]['tegoid']+ ' mid '+offmessageArray[i]['mid']+ 'body '+ offmessageArray[i]['body'])
+                jid=offmessageArray[i]['tegoid']+'@' + "chat-staging.paytm.com";
                 mid=offmessageArray[i]['mid'];
                 body=offmessageArray[i]['body'];
                 message = $msg({to: jid, "type": "chat", "id": mid}).c('body').t(body).up().c('active', {xmlns: "http://jabber.org/protocol/chatstates"}).up()
                 .c('request', {xmlns: 'urn:xmpp:receipts'}).up().c('meta').c('acl', {deleteafter: "-1", canforward: "1", candownload: "1"});
                 $rootScope.chatSDK.connection.send(message);
-               timeInMilliSecond = getTimeInLongString();
-               strTimeMii = timeInMilliSecond.toString();
+               // timeInMilliSecond = getTimeInLongString();
+               // strTimeMii = timeInMilliSecond.toString();
              //   utility.comn.consoleLogger(' local cache message status upadted from mid '+mid);
-               LocalCache.updateMessageStatus(mid, 0, Strophe.getNodeFromJid(jid), strTimeMii);
+               //LocalCache.updateMessageStatus(mid, 0, Strophe.getNodeFromJid(jid), strTimeMii);
             }
            }
           return true;
