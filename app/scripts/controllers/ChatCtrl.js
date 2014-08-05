@@ -8,9 +8,12 @@
 				$rootScope.$on('ChatObjectChanged', function(event, chatObj){
 					$scope.$apply(function(){
 				        $scope.contact = chatObj.contact;
-				        scope.activeWindows = chatObj.message;
+				        $scope.activeWindows = chatObj.message;
 				    });
 				});
+				$scope.sendMessage = function(){
+					alert('Send Message');
+				}
       }]);
 })(angular);
 
