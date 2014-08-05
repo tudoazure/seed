@@ -4,7 +4,7 @@
     .directive('chatArea', ['$timeout', function( $timeout) {
       return {
         restrict: 'EA',
-        templateUrl: 'app/scripts/directives/chat-contact-list/chat-area-template.html',
+        templateUrl: 'app/scripts/directives/chat-area/chat-area-template.html',
         // transclude:true,
         // replace: true,
         scope: false,
