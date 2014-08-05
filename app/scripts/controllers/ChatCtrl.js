@@ -11,6 +11,9 @@
 				        $scope.activeWindows = chatObj.message;
 				    });
 				});
+				$scope.sendMessage = function(){
+					alert('Send Message');
+				}
       }]);
 })(angular);
 
