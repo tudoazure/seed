@@ -15,7 +15,7 @@
           else{
             scope.product = {};
             scope.product.imageUrl = "";
-            scope.product.description = "N/A";
+            scope.product.description = "Product Information Not Available";
             scope.product.price = "N/A";
           }
           scope.userName = scope.contact[scope.userId].name;
