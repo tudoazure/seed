@@ -9,8 +9,8 @@
         // replace: true,
         scope: false,
         link: function(scope, element, attrs) {
-          if(scope.products && scope.products[scope.userId]){
-            scope.product = scope.products[scope.userId];
+          if(scope.products && scope.products[scope.chatData.userId]){
+            scope.product = scope.products[scope.chatData.userId];
           }
           else{
             scope.product = {};
