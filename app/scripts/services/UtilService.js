@@ -121,7 +121,13 @@
 	        	contactObj.id   = otherpartyid;
 	        	contactObj.lastActive = getTimeInLongString();
 	        	$rootScope.plustxtcacheobj['contact'][otherpartyid] = contactObj;
+
+	        	if($rootScope.plustxtcacheobj.visibleChatContacts.length < 4){
+	        		$rootScope.plustxtcacheobj.visibleChatContacts.push(otherpartyid);
+	        	}
 	        } 
+
+
 
 	        if ($rootScope.plustxtcacheobj['message'].hasOwnProperty(otherpartyid))
 	        {

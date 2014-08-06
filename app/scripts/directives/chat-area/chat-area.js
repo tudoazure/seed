@@ -18,7 +18,8 @@
             scope.product.description = "Product Information Not Available";
             scope.product.price = "N/A";
           }
-          scope.userName = scope.contact[scope.userId].name;
+          scope.userName = scope.contact[scope.chatData.userId].name;
+          scope.messages = scope.chatData.messages;
           scope.sendMessageClick = function(){
             var message = {
               can_forward: "true",
@@ -28,15 +29,15 @@
               id: "",
               last_ts: "1407260564",
               mid: "purple37c8c6a8",
-              receiver: scope.userId,
+              receiver: scope.chatData.userId ,
               sender: scope.agentId,
               sent_on: "1407260564",
               state: -1,
               txt: scope.agentMessage,
               isProductDetails : false
             }
-            scope.messages.push(message);
-            var jId = scope.userId + "@" + Globals.AppConfig.ChatHostURI;
+            scope.chatData.messages.push(message);
+            var jId = scope.chatData.userId + "@" + Globals.AppConfig.ChatHostURI;
             scope.sendMessage(message, jId);
             scope.agentMessage = "";
           }
