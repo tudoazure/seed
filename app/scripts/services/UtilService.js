@@ -62,6 +62,22 @@
 	        return midread;
 	    };
 
+	    var updateMessageStatus = function(inmessageid, instatus, inotherpartytigoid, intime){
+	        var messagearray =  $rootScope.plustxtcacheobj['message'][inotherpartytigoid];
+	        //console.log("inotherpartytigoid "+inotherpartytigoid+"messagearray "+JSON.stringify(messagearray));
+	        // var messagearray=messageobject.inmessageid;
+	        for (var key in messagearray)
+	        {
+	            if (messagearray[key]['mid'] == inmessageid) {
+	                messagearray[key]['state'] = instatus;
+	                messagearray[key]['last_ts'] = intime;
+	            }
+	        }
+	        $rootScope.plustxtcacheobj['message'][inotherpartytigoid] = messagearray
+	        //console.log("after updateinotherpartytigoid " + inotherpartytigoid + "messagearray " + JSON.stringify(plustxtobject['message'][inotherpartytigoid]));
+	        // $.jStorage.set(plustxtid, plustxtobject);
+	    };
+
     	var addMessage = function(inRecieverJID, inSenderJID, inMessage, inTime, mid, isSpecialMessage) {
         	var otherpartyid;
 	        var messagelist = [];
@@ -147,7 +163,8 @@
       		getMilliTimeToString : milliTimeToString,
       		getJidToId : jIdToId,
       		addMessage : addMessage,
-      		getAllPendingMessages : getAllPendingMessages 
+      		getAllPendingMessages : getAllPendingMessages,
+      		updateMessageStatus : updateMessageStatus
 
       	}
 

@@ -1,7 +1,7 @@
 (function (angular){
   'use strict';
   angular.module('bargain')
-    .directive('chatArea', ['$timeout', function( $timeout) {
+    .directive('chatArea', ['UtilService', function(UtilService) {
       return {
         restrict: 'EA',
         templateUrl: 'app/scripts/directives/chat-area/chat-area-template.html',
@@ -21,26 +21,33 @@
           scope.userName = scope.contact[scope.chatData.userId].name;
           scope.messages = scope.chatData.messages;
           scope.sendMessageClick = function(){
+            var timeInMilliSecond = UtilService.getTimeInLongString();
+            var strTimeMii = timeInMilliSecond.toString();
+            var messageId = scope.agentId + "-c-" + strTimeMii;
+            var mid = messageId.toString();
+
             var message = {
               can_forward: "true",
               delete_after: "-1",
               deleted_on_sender: "false",
               flags: 0,
               id: "",
-              last_ts: "1407260564",
-              mid: "purple37c8c6a8",
+              last_ts: strTimeMii.substring(0, 10),
+              mid: mid,
               receiver: scope.chatData.userId ,
               sender: scope.agentId,
-              sent_on: "1407260564",
-              state: -1,
+              sent_on: strTimeMii.substring(0, 10),
+              state: 0,
               txt: scope.agentMessage,
               isProductDetails : false
             }
             scope.chatData.messages.push(message);
             var jId = scope.chatData.userId + "@" + Globals.AppConfig.ChatHostURI;
-            scope.sendMessage(message, jId);
+            scope.sendMessage(message, jId, timeInMilliSecond, mid);
             scope.agentMessage = "";
           }
+
+                      
 
           }
         }

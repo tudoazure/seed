@@ -24,8 +24,8 @@
         // Exact the timestamp from messageID
 
 
-        var timeInMilliSeconds = UtilService.getTimeInLongString();
-        //var timeInMilliSeconds = messageId.substr(messageId.lastIndexOf('-') + 1, messageId.length);
+        //var timeInMilliSeconds = UtilService.getTimeInLongString();
+        var timeInMilliSeconds = messageId.substr(messageId.lastIndexOf('-') + 1, messageId.length);
        // var messageTimeDescription = UtilService.getMilliTimeToString(new Number(timeInMilliSeconds));
         var strTimeMii = timeInMilliSeconds.toString().substring(0, 10);
         UtilService.addMessage($rootScope.plustxtId, jid, body, strTimeMii, messageId, isSpecialMessage);
@@ -326,7 +326,7 @@
              else {
                 console.log("@on_message :New Text Message : " + message.textContent);
                 var strTimeMii = UtilService.getTimeInLongString().toString();
-                var messageId = $rootScope.tigoid + "-dv-" + strTimeMii;
+                var messageId = $rootScope.tigoId + "-dv-" + strTimeMii;
                 var mid = messageId.toString();
                 // Sending delivery acknowledment back.
                 var message2 = $msg({to: response['full_jid'], "type": "chat", "id": mid}).c('delivered').t(messageID).up().c('meta');

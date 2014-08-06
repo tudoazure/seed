@@ -34,18 +34,18 @@
 				    });
 				});
 
-				$scope.sendMessage = function(body, jid){
+				$scope.sendMessage = function(body, jid, timeInMilliSecond, mid){
 					if(body !== ""){
-			            var timeInMilliSecond = UtilService.getTimeInLongString();
-			            var strTimeMii = timeInMilliSecond.toString();
-			            var messageId = $rootScope.tigoId + "-c-" + strTimeMii;
-			            var mid = messageId.toString();
+			            // var timeInMilliSecond = UtilService.getTimeInLongString();
+			            // var strTimeMii = timeInMilliSecond.toString();
+			            // var messageId = $rootScope.tigoId + "-c-" + strTimeMii;
+			           // var mid = messageId.toString();
 			            var message = $msg({to: jid, "type": "chat", "id": mid}).c('body').t(body).up().c('active', {xmlns: "http://jabber.org/protocol/chatstates"}).up()
 			            .c('meta').c('acl', {deleteafter: "-1", canforward: "1", candownload: "1"});
 		             	var to = Strophe.getDomainFromJid($rootScope.chatSDK.connection.jid);
              			var ping = $iq({to: to,type: "get",id: "ping1"}).c("ping", {xmlns: "urn:xmpp:ping"});
              			$rootScope.chatSDK.connection.send(ping);
-
+             			UtilService.updateMessageStatus(mid, -1, Strophe.getNodeFromJid(jid), timeInMilliSecond);
 			        }
 				};
       }]);
