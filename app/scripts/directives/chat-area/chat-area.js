@@ -9,9 +9,16 @@
         // replace: true,
         scope: false,
         link: function(scope, element, attrs) {
-          if(scope.products){
-            scope.product = scope.products[scope.userId]
+          if(scope.products && scope.products[scope.userId]){
+            scope.product = scope.products[scope.userId];
           }
+          else{
+            scope.product = {};
+            scope.product.imageUrl = "";
+            scope.product.description = "N/A";
+            scope.product.price = "N/A";
+          }
+          scope.userName = scope.contact[scope.userId].name;
           scope.sendMessageClick = function(){
             var message = {
               can_forward: "true",
@@ -25,7 +32,8 @@
               sender: scope.agentId,
               sent_on: "1407260564",
               state: -1,
-              txt: scope.agentMessage
+              txt: scope.agentMessage,
+              isProductDetails : false
             }
             scope.messages.push(message);
             var jId = scope.userId + "@" + Globals.AppConfig.ChatHostURI;
