@@ -1,7 +1,7 @@
 <div ng-controller='ChatCtrl' class="mt30">
 	<chat-contact-list contact="contact"></chat-contact-list>
-	<div ng-repeat="messages in activeWindows" >
-		<chat-area chat-data="messages"></chat-area>
+	<div ng-repeat="(userId, messages) in activeWindows" >
+		<chat-area chat-data="messages" userId="userId"></chat-area>
 	</div>
 
 </div>

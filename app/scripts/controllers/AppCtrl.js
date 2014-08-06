@@ -14,6 +14,7 @@
 					$rootScope.plustxtcacheobj = {};
 					$rootScope.plustxtcacheobj.contact = {};
 					$rootScope.plustxtcacheobj.message = {};
+					$rootScope.plustxtcacheobj.products = {};
 					$rootScope.loginusername = null;
 					$rootScope.password = null;
 					$rootScope.usersCount = 0;

@@ -5,14 +5,17 @@
 			function ($scope, $rootScope, ChatCoreService, UtilService) {
 				$scope.activeWindows = $rootScope.plustxtcacheobj.messages;
     			$scope.contact = $rootScope.plustxtcacheobj.contact;
+    			$scope.products = $rootScope.plustxtcacheobj.products;
+    			$scope.agentId = $rootScope.tigoId;
 				$rootScope.$on('ChatObjectChanged', function(event, chatObj){
 					$scope.$apply(function(){
 				        $scope.contact = chatObj.contact;
 				        $scope.activeWindows = chatObj.message;
+				        $scope.products = chatObj.products;
 				    });
 				});
 
-				$scope.sendMessage = function(body, jid, jid_id){
+				$scope.sendMessage = function(body, jid){
 					if(body !== ""){
 			            var timeInMilliSecond = UtilService.getTimeInLongString();
 			            var strTimeMii = timeInMilliSecond.toString();

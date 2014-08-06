@@ -9,12 +9,12 @@
 				</div>
 			</li>
 			<li class="productdetail">
-				<div class="col-md-4"><img src="" class="img"></img></div>
+				<div class="col-md-4"><img src={{product.imageUrl}} class="img"></img></div>
 				<div class="col-md-8" style="padding:10px 0 0 0;">
-					<span class="detail">Panasonic RP-HJ201E-K In-the-ear Weired Headphone</span>
+					<span class="detail">{{product.description}}</span>
 					<div class="col-md-4 price">
 						<span>Price</span>
-						<div class="priceDiv"> Rs. 95.45</div>
+						<div class="priceDiv"> Rs. {{product.price}}</div>
 					</div>
 					<div class="col-md-4 disc">
 						<span>Discount</span>
@@ -25,11 +25,11 @@
 			<li class="chatArea" >
 				<div style="margin-bottom:10px;">
 
-					<div class='chat-message fr reporter bgblue me', ng-repeat='message in messages', ng-class="message.sender== contact ? 'me' : 'then'">
-                	<div class='chat-name'>
-                		{{message.txt}}
-            		</div>
-            			<span style='float:right;font-size:9px'>{{message.sent_on}}</span>
+					<div class='chat-message fr reporter bgblue me', ng-repeat='message in messages', ng-class="message.sender== contact ? 'me' : 'then'" ng-if="!message.isProductDetails">
+	                	<div class='chat-name'>
+	                		{{message.txt}}
+	            		</div>
+	            			<span style='float:right;font-size:9px'>{{message.sent_on}}</span>
         			</div>
     			<div class="linkBtn">
     				<a > show new messages</a>

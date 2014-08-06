@@ -9,6 +9,9 @@
         // replace: true,
         scope: false,
         link: function(scope, element, attrs) {
+          if(scope.products){
+            scope.product = scope.products[scope.userId]
+          }
           scope.sendMessageClick = function(){
             var message = {
               can_forward: "true",
@@ -18,15 +21,16 @@
               id: "",
               last_ts: "1407260564",
               mid: "purple37c8c6a8",
-              receiver: "piayrq",
-              sender: "fmpwrn",
+              receiver: scope.userId,
+              sender: scope.agentId,
               sent_on: "1407260564",
               state: -1,
               txt: scope.agentMessage
             }
             scope.messages.push(message);
+            var jId = scope.userId + "@" + Globals.AppConfig.ChatHostURI;
+            scope.sendMessage(message, jId);
             scope.agentMessage = "";
-            scope.sendMessage(message, "piayrq@chat-staging.paytm.com" , "piayrq-chat-staging-paytm-com");
           }
 
           }

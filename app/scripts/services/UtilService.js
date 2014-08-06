@@ -62,7 +62,7 @@
 	        return midread;
 	    };
 
-    	var addMessage = function(inRecieverJID, inSenderJID, inMessage, inTime, mid) {
+    	var addMessage = function(inRecieverJID, inSenderJID, inMessage, inTime, mid, isSpecialMessage) {
         	var otherpartyid;
 	        var messagelist = [];
 	        var receiverTigoId = inRecieverJID.substring(0, inRecieverJID.lastIndexOf('@'));
@@ -80,12 +80,34 @@
 	        messageobj['mid'] = mid;
 	        messageobj['flags'] = 0;//0-sent;1-recieved
 	        messageobj['state'] = 0;//0-sending;1-sent;2-Delivered;3-read
+	        messageobj['isProductDetails'] = false;
+
+	        
 
 	        if (receiverTigoId == $rootScope.tigoId){
 	            otherpartyid = senderTigoId;
 	        }
 	        else{
 	            otherpartyid = receiverTigoId;
+	        }
+	        if(isSpecialMessage){
+	        	try{
+	        		var specialMessage = JSON.parse(inMessage);
+	        		if(specialMessage.PRDCNTXT){
+		        		messageobj['isProductDetails'] = true;
+						var productObj ={}
+						productObj.imageUrl = specialMessage.PRDCNTXT.image_url;
+						productObj.description = specialMessage.PRDCNTXT.description;
+						productObj.price = specialMessage.PRDCNTXT.price.replace("Rs" , "").trim();
+						productObj.merchantId = specialMessage.PRDCNTXT.merchant_id;
+						productObj.productId = specialMessage.PRDCNTXT.id;
+						productObj.userId = specialMessage.PRDCNTXT.user_id;
+						productObj.productUrl = specialMessage.PRDCNTXT.product_url;
+						$rootScope.plustxtcacheobj.products[otherpartyid] = productObj;
+			        }
+	            }
+	            catch(e){
+	            }
 	        }
 
 	        if ($rootScope.plustxtcacheobj['contact'].hasOwnProperty(otherpartyid))

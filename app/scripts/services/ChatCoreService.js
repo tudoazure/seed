@@ -13,7 +13,7 @@
       var messageId = response['id'];
       var isProductDetails = false;
       if(response['id']){
-        isProductDetails = response['isProductDetails'];
+        isSpecialMessage = response['isSpecialMessage'];
       }
       var jid = Strophe.getBareJidFromJid(full_jid);
       var jid_id = UtilService.getJidToId(jid);
@@ -28,7 +28,7 @@
         //var timeInMilliSeconds = messageId.substr(messageId.lastIndexOf('-') + 1, messageId.length);
        // var messageTimeDescription = UtilService.getMilliTimeToString(new Number(timeInMilliSeconds));
         var strTimeMii = timeInMilliSeconds.toString().substring(0, 10);
-        UtilService.addMessage($rootScope.plustxtId, jid, body, strTimeMii, messageId);
+        UtilService.addMessage($rootScope.plustxtId, jid, body, strTimeMii, messageId, isSpecialMessage);
       }  
     };
 	
@@ -272,10 +272,10 @@
             response['body'] = body;
             try{
               var productDetail = JSON.parse(body);
-              response['isProductDetails'] = true;
+              response['isSpecialMessage'] = true;
             }
             catch(e){
-              response['isProductDetails'] = false;
+              response['isSpecialMessage'] = false;
             }
 
             var DeliveryMessgae = messageID.search("-dv-");
