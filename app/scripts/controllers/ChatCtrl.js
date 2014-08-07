@@ -23,7 +23,7 @@
 				        			value.messages = chatObj.message[contact];
 				        			contactExists = true;
 				        		}
-				        	})
+				        	});
 				        	if(!contactExists){
 					        	var converstion = {};
 					        	converstion.userId = contact;
@@ -33,6 +33,16 @@
 				        })
 				    });
 				});
+
+				$scope.openchatview = function(user){
+					if(user){
+						if($scope.activeWindows && $scope.activeWindows.length){
+							angular.forEach($scope.activeWindows, function(value, index){
+
+							});
+						}
+					}
+				};
 
 				$scope.sendMessage = function(body, jid, timeInMilliSecond, mid){
 					if(body !== ""){

@@ -6,7 +6,7 @@
 				</div>
 			</li>
 		    <li ng-repeat="user in contact">
-		    	<div class="col-md-10 p0 active">{{ user.name }}
+		    	<div class="col-md-10 p0 active" ng-click="openchatview(user)">{{ user.name }}
 		    		<br/>
 		    		<!-- <span class='italicFont'>...is typing</span> -->
 		    	</div>
