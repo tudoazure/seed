@@ -142,9 +142,9 @@
 	        	contactObj.lastActive = getTimeInLongString();
 	        	$rootScope.plustxtcacheobj['contact'][otherpartyid] = contactObj;
 
-	        	if($rootScope.plustxtcacheobj.visibleChatContacts.length < 2){
-	        		$rootScope.plustxtcacheobj.visibleChatContacts.push(otherpartyid);
-	        	}
+	        	// if($rootScope.plustxtcacheobj.visibleChatContacts.length < 2){
+	        	// 	$rootScope.plustxtcacheobj.visibleChatContacts.push(otherpartyid);
+	        	// }
 	        } 
 
 
