@@ -17,7 +17,7 @@
 				        $scope.allMessages = chatObj.message;
 				        $scope.products = chatObj.products;
 				        $scope.visibleContacts = chatObj.visibleChatContacts;
-				        angular.forEach(chatObj.visibleChatContacts, function(contact, order){
+				        angular.forEach($scope.visibleContacts, function(contact, order){
 				        	var contactExists = false;
 				        	angular.forEach($scope.activeWindows, function(value, index){
 				        		if (value.userId == contact){
@@ -43,24 +43,27 @@
 						}
 						if($scope.activeWindows && $scope.activeWindows.length ==2){
 							var minTime = '';
-							angular.forEach($scope.contact, function(value, index){
-								var contactTime = new Date(value.lastActive).getTime();
+							var deactiveContact ="";
+							angular.forEach($scope.activeWindows, function(value, index){
+								//var contactTime = new Date($scope.contact[value.userId].lastActive).getTime();
+								var contactTime = $scope.contact[value.userId].lastActive;
 								if(minTime){
 									if(minTime > contactTime){
 										minTime = contactTime;
-										$scope.deactiveContact = value.id;
+										deactiveContact = value.userId;
 									}
 								}else{
 									minTime = contactTime;
-									$scope.deactiveContact = value.id;
+									deactiveContact = value.userId;
 								}
 							});
 							angular.forEach($scope.activeWindows, function(value, index){
-								if(value.userId == $scope.deactiveContact){
+								if(value.userId == deactiveContact){
 									var conversation = {};
 						        	conversation.userId = user.id;
 						        	conversation.messages =  $scope.allMessages[user.id];
 						        	$scope.activeWindows[index] = conversation;
+						        	$scope.visibleContacts[index] = user.id;
 								}
 							});
 						}
