@@ -128,7 +128,7 @@
 						</div>
 					</div>
 				</li>
-				<li class="chatArea" >
+				<li class="chatArea" ng-show='showPromo'>
 					<div style="margin-bottom:10px;">
 						<div class='chat-message fr reporter bgblue me'>
 	                	<div class='chat-name'>
@@ -180,8 +180,91 @@
         			</div>
 					
 				</li>
+				<li class="chatArea" >
+					<div style="margin-bottom:10px;" align="center">
+						<ul class="col-md-12">
+							<li class="chatheader active1">
+								<div align="center">
+									Create Promotion Code
+								</div>
+							</li>
+							<li class="promoArea">
+								<ul class="col-md-12 pt10">
+									<li>
+										<div class="col-md-7 padd1"  align="left">
+											<label>Discount Value</label>
+										</div>
+										<div class="col-md-5 padd mt3">
+											
+										</div>
+									</li>
+									<li>
+										<div class="col-md-7 padd1"  align="left">
+											<input type="radio" name="percentage" value="0" ng-click="setPromoType('percentage')"/>
+											<label>Percentage</label>
+										</div>
+										<div class="col-md-5 padd mt3">
+											<input type="text" class="width65">
+										</div>
+									</li>
+									<li>
+										<div class="col-md-7 padd1"  align="left">
+											<input type="radio" name="absolute" value="1" ng-click="setPromoType('absolute')"/>
+											<label>Amount</label>
+										</div>
+										<div class="col-md-5 padd mt3">
+											<input type="text" class="width65"/>
+										</div>
+									</li>
+									<li>
+										<div class="col-md-7 padd1"  align="left">
+											<label>Upper Limit</label>
+										</div>
+										<div class="col-md-5 padd mt3">
+											<input type="text" class="width65"/>
+										</div>
+									</li>
+									<li>
+										<div class="col-md-7 padd1"  align="left">
+											<label>Minimum Quantity</label>
+										</div>
+										<div class="col-md-5 padd mt3">
+											<input type="text" class="width65"/>
+										</div>
+									</li>
+									<li>
+										<div class="col-md-7 padd1"  align="left">
+											<label>Validity</label>
+										</div>
+										<div class="col-md-5 padd mt3">
+											<input type="text" class="width65">
+										</div>
+									</li>
+									<li>
+										<div class="col-md-7 padd1"  align="left">
+											<input type="checkbox">
+											<label>Free Shipping</label>
+										</div>
+										<div class="col-md-5 padd mt3">
+											
+										</div>
+									</li>
+									<li>
+										<div class="col-md-12 mt10" align="center">
+											<div class="promoBtn">
+						        				<a > Generate code</a>
+						        			</div>
+										</div>
+									</li>
+									
+								</ul>
+							</li>
+						</ul>
+					</div>
+			</li>
 				<li>
 					<div class="chatText">
+						<span class="promolink" ng-click="openPromoWindow()">Code</span>
 						<textarea type="text" placehoder="send message" class="chatTextArea"></textarea>
 					</div>
 				</li>
@@ -260,7 +343,7 @@
 	        			
 					</div>
                 	
-        			<div class="linkBtn">
+        			<div class="linkBtn" align="center">
         				<a > show new messages</a>
         			</div>
 					

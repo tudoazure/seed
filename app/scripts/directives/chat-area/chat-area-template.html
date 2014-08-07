@@ -2,10 +2,8 @@
 	<div class="col-md-12" style="padding:0px;">
 		<ul class="chatUL">
 			<li class="chatheader active1">
-				<div>
-					<div class="col-md-1"></div>
-					<div class="col-md-6  h11" > {{userName}}</div>
-					<div class="col-md-1 "></div>
+				<div align="center" class="col-md-12">
+					{{userName}}
 				</div>
 			</li>
 			<li class="productdetail">
@@ -22,7 +20,7 @@
 					</div>
 				</div>
 			</li>
-			<li class="chatArea" >
+			<li class="chatArea" ng-show="!showPromo" >
 				<div style="margin-bottom:10px;">
 
 					<div class='chat-message fr reporter bgblue', ng-repeat='message in messages', ng-class="message.sender== chatData.userId ? 'user-mesg' : 'agent-mesg'" ng-if="!message.isProductDetails">
@@ -36,8 +34,92 @@
     			</div>
 				
 			</li>
+			<li class="chatArea" ng-show="showPromo" >
+					<div style="margin-bottom:10px;" align="center">
+						<ul class="col-md-12">
+							<li class="chatheader active1">
+								<div align="center">
+									Create Promotion Code
+									<span ng-click="openPromoWindow()" class="close">X</span>
+								</div>
+							</li>
+							<li class="promoArea">
+								<ul class="col-md-12 pt10">
+									<li>
+										<div class="col-md-7 padd1"  align="left">
+											<label>Discount Value</label>
+										</div>
+										<div class="col-md-5 padd mt3">
+											
+										</div>
+									</li>
+									<li>
+										<div class="col-md-7 padd1"  align="left">
+											<input type="radio" name="promoType" value="percentage" ng-click="setPromoType('percentage')"/>
+											<label>Percentage</label>
+										</div>
+										<div class="col-md-5 padd mt3">
+											<input type="text" class="width65" ng-model="percentCap">
+										</div>
+									</li>
+									<li>
+										<div class="col-md-7 padd1"  align="left">
+											<input type="radio" name="promoType" value="absolute" ng-click="setPromoType('absolute')"/>
+											<label>Amount</label>
+										</div>
+										<div class="col-md-5 padd mt3">
+											<input type="text" class="width65" ng-model="absoluteCap"/>
+										</div>
+									</li>
+									<li>
+										<div class="col-md-7 padd1"  align="left">
+											<label>Upper Limit</label>
+										</div>
+										<div class="col-md-5 padd mt3">
+											<input type="text" class="width65" ng-model="capLimit"/>
+										</div>
+									</li>
+									<li>
+										<div class="col-md-7 padd1"  align="left">
+											<label>Minimum Quantity</label>
+										</div>
+										<div class="col-md-5 padd mt3">
+											<input type="text" class="width65" ng-model="qty"/>
+										</div>
+									</li>
+									<li>
+										<div class="col-md-7 padd1"  align="left">
+											<label>Validity</label>
+										</div>
+										<div class="col-md-5 padd mt3">
+											<input type="text" class="width65" ng-model="validDate">
+										</div>
+									</li>
+									<li>
+										<div class="col-md-7 padd1"  align="left">
+											<input type="checkbox" ng-model="isFreeShiping" ng-click="setFreeShip()">
+											<label>Free Shipping</label>
+										</div>
+										<div class="col-md-5 padd mt3">
+											
+										</div>
+									</li>
+									<li>
+										<div class="col-md-12 mt10" align="center">
+											<div class="promoBtn" ng-click="savePromo()">
+						        				<a > Generate code</a>
+						        			</div>
+										</div>
+									</li>
+									
+								</ul>
+							</li>
+						</ul>
+					</div>
+			</li>
 			<li>
 				<div class="chatText">
+					<span class="promolink" ng-click="openPromoWindow()">Code</span>
 					<textarea type="text" placehoder="send message" class="chatTextArea" ng-enter="sendMessageClick()" ng-model="agentMessage"></textarea>
 				</div>
 			</li>

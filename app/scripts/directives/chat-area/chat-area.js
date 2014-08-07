@@ -21,6 +21,42 @@
           }
           scope.userName = scope.contact[scope.chatData.userId].name;
           scope.messages = scope.chatData.messages;
+          scope.openPromoWindow = function(){
+            scope.showPromo = !scope.showPromo;
+          };
+
+          scope.setPromoType = function(type){
+            scope.promoType= type;
+          }
+
+          scope.setFreeShip = function(){
+            scope.isFreeShiping = !scope.isFreeShiping;
+          }
+
+          scope.savePromo = function(){
+            var promoObj = {};
+            promoObj.action = scope.promoType;
+            promoObj.value =  scope.promoType == 'percentage' ? scope.percentCap : scope.absoluteCap;
+            promoObj.cap = scope.promoType == 'percentage' ? scope.capLimit : '';
+            promoObj.qty = scope.qty;
+            promoObj.freeshipping = scope.isFreeShiping;
+            promoObj.product_id = scope.product.id;
+            promoObj.user_id = scope.userid;
+            promoObj.valid_upto = scope.validDate;
+            //ajax code;
+
+            // var promoObj = {
+            //   action : action,
+            //   value : value,
+            //   cap : cap, 
+            //   qty : minQty,
+            //   freeshipping : freeshipping,
+            //   product_id : bargainProduct ? (bargainProduct.id||0) : 0,
+            //   user_id : bargainProduct ? (bargainProduct.user_id||0) : 0,
+            //   valid_upto : validDate, 
+            // };
+          }
+
           scope.sendMessageClick = function(){
             var timeInMilliSecond = UtilService.getTimeInLongString();
             var strTimeMii = timeInMilliSecond.toString();

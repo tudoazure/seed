@@ -54,7 +54,10 @@ ul li{
 .p0{padding:0px;}
 .ml7{margin-left: 7px;}
 .padd{padding: 5px 0px 2px 0px;}
+.padd1{padding: 5px 0px 5px 10px;}
 .mt3{margin-top: 3px;}
+.mt10{margin-top: 10px;}
+.pt10{padding: 10px 0px 0px 0px;}
 
 .roaster{
 	background-color: #eaedee;
@@ -235,7 +238,7 @@ ul li{
 	padding: 3px;
 	border-radius: 4px;
 	position: absolute;
-	margin-top: 340px;
+	bottom: 60px;
 	margin-left: 50px;
 	width: 150px;
 	text-align: center;
@@ -276,4 +279,42 @@ font-size: 14px;}
 .agent-mesg{
 	margin-right: 5px;
 	background-color: #D8F5B9;
+}
+
+.promoArea {
+	border: solid 1px #00B8FF;
+	background-color: #f6fcff;
+	font-size: 11px;
+	font-weight: 500;
+	line-height: 1.43;
+	height: 300px;
+}
+
+.width65{
+	width: 65px;
+}
+.promoBtn{
+	color: #a6a6a6;
+	text-decoration: none;
+	font-size: 11px;
+	border: solid 1px #00B8FF;
+	padding: 3px;
+	border-radius: 4px;
+	width: 150px;
+	text-align: center;
+}
+
+.promolink{
+	position: absolute;
+	padding: 10px;
+	font-size: 12px;
+	border: solid 1px #00B8FF;
+	line-height: 2px;
+	height: 12px;
+	margin: 5px;
+}
+
+.close{
+	margin-left: 26px;
+	position: absolute;
 }
