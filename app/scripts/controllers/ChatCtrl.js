@@ -48,6 +48,10 @@
              			UtilService.updateMessageStatus(mid, -1, Strophe.getNodeFromJid(jid), timeInMilliSecond);
 			        }
 				};
+
+				$scope.parsedDate = function(ts){
+					return UtilService.getLocalTime(ts);
+				}
       }]);
 })(angular);
 

@@ -47,8 +47,6 @@
             scope.agentMessage = "";
           }
 
-                      
-
           }
         }
     }]);

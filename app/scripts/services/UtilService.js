@@ -28,6 +28,10 @@
 			return parseDate;
 		};
 
+		var getLocalTime = function(ts) {
+            return moment.unix(ts).format("MMM Do, h:mm:ss a");
+        };
+
         var milliTimeToString = function(inMilliSeconds) {
 		    var date = new Date(inMilliSeconds);
 		    var strTime = parseDate(date) + " "+ parseTime(date);
@@ -164,7 +168,8 @@
       		getJidToId : jIdToId,
       		addMessage : addMessage,
       		getAllPendingMessages : getAllPendingMessages,
-      		updateMessageStatus : updateMessageStatus
+      		updateMessageStatus : updateMessageStatus,
+      		getLocalTime : getLocalTime
 
       	}
 

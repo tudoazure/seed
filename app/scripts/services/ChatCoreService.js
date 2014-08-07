@@ -398,10 +398,10 @@
                 message = $msg({to: jid, "type": "chat", "id": mid}).c('body').t(body).up().c('active', {xmlns: "http://jabber.org/protocol/chatstates"}).up()
                 .c('request', {xmlns: 'urn:xmpp:receipts'}).up().c('meta').c('acl', {deleteafter: "-1", canforward: "1", candownload: "1"});
                 $rootScope.chatSDK.connection.send(message);
-               // timeInMilliSecond = getTimeInLongString();
-               // strTimeMii = timeInMilliSecond.toString();
+               timeInMilliSecond = UtilService.getTimeInLongString();
+               strTimeMii = timeInMilliSecond.toString();
              //   utility.comn.consoleLogger(' local cache message status upadted from mid '+mid);
-               //LocalCache.updateMessageStatus(mid, 0, Strophe.getNodeFromJid(jid), strTimeMii);
+               UtilService.updateMessageStatus(mid, 0, Strophe.getNodeFromJid(jid), strTimeMii);
             }
            }
           return true;
