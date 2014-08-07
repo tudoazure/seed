@@ -1,7 +1,7 @@
 <div class="col-md-3">
 	<div class="col-md-12" style="padding:0px;">
 		<ul class="chatUL">
-			<li class="chatheader active1">
+			<li class="chatheader active1" ng-class="activeChatUser == chatData.userId ? 'active-chat-header' : 'inactive-chat-header'">
 				<div align="center" class="col-md-12">
 					{{userName}}
 				</div>

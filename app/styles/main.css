@@ -147,9 +147,12 @@ ul li{
 	padding: 8px 0px 8px 0px;
 }
 
-.active1{
+.active-chat-header{
 	background-color: #00b8ff !important;
 	color: #fff !important;
+}
+.inactive-chat-header{
+
 }
 .h11{
 	text-align: center;

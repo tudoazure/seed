@@ -3,7 +3,7 @@
 	angular.module('bargain')
 		.controller('ChatCtrl', ['$scope', '$rootScope', 'ChatCoreService', 'UtilService', '$filter',
 			function ($scope, $rootScope, ChatCoreService, UtilService, $filter) {
-				$scope.visibleContacts = $rootScope.plustxtcacheobj.visibleChatContacts;
+				//$scope.visibleContacts = $rootScope.plustxtcacheobj.visibleChatContacts;
 				//$scope.allMessages = $rootScope.plustxtcacheobj.messages;
 				$scope.activeWindows = [];
     			$scope.contact = $rootScope.plustxtcacheobj.contact;
@@ -16,27 +16,50 @@
 				        console.log($scope.contact);
 				        $scope.allMessages = chatObj.message;
 				        $scope.products = chatObj.products;
-				        $scope.visibleContacts = chatObj.visibleChatContacts;
-				        angular.forEach($scope.visibleContacts, function(contact, order){
-				        	var contactExists = false;
-				        	angular.forEach($scope.activeWindows, function(value, index){
-				        		if (value.userId == contact){
-				        			value.messages =  $scope.allMessages[contact];
-				        			contactExists = true;
-				        		}
-				        	});
-				        	if(!contactExists){
-					        	var converstion = {};
-					        	converstion.userId = contact;
-					        	converstion.messages =  $scope.allMessages[contact];
-					        	$scope.activeWindows.push(converstion);
-				        	}
-				        })
+				        // $scope.visibleContacts = chatObj.visibleChatContacts;
+				        if($scope.activeWindows.length < 2){
+					        angular.forEach($scope.allMessages, function(val, key){
+					        	var contactExists = false;
+					        	angular.forEach($scope.activeWindows, function(value, index){
+					        		if (value.userId == key){
+					        			value.messages =  val;
+					        			contactExists = true;
+					        		}
+					        	});
+					        	if(!contactExists){
+					        		if($scope.activeWindows.length == 0){
+						        		$scope.activeChatUser = key;
+						        	}
+						        	var converstion = {};
+						        	converstion.userId = key;
+						        	converstion.messages =  val;
+						        	$scope.activeWindows.push(converstion);
+
+					        	}
+					        })
+					    }
+
+				        // angular.forEach($scope.visibleContacts, function(contact, order){
+				        // 	var contactExists = false;
+				        // 	angular.forEach($scope.activeWindows, function(value, index){
+				        // 		if (value.userId == contact){
+				        // 			value.messages =  $scope.allMessages[contact];
+				        // 			contactExists = true;
+				        // 		}
+				        // 	});
+				        // 	if(!contactExists){
+					       //  	var converstion = {};
+					       //  	converstion.userId = contact;
+					       //  	converstion.messages =  $scope.allMessages[contact];
+					       //  	$scope.activeWindows.push(converstion);
+				        // 	}
+				        // })
 				    });
 				});
 
 				$scope.changeActiveWindow = function(user){
 					if(user){
+						$scope.activeChatUser = user.id;
 						var isChatExist = $filter('filter')($scope.activeWindows, {userId : user.id}, true);
 						if(isChatExist.length){
 							return;
@@ -63,7 +86,7 @@
 						        	conversation.userId = user.id;
 						        	conversation.messages =  $scope.allMessages[user.id];
 						        	$scope.activeWindows[index] = conversation;
-						        	$scope.visibleContacts[index] = user.id;
+						        	// $scope.visibleContacts[index] = user.id;
 								}
 							});
 						}
