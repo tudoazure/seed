@@ -1,8 +1,8 @@
 (function (angular){
 	"use strict;"
 	angular.module('bargain')
-		.controller('ChatCtrl', ['$scope', '$rootScope', 'ChatCoreService', 'UtilService',
-			function ($scope, $rootScope, ChatCoreService, UtilService) {
+		.controller('ChatCtrl', ['$scope', '$rootScope', 'ChatCoreService', 'UtilService', '$filter',
+			function ($scope, $rootScope, ChatCoreService, UtilService, $filter) {
 				$scope.visibleContacts = $rootScope.plustxtcacheobj.visibleChatContacts;
 				//$scope.allMessages = $rootScope.plustxtcacheobj.messages;
 				$scope.activeWindows = [];
@@ -37,7 +37,7 @@
 
 				$scope.changeActiveWindow = function(user){
 					if(user){
-						var isChatExist = $filter('filter')($scope.activeWindows, {userId == user.id}, true);
+						var isChatExist = $filter('filter')($scope.activeWindows, {userId : user.id}, true);
 						if(isChatExist.length){
 							return;
 						}
