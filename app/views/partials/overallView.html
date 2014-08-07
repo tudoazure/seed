@@ -1,5 +1,10 @@
 <div ng-controller='ChatCtrl' class="mt30">
-	<chat-contact-list contact="contact"></chat-contact-list>
+	<div class="col-md-3">
+		<div class="col-md-11">
+			<chat-contact-list contact="contact"></chat-contact-list>
+			<promocode-calculator></promocode-calculator>
+		</div>
+	</div>
 	<div ng-repeat="chatData in activeWindows" >
 		<chat-area chat-data="chatData"></chat-area>
 	</div>
