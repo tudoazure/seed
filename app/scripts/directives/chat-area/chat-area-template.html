@@ -9,7 +9,7 @@
 				</div>
 			</li>
 			<li class="productdetail">
-				<div class="col-md-4"><img src={{product.imageUrl}} class="img"></img></div>
+				<div class="col-md-4"><img ng-src={{product.imageUrl}} class="img"></img></div>
 				<div class="col-md-8" style="padding:10px 0 0 0;">
 					<span class="detail">{{product.description}}</span>
 					<div class="col-md-4 price">
@@ -25,7 +25,7 @@
 			<li class="chatArea" >
 				<div style="margin-bottom:10px;">
 
-					<div class='chat-message fr reporter bgblue me', ng-repeat='message in messages', ng-class="message.sender== contact ? 'me' : 'then'" ng-if="!message.isProductDetails">
+					<div class='chat-message fr reporter bgblue', ng-repeat='message in messages', ng-class="message.sender== chatData.userId ? 'user-mesg' : 'agent-mesg'" ng-if="!message.isProductDetails">
 	                	<div class='chat-name'>
 	                		{{message.txt}}
 	            		</div>

@@ -269,11 +269,11 @@ font-size: 14px;}
 	font-weight: bold;
 	padding-top: 10px
 }
-.me{
+.user-mesg{
 	margin-right: 10px;
 	background-color: #BDE7FF;
 }
-.them{
+.agent-mesg{
 	margin-left: 10px;
 	background-color: #D8F5B9;
 }

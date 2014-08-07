@@ -4,7 +4,7 @@
 		.controller('ChatCtrl', ['$scope', '$rootScope', 'ChatCoreService', 'UtilService',
 			function ($scope, $rootScope, ChatCoreService, UtilService) {
 				$scope.visibleContacts = $rootScope.plustxtcacheobj.visibleChatContacts;
-				$scope.allMessages = $rootScope.plustxtcacheobj.messages;
+				//$scope.allMessages = $rootScope.plustxtcacheobj.messages;
 				$scope.activeWindows = [];
     			$scope.contact = $rootScope.plustxtcacheobj.contact;
     			$scope.products = $rootScope.plustxtcacheobj.products;
@@ -13,21 +13,21 @@
 					$scope.agentId = $rootScope.tigoId;
 					$scope.$apply(function(){
 				        $scope.contact = chatObj.contact;
-				        $scope.allMessages = chatObj.message;
+				        //$scope.allMessages = chatObj.message;
 				        $scope.products = chatObj.products;
 				        $scope.visibleContacts = chatObj.visibleChatContacts;
 				        angular.forEach(chatObj.visibleChatContacts, function(contact, order){
 				        	var contactExists = false;
 				        	angular.forEach($scope.activeWindows, function(value, index){
 				        		if (value.userId == contact){
-				        			value.messages = $scope.allMessages[contact];
+				        			value.messages = chatObj.message[contact];
 				        			contactExists = true;
 				        		}
 				        	})
 				        	if(!contactExists){
 					        	var converstion = {};
 					        	converstion.userId = contact;
-					        	converstion.messages = $scope.allMessages[contact];
+					        	converstion.messages = chatObj.message[contact];
 					        	$scope.activeWindows.push(converstion);
 				        	}
 				        })
