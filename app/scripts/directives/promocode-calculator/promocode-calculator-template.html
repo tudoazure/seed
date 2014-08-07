@@ -1,36 +1,48 @@
 <div ng-if='activeChatUser && activeChatUser != ""'>
 	<div align="center">
-		<div class="mrpText">Rs 1894 with no Discount</div>
+		<div class="mrpText">Rs {{product.price}} with no Discount</div>
 	</div>
 	<ul class="discount">
 		<li>
 			<div class="col-md-8 padd">
-				<input type="radio" name="percentage" value="0"/>
+				<input type="radio" name="discountType" value="percentage" ng-model="discountType" checked/>
 				<label>PERCENTAGE to INR</label>
 			</div>
 			<div class="col-md-4 padd mt3">
-				<input type="text" style="width:45px;">
+				<input type="text" style="width:45px;" ng-model="discountPC">
+				<label>%</label>
 			</div>
 		</li>
 		<li>
 			<div class="col-md-8 padd">
-				<input type="radio" name="percentage" value="0"/>
+				<input type="radio" name="discountType" value="absolute" ng-model="discountType"/>
 				<label>INR to PERCENTAGE</label>
 			</div>
 			<div class="col-md-4 padd mt3">
-				<input type="text" style="width:45px;">
+				<input type="text" style="width:45px;" ng-model="discountABS">
+				<label>RS</label>
 			</div>
 		</li>
 		<li>
-			<div class="col-md-6 padd">
+			<div class="col-md-6 padd" ng-show="discountType == 'percentage'">
 				<label class="lbl">Discount (Rs)</label>
 				<br/>
-				<label class="f12">95.45</label>
+				<label class="f12">{{(product.price * discountPC)/100}}</label>
 			</div>
-			<div class="col-md-6 padd">
+			<div class="col-md-6 padd" ng-show="discountType == 'absolute'">
+				<label class="lbl">Discount (%)</label>
+				<br/>
+				<label class="f12">{{(discountABS/product.price) * 100}}</label>
+			</div>
+			<div class="col-md-6 padd" ng-show="discountType == 'percentage'">
 				<label class="lbl">Final Price</label>
 				<br/>
-				<label class="f12">Rs 2995.45</label>
+				<label class="f12">Rs {{product.price - ((product.price * discountPC)/100)}} </label>
+			</div>
+			<div class="col-md-6 padd"  ng-show="discountType == 'absolute'">
+				<label class="lbl">Final Price</label>
+				<br/>
+				<label class="f12">Rs {{product.price - discountABS}} </label>
 			</div>
 		</li>
 	</ul>
