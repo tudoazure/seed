@@ -11,7 +11,7 @@
         link: function(scope, element, attrs) {
             scope.openchatview = function(user){
               scope.changeActiveWindow(user);
-            }
+            };
             // console.log(scope.contact);
             // scope.$watch('contact', function(newValue, oldValue) {
             //     console.log(newValue);

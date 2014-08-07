@@ -9,6 +9,7 @@
         // replace: true,
         scope: false,
         link: function(scope, element, attrs) {
+          scope.promocode = {};
           if(scope.products && scope.products[scope.chatData.userId]){
             scope.product = scope.products[scope.chatData.userId];
           }
