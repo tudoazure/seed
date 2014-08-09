@@ -113,6 +113,11 @@
 					return JSON.parse(message);
 				}
 
+				$scope.getUnReadMessageCount = function(user){
+					var userMessages = $filter('filter')($scope.allMessages[user.id], {sender : user.id, state : 0}, true);
+					return userMessages.length;
+	            };
+
 				$scope.getMesgState = function(state){
 					var messageState = "Sending";
 					switch(state){
