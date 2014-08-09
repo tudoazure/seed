@@ -2,14 +2,14 @@
 	<div class="col-md-12" style="padding:0px;">
 		<ul class="chatUL">
 			
-			<li class="chatheader" ng-class="activeChatUser == chatData.userId ? 'active-chat-header' : 'inactive-chat-header'">
+			<li class="chatheader" ng-click="setFocus()" ng-class="activeChatUser == chatData.userId ? 'active-chat-header' : 'inactive-chat-header'">
 				<div>
 					<div class="col-md-1"></div>
 					<div class="col-md-6  h11" > {{userName}}</div>
 					<div class="col-md-1 "></div>
 				</div>
 			</li>
-			<li class="productdetail">
+			<li class="productdetail" ng-click="setFocus()">
 				<div class="col-md-4"><img ng-src={{product.imageUrl}} class="img"></img></div>
 				<div class="col-md-8" style="padding:10px 0 0 0;">
 					<span class="detail">{{product.description}}</span>
@@ -23,7 +23,7 @@
 					</div>
 				</div>
 			</li>
-			<li class="chatArea" ng-show="!showPromo" >
+			<li class="chatArea" ng-show="!showPromo" ng-click="setFocus()" chat-scroll-down>
 				<div style="margin-bottom:10px;">
 
 					<div class='chat-message fr reporter bgblue', ng-repeat='message in messages', ng-class="message.sender== chatData.userId ? 'user-mesg' : 'agent-mesg'" ng-if="!message.isProductDetails">
@@ -126,7 +126,7 @@
 			<li>
 				<div class="chatText">
 					<span class="promolink" ng-click="openPromoWindow()">Code</span>
-					<textarea type="text" placehoder="send message" class="chatTextArea" ng-enter="sendMessageClick()" ng-model="agentMessage"></textarea>
+					<textarea type="text" placehoder="send message" class="chatTextArea" ng-enter="sendMessageClick()" ng-model="agentMessage" ng-focus="setFocus()"></textarea>
 				</div>
 			</li>
 		</ul>

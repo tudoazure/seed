@@ -22,13 +22,21 @@
           //date picker
 
           //scope.promocode = {};
+          scope.setFocus = function(){
+            scope.$emit('Active-User-Changed', scope.chatData.userId);
+            console.log(1);
+          }
+          scope.removeFocus = function(){
+            console.log(2);
+          }
+
           if(scope.products && scope.products[scope.chatData.userId]){
             scope.product = scope.products[scope.chatData.userId];
           }
           else{
             scope.product = {};
             scope.product.imageUrl = "";
-            scope.product.description = "Product Information Not Available";
+            scope.product.description = "Product Information N/A";
             scope.product.price = 500 * scope.$parent.activeWindows.length;
           }
           scope.userName = scope.contact[scope.chatData.userId].name;
