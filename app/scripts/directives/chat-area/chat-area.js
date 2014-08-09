@@ -55,18 +55,18 @@
 
           scope.savePromo = function(){
             scope.agentMessage = 'new Promo';
-            var bargainPromo =  ChatPanelUser.apiUrl + "admin/promocode/bargain";
+            var bargainPromo =  Globals.AppConfig.PromoCodeCreate;
             var promoObj = {};
             promoObj.action = scope.promoType;
             promoObj.value =  scope.promoType == 'percentage' ? scope.percentCap : scope.absoluteCap;
             promoObj.cap = scope.promoType == 'percentage' ? scope.capLimit : '';
             promoObj.qty = scope.qty;
             promoObj.freeshipping = scope.isFreeShiping;
-            promoObj.product_id = scope.product.id;
-            promoObj.user_id = scope.userid;
+            promoObj.product_id = scope.product.productId;
+            promoObj.user_id = scope.product.userId;
             promoObj.valid_upto = scope.validDate;
 
-            var svc = httpService.callFunc(url);
+            var svc = httpService.callFunc(bargainPromo);
             svc.post(promoObj).then(function(response){
               if (response) {
                 var promotext =  " USE PROMO CODE: " +response.code + " VALID TILL : " + UtilService.parseDateTime(response.valid_from) ;

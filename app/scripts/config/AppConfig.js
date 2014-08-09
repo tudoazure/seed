@@ -8,5 +8,6 @@ var Globals = {
   	ChatHostURI : chatHostBaseURI,
     ChatServerConnect : "https://" + chatHostBaseURI + "/accounts/connect/",
     StropheConnect : "https://" + chatHostBaseURI  + "/http-bind/",
+    PromoCodeCreate : fulfillmentBaseURI + "admin/promocode/bargain"
   }        
 })();
