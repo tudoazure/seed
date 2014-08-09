@@ -8,6 +8,11 @@
         scope: false,
         link: function(scope, element, attrs) {
           
+          scope.templates = scope.templates;
+          scope.openDefaultTemplates = function(){
+            scope.showTemplates = !scope.showTemplates
+          }
+          
           scope.qty = 1;
           //date picker
           scope.promoType = 'percentage';

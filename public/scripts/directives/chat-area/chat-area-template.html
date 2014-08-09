@@ -28,7 +28,7 @@
 					</div>
 				</div>
 			</li>
-			<li class="chatArea" ng-show="!showPromo" ng-click="setFocus()" chat-scroll-down>
+			<li class="chatArea" ng-show="!showPromo && !showTemplates" ng-click="setFocus()" chat-scroll-down>
 				<div style="margin-bottom:10px;">
 
 					<div class='chat-message fr reporter bgblue', ng-repeat='message in messages', ng-class="message.sender== chatData.userId ? 'user-mesg' : 'agent-mesg'" ng-if="!message.isProductDetails">
@@ -49,6 +49,7 @@
     			</div> -->
 				
 			</li>
+			<!-- Promo Code Template -->
 			<li class="chatArea" ng-show="showPromo" >
 					<div style="margin-bottom:10px;" align="center">
 						<ul class="col-md-12">
@@ -146,6 +147,27 @@
 						</ul>
 					</div>
 			</li>
+
+			<!-- Message Templates -->
+			<li class="chatArea" ng-show="showTemplates">
+				<div style="margin-bottom:10px;" align="center">
+					<ul class="col-md-12">
+						<li class="chatheader active-chat-header">
+							<div align="center" class="col-md-10">
+								Default Message Templates
+							</div>
+							<i class="col-md-2 closeIcon fa fa-times-circle" ng-click="openDefaultTemplates()"></i>
+						</li>
+						<li ng-repeat="(key, value) in templates">
+							<div class="col-md-12">
+								{{value.msg}}
+							</div>
+						</li>
+					</ul>
+				</div>
+			</li>
+
+			<!-- Bottom Text Area -->
 			<li>
 				<div class="chatText col-md-12">
 					<div class="col-md-1 promolink" ng-click="openPromoWindow()" title="Promo Code">
@@ -155,7 +177,7 @@
 					<div class="col-md-9" style="padding-left:5px;">
 						<textarea type="text" placehoder="Send Message" class="chatTextArea" ng-enter="submitMessage()" ng-model="agentMessage" ng-focus="setFocus()"></textarea>
 					</div>
-					<div class="col-md-1" ng-click="openPromoWindow()" title="Templates">
+					<div class="col-md-1" ng-click="openDefaultTemplates()" title="Templates">
 					  <i class="fa fa-envelope templateLink"></i>
 					</div>
 				</div>

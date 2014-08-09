@@ -6,6 +6,7 @@
 				$scope.activeWindows = [];
     			$scope.contact = $rootScope.plustxtcacheobj.contact;
     			$scope.products = $rootScope.plustxtcacheobj.products;
+    			$scope.templates = $rootScope.templates;
     			
     			$scope.$on('Active-User-Changed', function(event, activeUser){
     				$scope.activeChatUser = activeUser;
@@ -28,6 +29,7 @@
     			
 				$rootScope.$on('ChatObjectChanged', function(event, chatObj){
 					$scope.agentId = $rootScope.tigoId;
+					$scope.templates = $rootScope.templates;
 					$scope.$apply(function(){
 				        $scope.contact = chatObj.contact;
 				        console.log($scope.contact);

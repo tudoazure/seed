@@ -1,8 +1,8 @@
 (function (angular){
 	"use strict;"
 	angular.module('bargain')
-		.controller('AppCtrl', ['$scope', '$rootScope', 'AuthService', 'StropheService', 'ChatCoreService','$timeout',
-			function ($scope, $rootScope, AuthService, StropheService, ChatCoreService, $timeout) {
+		.controller('AppCtrl', ['$scope', '$rootScope', 'AuthService', 'StropheService', 'ChatCoreService', 'TemplateService', '$timeout',
+			function ($scope, $rootScope, AuthService, StropheService, ChatCoreService, TemplateService, $timeout) {
 				
 
 				$scope.init =function(){
@@ -80,6 +80,7 @@
 						$rootScope.plustxtId = response.data['tego_id'] + "@" + Globals.AppConfig.ChatHostURI;
 						$rootScope.password = response.data['password'] + response.data['tego_id'].substring(0, 3);
 						StropheService.connection($rootScope.plustxtId, $rootScope.password);
+						$scope.getMessageTemplates();
 					}, function failure(error){
 						$timeout(function(){
 							$scope.chatConnectionStatus = "Connection Could not be made";
@@ -87,8 +88,23 @@
 					})
 				};
 
+				$scope.getMessageTemplates = function(){
+					if($rootScope.sessionid && !$scope.templates){
+						TemplateService.getMessageTemplates.query({
+							session_id : $rootScope.sessionid
+						}, function success(response){
+							$timeout(function(){
+								$rootScope.templates = response.data['t_msgs'];
+                    		});			
+						}, function failure(error){
+							console.log("Templates could not be loaded.")
+						})
+					}
+				}
+
 				$scope.init();
 				$scope.loginToChatServer();
+				
 
 			}
     	]);
