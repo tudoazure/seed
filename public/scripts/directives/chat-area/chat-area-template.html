@@ -158,7 +158,7 @@
 							</div>
 							<i class="col-md-2 closeIcon fa fa-times-circle" ng-click="openDefaultTemplates()"></i>
 						</li>
-						<li ng-repeat="(key, value) in templates">
+						<li ng-repeat="(key, value) in templates" ng-click="submitTemplate(value.msg)">
 							<div class="col-md-12">
 								{{value.msg}}
 							</div>

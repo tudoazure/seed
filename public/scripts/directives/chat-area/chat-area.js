@@ -12,7 +12,7 @@
           scope.openDefaultTemplates = function(){
             scope.showTemplates = !scope.showTemplates
           }
-          
+
           scope.qty = 1;
           //date picker
           scope.promoType = 'percentage';
@@ -117,7 +117,16 @@
               console.log(error)
             })
             
-          }
+          };
+
+          scope.submitTemplate = function(templateMessage){
+            console.log(templateMessage);
+            if(templateMessage){
+              scope.agentMessage = templateMessage;
+              scope.submitMessage(false);
+              scope.showTemplates = !scope.showTemplates;
+            }
+          };
 
           scope.submitMessage = function(isPromoCode){
             var timeInMilliSecond = UtilService.getTimeInLongString();
