@@ -40,10 +40,10 @@
 			<li class="chatArea" ng-show="showPromo" >
 					<div style="margin-bottom:10px;" align="center">
 						<ul class="col-md-12">
-							<li class="chatheader active1">
+							<li class="chatheader active-chat-header">
 								<div align="center">
 									Create Promotion Code
-									<span ng-click="openPromoWindow()" class="close">X</span>
+									<span ng-click="openPromoWindow()" class="cancel">X</span>
 								</div>
 							</li>
 							<li class="promoArea">
@@ -95,7 +95,10 @@
 											<label>Validity</label>
 										</div>
 										<div class="col-md-5 padd mt3">
-											<input type="text" class="width65" ng-model="validDate">
+											<p>
+												<input type="text" class="width65" ng-model="validDate" datepicker-popup="{{format}}" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" is-open="opened" show-weeks="false">
+											</p>
+											
 										</div>
 									</li>
 									<li>

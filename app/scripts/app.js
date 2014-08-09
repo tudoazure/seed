@@ -1,6 +1,6 @@
 (function (angular){
 "use strict;"
-	var app = angular.module('bargain', ['ngRoute', 'ngResource', 'LocalStorageModule']);
+	var app = angular.module('bargain', ['ngRoute', 'ngResource', 'LocalStorageModule', 'ui.bootstrap']);
 	
 	app.config(['$routeProvider', function($routeProvider){
 		$routeProvider
@@ -15,6 +15,11 @@
 			.otherwise({
 				redirectTo: '/'
 			});
+	}])
+	.run(['datepickerPopupConfig', function(datepickerPopupConfig) {
+	    datepickerPopupConfig.appendToBody = true;
+	    datepickerPopupConfig.showButtonBar = false;
+
 	}]);
 
 

@@ -223,6 +223,7 @@ ul li{
 }
 .chatText{
 	border-top: solid 1px #a6a6a6;
+	background-color: #fff;
 }
 .chatArea{
 	height: 385px;
@@ -231,7 +232,8 @@ ul li{
 }
 .chatTextArea{
 	border: none;
-	width: 260px;
+	width: 200px;
+	margin-left : 59px;
 }
 .linkBtn{
 	color: #a6a6a6;
@@ -317,7 +319,7 @@ font-size: 14px;}
 	margin: 5px;
 }
 
-.close{
+.cancel{
 	margin-left: 26px;
 	position: absolute;
 }
