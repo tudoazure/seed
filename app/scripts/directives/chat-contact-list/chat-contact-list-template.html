@@ -3,8 +3,8 @@
 		<div class="col-md-10 p0">Users
 		</div>
 	</li>
-    <li ng-repeat="user in contact">
-    	<div class="col-md-10 p0" ng-class="activeChatUser == user.id ? 'active' : '' " ng-click="openchatview(user)">{{ user.name }}
+    <li ng-repeat="user in contact" ng-click="openchatview(user)">
+    	<div class="col-md-10 p0" ng-class="activeChatUser == user.id ? 'active' : '' " >{{ user.name }}
     		<br/>
     		<!-- <span class='italicFont'>...is typing</span> -->
     	</div>

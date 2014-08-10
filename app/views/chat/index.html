@@ -61,8 +61,8 @@
     <input type="text" ng-init="userData =JSON.stringify(user)" ng-model="session" style="display:none">
     <div id="header" class="header col-md-12">
         <div class="col-md-3 logo"></div>
-        <div class="col-md-9"></div>
-        <div class="col-md-2"  align="center"><a href="/logout">Logout</a></div>
+        <div class="col-md-7 connectionStatus status-{{stropheStatus}}" >{{chatConnectionStatus}}</div>
+        <div class="col-md-2 mt10"  align="center"><a href="/logout">Logout</a></div>
     </div>
     <div ng-view ="" class="col-md-12 content"></div>
    

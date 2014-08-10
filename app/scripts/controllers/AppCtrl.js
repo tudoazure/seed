@@ -1,8 +1,8 @@
 (function (angular){
 	"use strict;"
 	angular.module('bargain')
-		.controller('AppCtrl', ['$scope', '$rootScope', 'AuthService', 'StropheService', 'ChatCoreService',
-			function ($scope, $rootScope, AuthService, StropheService, ChatCoreService) {
+		.controller('AppCtrl', ['$scope', '$rootScope', 'AuthService', 'StropheService', 'ChatCoreService','$timeout',
+			function ($scope, $rootScope, AuthService, StropheService, ChatCoreService, $timeout) {
 				
 
 				$scope.init =function(){
@@ -27,7 +27,6 @@
 					switch(status){
 						case Strophe.Status.CONNECTING:
 							$scope.chatConnectionStatus = "Connecting";
-							// Do something on connecting state
 							break;
 						case Strophe.Status.CONNECTED:
 							$scope.chatConnectionStatus = "Connected";
@@ -45,7 +44,12 @@
 							break;
 						case Strophe.Status.AUTHFAIL:
 							break;
+						case Strophe.Status.ATTACHED:
+							break;
 					}
+					$timeout(function(){
+						$scope.chatConnectionStatus = StropheService.connectionStatus(status);
+                    });
 				});
 
 				$scope.connectedState = function(){

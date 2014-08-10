@@ -8,7 +8,7 @@
 				$scope.activeWindows = [];
     			$scope.contact = $rootScope.plustxtcacheobj.contact;
     			$scope.products = $rootScope.plustxtcacheobj.products;
-
+    			$scope.agentId = $rootScope.tigoId;
     			$scope.$on('Active-User-Changed', function(event, activeUser){
     				$scope.activeChatUser = activeUser;
     				// $scope.$apply(function(){
@@ -19,14 +19,14 @@
     			})
     			
 				$rootScope.$on('ChatObjectChanged', function(event, chatObj){
-					$scope.agentId = $rootScope.tigoId;
+					
 					$scope.$apply(function(){
 				        $scope.contact = chatObj.contact;
 				        console.log($scope.contact);
 				        $scope.allMessages = chatObj.message;
 				        $scope.products = chatObj.products;
 				        // $scope.visibleContacts = chatObj.visibleChatContacts;
-				        if($scope.activeWindows.length < 2){
+				        if($scope.activeWindows.length < 3){
 					        angular.forEach($scope.allMessages, function(val, key){
 					        	var contactExists = false;
 					        	angular.forEach($scope.activeWindows, function(value, index){

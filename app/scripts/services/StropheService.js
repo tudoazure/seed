@@ -11,8 +11,43 @@
 				$rootScope.$emit("StropheStatusChange", status, connect);
 			})
 		};
+		var connectionStatus = function(status){
+			var statusMesg = "";
+			switch(status.toString()){
+				case "0" :
+					statusMesg = "An error has occurred";
+					break;
+				case "1" :
+					statusMesg = "Connecting to Chat Server ..";
+					break;
+				case "2" :
+					statusMesg = "The connection attempt failed";
+					break;
+				case "3" :
+					statusMesg = "The connection is authenticating";
+					break;
+				case "4" :
+					statusMesg = "The authentication attempt failed";
+					break;
+				case "5" :
+					statusMesg = "Connected to Chat Server";
+					break;
+				case "6" :
+					statusMesg = "The connection has been terminated";
+					break;
+				case "7" :
+					statusMesg = "The connection is currently being terminated";
+					break;
+				case "8" :
+					statusMesg = "The connection has been attached";
+					break;
+
+			}
+			return statusMesg;
+		}
 		StropheService = {
       		connection: connection,
+      		connectionStatus : connectionStatus 
       	}
 		return StropheService;
 	}]);

@@ -17,7 +17,7 @@ ul li{
 }
 
 .header{
-    padding: 15px 0 15px 0;
+    padding: 10px 0 10px 0;
     border-bottom: 1px solid #CDDADF;
 }
 
@@ -90,7 +90,8 @@ ul li{
 	line-height: 15px;
 	border-bottom: 1px solid #CDDADF;
 	height: 45px;
-	padding: 10px 10px 10px 0px;	
+	padding: 10px 10px 10px 0px;
+	cursor: pointer;	
 }
 .circle{
    border-radius: 50%;
@@ -254,8 +255,8 @@ ul li{
 .chat-messages .bgblue{background: #00c7f6; color:#fff; font-weight: 600;
 font-size: 14px;}
 .reporter { 
-	width: 200px;
-	padding: 10px;
+	width: 85%;
+	padding: 8px;
 	
 	color: #565656;
 	-moz-border-radius: 5px;
@@ -263,7 +264,7 @@ font-size: 14px;}
 	border-radius: 5px;
 	text-align: justify;
 	font-size: 12px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 .chatbyme{
 	float: left;
@@ -278,11 +279,11 @@ font-size: 14px;}
 	padding-top: 10px
 }
 .user-mesg{
-	margin-right: 55px;
+	margin-right: 10%;
 	background-color: #BDE7FF;
 }
 .agent-mesg{
-	margin-right: 5px;
+	margin-right: 2%;
 	background-color: #D8F5B9;
 }
 
@@ -322,4 +323,24 @@ font-size: 14px;}
 .cancel{
 	margin-left: 26px;
 	position: absolute;
+}
+
+
+.connectionStatus{
+	margin-top: 10px;
+	font-size: 18px;
+	margin-top: 10px;
+	margin-left: 15%;
+}
+
+.status-1{
+	color: #FFA500 ;
+}
+
+.status-5{
+	color: #8AC007;
+}
+
+.status-0, .status-2, .status-3, .status-4, .status-6, .status-7, .status-8 {
+	color: #FC0505;
 }
