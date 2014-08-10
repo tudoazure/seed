@@ -3,19 +3,12 @@
 	angular.module('bargain')
 		.controller('ChatCtrl', ['$scope', '$rootScope', 'ChatCoreService', 'UtilService', '$filter',
 			function ($scope, $rootScope, ChatCoreService, UtilService, $filter) {
-				//$scope.visibleContacts = $rootScope.plustxtcacheobj.visibleChatContacts;
-				//$scope.allMessages = $rootScope.plustxtcacheobj.messages;
 				$scope.activeWindows = [];
     			$scope.contact = $rootScope.plustxtcacheobj.contact;
     			$scope.products = $rootScope.plustxtcacheobj.products;
     			$scope.agentId = $rootScope.tigoId;
     			$scope.$on('Active-User-Changed', function(event, activeUser){
     				$scope.activeChatUser = activeUser;
-    				// $scope.$apply(function(){
-    				// 	if($scope.activeChatUser != activeUser){
-    				// 		$scope.activeChatUser = activeUser;
-    				// 	}
-    				// })
     			})
     			
 				$rootScope.$on('ChatObjectChanged', function(event, chatObj){
@@ -25,8 +18,7 @@
 				        console.log($scope.contact);
 				        $scope.allMessages = chatObj.message;
 				        $scope.products = chatObj.products;
-				        // $scope.visibleContacts = chatObj.visibleChatContacts;
-				        if($scope.activeWindows.length < 3){
+				        if($scope.activeWindows.length < Globals.AppConfig.ConcurrentChats){
 					        angular.forEach($scope.allMessages, function(val, key){
 					        	var contactExists = false;
 					        	angular.forEach($scope.activeWindows, function(value, index){
@@ -47,22 +39,6 @@
 					        	}
 					        })
 					    }
-
-				        // angular.forEach($scope.visibleContacts, function(contact, order){
-				        // 	var contactExists = false;
-				        // 	angular.forEach($scope.activeWindows, function(value, index){
-				        // 		if (value.userId == contact){
-				        // 			value.messages =  $scope.allMessages[contact];
-				        // 			contactExists = true;
-				        // 		}
-				        // 	});
-				        // 	if(!contactExists){
-					       //  	var converstion = {};
-					       //  	converstion.userId = contact;
-					       //  	converstion.messages =  $scope.allMessages[contact];
-					       //  	$scope.activeWindows.push(converstion);
-				        // 	}
-				        // })
 				    });
 				});
 
@@ -77,7 +53,6 @@
 							var minTime = '';
 							var deactiveContact ="";
 							angular.forEach($scope.activeWindows, function(value, index){
-								//var contactTime = new Date($scope.contact[value.userId].lastActive).getTime();
 								var contactTime = $scope.contact[value.userId].lastActive;
 								if(minTime){
 									if(minTime > contactTime){
@@ -95,7 +70,6 @@
 						        	conversation.userId = user.id;
 						        	conversation.messages =  $scope.allMessages[user.id];
 						        	$scope.activeWindows[index] = conversation;
-						        	// $scope.visibleContacts[index] = user.id;
 								}
 							});
 						}
@@ -116,10 +90,6 @@
              			UtilService.updateMessageStatus(mid, -1, Strophe.getNodeFromJid(jid), timeInMilliSecond);
 			        }
 				};
-
-				$scope.parsedDate = function(ts){
-					return UtilService.getLocalTime(ts);
-				}
       }]);
 })(angular);
 

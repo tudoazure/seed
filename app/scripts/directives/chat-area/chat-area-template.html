@@ -32,19 +32,21 @@
 	            		</div>
 	            			<span style='float:right;font-size:9px'>{{parsedDate(message.sent_on)}}</span>
         			</div>
-    			<div class="linkBtn">
+    			<!-- <div class="linkBtn">
     				<a > show new messages</a>
-    			</div>
+    			</div> -->
 				
 			</li>
 			<li class="chatArea" ng-show="showPromo" >
 					<div style="margin-bottom:10px;" align="center">
 						<ul class="col-md-12">
 							<li class="chatheader active-chat-header">
-								<div align="center">
+								<div align="center" class="col-md-10">
 									Create Promotion Code
-									<span ng-click="openPromoWindow()" class="cancel">X</span>
+									
+									<!-- <span ng-click="openPromoWindow()" class="cancel">X</span> -->
 								</div>
+								<i class="col-md-2 closeIcon fa fa-times-circle" ng-click="openPromoWindow()"></i>
 							</li>
 							<li class="promoArea">
 								<ul class="col-md-12 pt10">
@@ -124,9 +126,10 @@
 					</div>
 			</li>
 			<li>
-				<div class="chatText">
-					<span class="promolink" ng-click="openPromoWindow()">Code</span>
-					<textarea type="text" placehoder="send message" class="chatTextArea" ng-enter="sendMessageClick()" ng-model="agentMessage" ng-focus="setFocus()"></textarea>
+				<div class="chatText col-md-12">
+					<i class="fa fa-inr col-md-1 promolink" ng-click="openPromoWindow()"></i>
+					<!-- <span class="promolink" ng-click="openPromoWindow()">Code</span> -->
+					<textarea type="text" placehoder="send message" class="chatTextArea col-md-11" ng-enter="sendMessageClick()" ng-model="agentMessage" ng-focus="setFocus()"></textarea>
 				</div>
 			</li>
 		</ul>
