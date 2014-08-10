@@ -5,8 +5,8 @@
 			<li class="chatheader" ng-click="setFocus()" ng-class="activeChatUser == chatData.userId ? 'active-chat-header' : 'inactive-chat-header'">
 				<div>
 					<div class="col-md-1"></div>
-					<div class="col-md-6  h11" > {{userName}}</div>
-					<div class="col-md-1 "></div>
+					<div class="col-md-9  h11" > {{userName}}</div>
+					<div class="col-md-1 fa fa-times-circle closeIcon" ng-click="deleteChat"></div>
 				</div>
 			</li>
 			<li class="productdetail" ng-click="setFocus()">
