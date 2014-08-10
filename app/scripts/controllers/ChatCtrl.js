@@ -1,14 +1,30 @@
 (function (angular){
 	"use strict;"
 	angular.module('bargain')
-		.controller('ChatCtrl', ['$scope', '$rootScope', 'ChatCoreService', 'UtilService', '$filter',
-			function ($scope, $rootScope, ChatCoreService, UtilService, $filter) {
+		.controller('ChatCtrl', ['$scope', '$rootScope', 'ChatCoreService', 'UtilService', '$filter', '$timeout',
+			function ($scope, $rootScope, ChatCoreService, UtilService, $filter, $timeout) {
 				$scope.activeWindows = [];
     			$scope.contact = $rootScope.plustxtcacheobj.contact;
     			$scope.products = $rootScope.plustxtcacheobj.products;
     			$scope.agentId = $rootScope.tigoId;
     			$scope.$on('Active-User-Changed', function(event, activeUser){
     				$scope.activeChatUser = activeUser;
+    			})
+
+    			$scope.$on('Close-User-Chat', function(event, closeChatUser){
+    				//$scope.activeChatUser = activeUser;			
+    				$timeout(function(){
+    					var closeChatUserIndex;
+    					angular.forEach($scope.activeWindows, function(value, index){
+    						if(value.userId ==closeChatUser){
+    							closeChatUserIndex = index;
+    						}
+    					})
+	    				$scope.activeWindows.splice(closeChatUserIndex, 1);
+	    				delete $scope.allMessages[closeChatUser];
+	    				delete $scope.contact[closeChatUser];
+
+                    });
     			})
     			
 				$rootScope.$on('ChatObjectChanged', function(event, chatObj){
@@ -49,7 +65,7 @@
 						if(isChatExist.length){
 							return;
 						}
-						if($scope.activeWindows && $scope.activeWindows.length ==2){
+						if($scope.activeWindows && $scope.activeWindows.length == Globals.AppConfig.ConcurrentChats){
 							var minTime = '';
 							var deactiveContact ="";
 							angular.forEach($scope.activeWindows, function(value, index){

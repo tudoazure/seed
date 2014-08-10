@@ -12,22 +12,23 @@
           //date picker
           scope.format = 'dd/MM/yyyy';
           scope.minDate =  new Date();
-
           scope.open = function($event) {
             $event.preventDefault();
             $event.stopPropagation();
-
             scope.opened = true;
           };
           //date picker
 
-          //scope.promocode = {};
+          scope.closeUserChat = function(){
+            console.log("Delete Chat from this user: ", scope.chatData.userId);
+            scope.agentMessage = '{"CLSCHAT" : "chat closed"}';
+            scope.submitMessage();
+            scope.$emit('Close-User-Chat', scope.chatData.userId);
+          }
           scope.setFocus = function(){
             scope.$emit('Active-User-Changed', scope.chatData.userId);
-            console.log(1);
           }
           scope.removeFocus = function(){
-            console.log(2);
           }
 
           if(scope.products && scope.products[scope.chatData.userId]){
@@ -76,7 +77,7 @@
                 //       minQuantity : minQty
                 // };
                 scope.agentMessage = promotext;
-                scope.sendMessageClick();
+                scope.submitMessage();
               }
               //send message()
             }, function(error){
@@ -85,7 +86,7 @@
             
           }
 
-          scope.sendMessageClick = function(){
+          scope.submitMessage = function(){
             var timeInMilliSecond = UtilService.getTimeInLongString();
             var strTimeMii = timeInMilliSecond.toString();
             var messageId = scope.agentId + "-c-" + strTimeMii;

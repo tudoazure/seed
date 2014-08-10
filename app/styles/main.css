@@ -355,3 +355,13 @@ font-size: 14px;}
 	font-size: 18px;
 	cursor: pointer;
 }
+
+.leftConversation{
+	color: #00B8FF;
+	font-style: italic;
+	text-align: center;
+	background: #f8fafb !important;
+	padding: 15px 0 15px 0;
+}
+
+

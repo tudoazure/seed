@@ -246,7 +246,7 @@
             if (body.length === 0) {
                 body = $(message).find('body');
                 if (body.length > 0) {
-                    body = body.text();
+                    body = body.text().trim();
                 } else {
                     body = null;
                 }
@@ -269,7 +269,7 @@
             var jid = $(message).attr('from');
             var messageID = $(message).attr('id');
             response['composing'] = $(message).find('composing');
-            response['body'] = body;
+            response['body'] = body.trim();
             try{
               var productDetail = JSON.parse(body);
               response['isSpecialMessage'] = true;

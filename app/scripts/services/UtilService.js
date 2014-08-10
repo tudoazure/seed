@@ -101,6 +101,7 @@
 	        messageobj['flags'] = 0;//0-sent;1-recieved
 	        messageobj['state'] = 0;//0-sending;1-sent;2-Delivered;3-read
 	        messageobj['isProductDetails'] = false;
+	        messageobj['isCloseChatMesg'] = false;
 
 	        
 
@@ -124,6 +125,9 @@
 						productObj.userId = specialMessage.PRDCNTXT.user_id;
 						productObj.productUrl = specialMessage.PRDCNTXT.product_url;
 						$rootScope.plustxtcacheobj.products[otherpartyid] = productObj;
+			        }
+			        else if(specialMessage.CLSCHAT){
+			        	messageobj['isCloseChatMesg'] = true;
 			        }
 	            }
 	            catch(e){

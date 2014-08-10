@@ -6,7 +6,7 @@
 				<div>
 					<div class="col-md-1"></div>
 					<div class="col-md-9  h11" > {{userName}}</div>
-					<div class="col-md-1 fa fa-times-circle closeIcon" ng-click="deleteChat"></div>
+					<div class="col-md-1 fa fa-times-circle closeIcon" ng-click="closeUserChat()"></div>
 				</div>
 			</li>
 			<li class="productdetail" ng-click="setFocus()">
@@ -26,10 +26,14 @@
 			<li class="chatArea" ng-show="!showPromo" ng-click="setFocus()" chat-scroll-down>
 				<div style="margin-bottom:10px;">
 
-					<div class='chat-message fr reporter bgblue', ng-repeat='message in messages', ng-class="message.sender== chatData.userId ? 'user-mesg' : 'agent-mesg'" ng-if="!message.isProductDetails">
-	                	<div class='chat-name'>
+					<div class='chat-message fr reporter bgblue', ng-repeat='message in messages', ng-class="message.sender== chatData.userId ? 'user-mesg' : 'agent-mesg'">
+	                	<div class='chat-name' ng-if="!message.isProductDetails && !message.isCloseChatMesg">
 	                		{{message.txt}}
 	            		</div>
+	            		<div class='leftConversation' ng-if="message.isCloseChatMesg">
+	                		User left the conversation
+	            		</div>
+
 	            			<span style='float:right;font-size:9px'>{{parsedDate(message.sent_on)}}</span>
         			</div>
     			<!-- <div class="linkBtn">
@@ -43,8 +47,6 @@
 							<li class="chatheader active-chat-header">
 								<div align="center" class="col-md-10">
 									Create Promotion Code
-									
-									<!-- <span ng-click="openPromoWindow()" class="cancel">X</span> -->
 								</div>
 								<i class="col-md-2 closeIcon fa fa-times-circle" ng-click="openPromoWindow()"></i>
 							</li>
@@ -129,7 +131,7 @@
 				<div class="chatText col-md-12">
 					<i class="fa fa-inr col-md-1 promolink" ng-click="openPromoWindow()"></i>
 					<!-- <span class="promolink" ng-click="openPromoWindow()">Code</span> -->
-					<textarea type="text" placehoder="send message" class="chatTextArea col-md-11" ng-enter="sendMessageClick()" ng-model="agentMessage" ng-focus="setFocus()"></textarea>
+					<textarea type="text" placehoder="send message" class="chatTextArea col-md-11" ng-enter="submitMessage()" ng-model="agentMessage" ng-focus="setFocus()"></textarea>
 				</div>
 			</li>
 		</ul>
