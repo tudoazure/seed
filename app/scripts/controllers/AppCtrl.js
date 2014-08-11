@@ -61,9 +61,6 @@
 				    
 				    $rootScope.chatSDK.write_to_log("IQ for fetching contact information is send : " + iq);
 				    $rootScope.chatSDK.connection.addHandler($rootScope.chatSDK.on_message, null, "message", "chat");
-				     // var ping = $iq({to: to,type: "get",id: "ping1"}).c("ping", {xmlns: "urn:xmpp:ping"});
-				     // console.log('ping message sent to : ' + to)
-				     // $rootScope.chatSDK.connection.send(ping);
 				};
 
 				$scope.loginToChatServer = function(){

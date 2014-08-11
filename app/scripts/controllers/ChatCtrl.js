@@ -6,7 +6,7 @@
 				$scope.activeWindows = [];
     			$scope.contact = $rootScope.plustxtcacheobj.contact;
     			$scope.products = $rootScope.plustxtcacheobj.products;
-    			$scope.agentId = $rootScope.tigoId;
+    			
     			$scope.$on('Active-User-Changed', function(event, activeUser){
     				$scope.activeChatUser = activeUser;
     			})
@@ -27,7 +27,7 @@
     			})
     			
 				$rootScope.$on('ChatObjectChanged', function(event, chatObj){
-					
+					$scope.agentId = $rootScope.tigoId;
 					$scope.$apply(function(){
 				        $scope.contact = chatObj.contact;
 				        console.log($scope.contact);
@@ -99,11 +99,33 @@
              			var ping = $iq({to: to,type: "get",id: "ping1"}).c("ping", {xmlns: "urn:xmpp:ping"});
              			$rootScope.chatSDK.connection.send(ping);
              			UtilService.updateMessageStatus(mid, -1, Strophe.getNodeFromJid(jid), timeInMilliSecond);
+             			var jid_id = $rootScope.chatSDK.jid_to_id(jid);
+             			var tigo_id = Strophe.getNodeFromJid(jid);
+						$rootScope.chatSDK.send_Read_Notification(jid, jid_id, tigo_id);
 			        }
 				};
 
 				$scope.parsedDate = function(ts){
 					return UtilService.getLocalTime(ts);
+				}
+
+				$scope.getMesgState = function(state){
+					var messageState = "Sending";
+					switch(state){
+						case 0:
+							messageState = "Received"
+							break;
+						case 1:
+							messageState = "Sent"
+							break;
+						case 2:
+							messageState = "Delievered"
+							break;
+						case 3:
+							messageState = "Read"
+							break;
+					}
+					return messageState;
 				}
       }]);
 })(angular);

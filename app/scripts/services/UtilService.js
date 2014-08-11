@@ -23,13 +23,13 @@
 				var date = new Date (dateString);
 				var momentDate = moment(dateString);
 				parseDate = momentDate.format("DD MMM YYYY");
-
 			}
 			return parseDate;
 		};
 
 		var getLocalTime = function(ts) {
-            return moment.unix(ts).format("MMM Do, h:mm:ss a");
+			return moment.unix(ts).format("h:mm:ss a");
+            //return moment.unix(ts).format("MMM Do, h:mm:ss a");
         };
 
         var milliTimeToString = function(inMilliSeconds) {
@@ -43,20 +43,20 @@
     	};
 
     	var getAllPendingMessages = function(){
-	        var messagearray = [];
+	        var messageArray = [];
 	        var offlinemessage;
 	        var midread = new Array();
 	        var MessageList = $rootScope.plustxtcacheobj['message'];
 	        for (var key in MessageList)
 	        {
-	            messagearray = $rootScope.plustxtcacheobj['message'][key];
-	            for (var key1 in messagearray)
+	            messageArray = $rootScope.plustxtcacheobj['message'][key];
+	            for (var key1 in messageArray)
 	            {
-	                if (messagearray[key1]['state'] == -1) {      
+	                if (messageArray[key1]['state'] == -1) {      
 	                    offlinemessage = {};
-	                    offlinemessage['tegoid'] = messagearray[key1]['receiver'];
-	                    offlinemessage['body'] = messagearray[key1]['txt']
-	                    offlinemessage['mid'] = messagearray[key1]['mid'];
+	                    offlinemessage['tegoid'] = messageArray[key1]['receiver'];
+	                    offlinemessage['body'] = messageArray[key1]['txt']
+	                    offlinemessage['mid'] = messageArray[key1]['mid'];
 	                    midread[midread.length] = offlinemessage;
 	                }
 	            }
@@ -65,16 +65,31 @@
 	    };
 
 	    var updateMessageStatus = function(inmessageid, instatus, inotherpartytigoid, intime){
-	        var messagearray =  $rootScope.plustxtcacheobj['message'][inotherpartytigoid];
-	        for (var key in messagearray)
+	        var messageArray =  $rootScope.plustxtcacheobj['message'][inotherpartytigoid];
+	        for (var key in messageArray)
 	        {
-	            if (messagearray[key]['mid'] == inmessageid) {
-	                messagearray[key]['state'] = instatus;
-	                messagearray[key]['last_ts'] = intime;
+	            if (messageArray[key]['mid'] == inmessageid) {
+	                messageArray[key]['state'] = instatus;
+	                messageArray[key]['last_ts'] = intime;
 	            }
 	        }
-	        $rootScope.plustxtcacheobj['message'][inotherpartytigoid] = messagearray;
+	        $rootScope.plustxtcacheobj['message'][inotherpartytigoid] = messageArray;
 	    };
+
+	    var updateMessageStatusAsRead = function(inotherpartytigoid, intime){
+			var messageArray = $rootScope.plustxtcacheobj['message'][inotherpartytigoid];
+			var midread = [];
+			for (var key in messageArray)
+			{
+			    if (messageArray[key]['state'] == 0 && messageArray[key]['sender'] == inotherpartytigoid) {
+			        messageArray[key]['state'] = 3;
+			        messageArray[key]['last_ts'] = intime;
+			        midread[midread.length] = messageArray[key]['mid'];
+			    }
+			}
+			$rootScope.plustxtcacheobj['message'][inotherpartytigoid] = messageArray;
+			return midread;
+		};
 
     	var addMessage = function(inRecieverJID, inSenderJID, inMessage, inTime, mid, isSpecialMessage) {
         	var otherpartyid;
@@ -163,6 +178,7 @@
       		addMessage : addMessage,
       		getAllPendingMessages : getAllPendingMessages,
       		updateMessageStatus : updateMessageStatus,
+      		updateMessageStatusAsRead : updateMessageStatusAsRead,
       		getLocalTime : getLocalTime
 
       	}

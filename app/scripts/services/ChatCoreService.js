@@ -23,6 +23,7 @@
         var timeInMilliSeconds = messageId.substr(messageId.lastIndexOf('-') + 1, messageId.length);
         var strTimeMii = timeInMilliSeconds.toString().substring(0, 10);
         UtilService.addMessage($rootScope.plustxtId, jid, body, strTimeMii, messageId, isSpecialMessage);
+        //UtilService.updateMessageStatus(messageId, 2, Strophe.getNodeFromJid(jid), UtilService.getTimeInLongString());
       }  
     };
 	
@@ -144,7 +145,9 @@
             var jid = $(message).attr('from');
             var messageID = $(message).attr('id');
             response['composing'] = $(message).find('composing');
-            response['body'] = body.trim();
+            if(body){
+              response['body'] = body.trim();
+            }
             try{
               var productDetail = JSON.parse(body);
               response['isSpecialMessage'] = true;
@@ -156,7 +159,7 @@
             var DeliveryMessgae = messageID.search("-dv-");
             var readMessageAcknow = messageID.search("-r-");
             // Message stanze is an acknowledment 
-
+            var timeInMilliSecond = UtilService.getTimeInLongString()
             if (DeliveryMessgae != -1) {
                 // code for update/ inform the user regarding delivered or read information
                 var delivered = $(message).find("delivered");
@@ -173,17 +176,14 @@
                 // Delivery Acknowledgment
                 if (deliveryAckID){
                   console.log("@on_message : Status -- DELIVERED From : " + response['full_jid']);
-                  // LocalCache.updateMessageStatus(deliveryAckID, 2, Strophe.getNodeFromJid(jid), timeInMilliSecond);
-                  // $('#mid-'+deliveryAckID).html('Delivered');
-                  //$rootScope.chatSDK.write_to_log("New STATUS Message ARRIVED! mid:" + message.id + " " + "Status: Delivered From: " + response['full_jid']);
+                  UtilService.updateMessageStatus(deliveryAckID, 2, Strophe.getNodeFromJid(jid), timeInMilliSecond);
                 }
-                //read  acknoledment
+                //read  Acknowledgment
                 if (readAckID){
                   console.log("@on_message : Status -- READ From : " + response['full_jid']);
-                  // LocalCache.updateMessageStatus(readAckID, 3, Strophe.getNodeFromJid(jid), timeInMilliSecond);
-                  // $('#mid-'+readAckID).html('Read&nbsp;');
-                  //$rootScope.chatSDK.write_to_log("New STATUS Message ARRIVED! mid:" + message.id + " " + "Status: Read From: " + response['full_jid']);
+                  UtilService.updateMessageStatus(readAckID, 3, Strophe.getNodeFromJid(jid), timeInMilliSecond);
                 }
+                $rootScope.$broadcast("ChatObjectChanged", $rootScope.plustxtcacheobj);
             }
             else if(readMessageAcknow != -1){
                 var read = $(message).find("read");
@@ -193,14 +193,14 @@
                 }
                 if (readAckID){
                   console.log("@on_message : Status -- READ From : " + response['full_jid']);
-                  // LocalCache.updateMessageStatus(readAckID, 3, Strophe.getNodeFromJid(jid), timeInMilliSecond);
-                  // $('#mid-'+readAckID).html('Read&nbsp;');
-                  //utility.comn.consoleLogger("New READ STATUS Message ARRIVED! Message Read: " + readAckID +  " From: " + response['full_jid']);
+                  UtilService.updateMessageStatus(readAckID, 3, Strophe.getNodeFromJid(jid), timeInMilliSecond);
                 }
+                $rootScope.$broadcast("ChatObjectChanged", $rootScope.plustxtcacheobj);
             }
              else {
                 console.log("@on_message :New Text Message : " + message.textContent);
-                var strTimeMii = UtilService.getTimeInLongString().toString();
+
+                var strTimeMii = timeInMilliSecond.toString();
                 var messageId = $rootScope.tigoId + "-dv-" + strTimeMii;
                 var mid = messageId.toString();
                 // Sending delivery acknowledment back.
@@ -258,40 +258,47 @@
              },1000);
             
        },
+        send_Read_Notification : function(jid, jid_id, tigo_id){
+          var to = Strophe.getDomainFromJid($rootScope.chatSDK.connection.jid);
+          var ping = $iq({to:to,type: "get",id: "readACK"}).c("ping", {xmlns: "urn:xmpp:ping"});
+          $rootScope.chatSDK.connection.send(ping);
+          var informationObj={};
+          informationObj['tigoId']=tigo_id;
+          informationObj['timeStamp']= UtilService.getTimeInLongString();
+          informationObj['jid']=jid;
+          informationObj['jid_id']=jid_id;
+          $rootScope.chatSDK.readACKO.push(informationObj);
+        },
+
         ping_handler_readACK : function (iq){
-               if($rootScope.chatSDK.kill=="Yes"){
-                   return false;
-               }
-                if ($rootScope.chatSDK.readACKO.length > 0 ) {
-                var infoObjec=$rootScope.chatSDK.readACKO.shift();
-                var tigo_id=infoObjec['tigoid'];
-                var timeStamp=infoObjec['timeStamp'];
-                var jid=infoObjec['jid'];
-                var jid_id=infoObjec['jid_id'];
-                var timeInMilliSecond;
-                var strTimeMii;
-                var messageId;
-                var mid;
-                // Fetching all message whose status is delivered and send the ack for read status.
-                // After fetching message , their status became modified to read .
-                var midreadArray = LocalCache.updateMessageStatusAsRead(tigo_id, timeStamp);
-                for (var i = 0; i < midreadArray.length; i++) {
-                   //  utility.comn.consoleLogger('value of message id when clicking on left side panel'+midreadArray[i]);
-                    timeInMilliSecond = getTimeInLongString();
-                    strTimeMii = timeInMilliSecond.toString();
-                    messageId = LocalCache.tigoid + "-r-" + strTimeMii;
-                    mid = messageId.toString();
-                    // Create read ack and send the corresoding jabber client/
-                    // Note that since it is an delivery/ read ack , message ID containd -div- attributes
-                    var message2 = $msg({to: jid, "type": "chat", "id": mid}).c('read').t(midreadArray[i]).up().c('meta');
-                    $('#mid-'+midreadArray[i]).html('Read&nbsp;');
-                    utility.comn.consoleLogger('Read Acknowledgement Sent: ' + message2);
-                    $rootScope.chatSDK.connection.send(message2);
-                }
-                $rootScope.chatSDK.scroll_chat(jid_id);
-                }
-                
-        return true;
+          if($rootScope.chatSDK.kill=="Yes"){
+             return false;
+          }
+          if ($rootScope.chatSDK.readACKO.length > 0 ) {
+          var infoObjec=$rootScope.chatSDK.readACKO.shift();
+          var tigo_id=infoObjec['tigoId'];
+          var timeStamp=infoObjec['timeStamp'];
+          var jid=infoObjec['jid'];
+          var jid_id=infoObjec['jid_id'];
+          var timeInMilliSecond;
+          var strTimeMii;
+          var messageId;
+          var mid;
+          var midreadArray = UtilService.updateMessageStatusAsRead(tigo_id, timeStamp);
+          for (var i = 0; i < midreadArray.length; i++) {
+             //  utility.comn.consoleLogger('value of message id when clicking on left side panel'+midreadArray[i]);
+              timeInMilliSecond = UtilService.getTimeInLongString();
+              strTimeMii = timeInMilliSecond.toString();
+              messageId = $rootScope.tigoId + "-r-" + strTimeMii;
+              mid = messageId.toString();
+              // Create read ack and send the corresoding jabber client/
+              // Note that since it is an delivery/ read ack , message ID containd -div- attributes
+              var message2 = $msg({to: jid, "type": "chat", "id": mid}).c('read').t(midreadArray[i]).up().c('meta');
+              $rootScope.chatSDK.connection.send(message2);
+              console.log('Read Acknowledgement Sent: ' + message2);
+            }
+          }
+          return true;
         }           
   };
 

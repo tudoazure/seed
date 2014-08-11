@@ -36,7 +36,7 @@
             scope.product = {};
             scope.product.imageUrl = "";
             scope.product.description = "Product Information N/A";
-            scope.product.price = 500 * scope.$parent.activeWindows.length;
+            scope.product.price = "N/A";
           }
           scope.userName = scope.contact[scope.chatData.userId].name;
           scope.messages = scope.chatData.messages;
