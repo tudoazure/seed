@@ -43,8 +43,6 @@
     	};
 
     	var getAllPendingMessages = function(){
-	        // var plustxtid = "Plustx_" + LocalCache.plustxtid;
-	        // var plustxtobject = $.jStorage.get(plustxtid);
 	        var messagearray = [];
 	        var offlinemessage;
 	        var midread = new Array();
@@ -68,8 +66,6 @@
 
 	    var updateMessageStatus = function(inmessageid, instatus, inotherpartytigoid, intime){
 	        var messagearray =  $rootScope.plustxtcacheobj['message'][inotherpartytigoid];
-	        //console.log("inotherpartytigoid "+inotherpartytigoid+"messagearray "+JSON.stringify(messagearray));
-	        // var messagearray=messageobject.inmessageid;
 	        for (var key in messagearray)
 	        {
 	            if (messagearray[key]['mid'] == inmessageid) {
@@ -77,9 +73,7 @@
 	                messagearray[key]['last_ts'] = intime;
 	            }
 	        }
-	        $rootScope.plustxtcacheobj['message'][inotherpartytigoid] = messagearray
-	        //console.log("after updateinotherpartytigoid " + inotherpartytigoid + "messagearray " + JSON.stringify(plustxtobject['message'][inotherpartytigoid]));
-	        // $.jStorage.set(plustxtid, plustxtobject);
+	        $rootScope.plustxtcacheobj['message'][inotherpartytigoid] = messagearray;
 	    };
 
     	var addMessage = function(inRecieverJID, inSenderJID, inMessage, inTime, mid, isSpecialMessage) {
@@ -145,10 +139,6 @@
 	        	contactObj.id   = otherpartyid;
 	        	contactObj.lastActive = getTimeInLongString();
 	        	$rootScope.plustxtcacheobj['contact'][otherpartyid] = contactObj;
-
-	        	// if($rootScope.plustxtcacheobj.visibleChatContacts.length < 2){
-	        	// 	$rootScope.plustxtcacheobj.visibleChatContacts.push(otherpartyid);
-	        	// }
 	        } 
 
 

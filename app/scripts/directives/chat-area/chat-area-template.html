@@ -17,10 +17,10 @@
 						<span>Price</span>
 						<div class="priceDiv"> Rs. {{product.price}}</div>
 					</div>
-					<div class="col-md-4 disc">
+					<!-- <div class="col-md-4 disc">
 						<span>Discount</span>
 						<div class="discDiv"> None</div>
-					</div>
+					</div> -->
 				</div>
 			</li>
 			<li class="chatArea" ng-show="!showPromo" ng-click="setFocus()" chat-scroll-down>
@@ -130,7 +130,6 @@
 			<li>
 				<div class="chatText col-md-12">
 					<i class="fa fa-inr col-md-1 promolink" ng-click="openPromoWindow()"></i>
-					<!-- <span class="promolink" ng-click="openPromoWindow()">Code</span> -->
 					<textarea type="text" placehoder="send message" class="chatTextArea col-md-11" ng-enter="submitMessage()" ng-model="agentMessage" ng-focus="setFocus()"></textarea>
 				</div>
 			</li>

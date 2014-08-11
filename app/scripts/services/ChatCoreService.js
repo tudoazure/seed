@@ -20,13 +20,7 @@
 
       var MessID='mid-'+messageId;
        if (body) {
-        // remove notifications since user is now active
-        // Exact the timestamp from messageID
-
-
-        //var timeInMilliSeconds = UtilService.getTimeInLongString();
         var timeInMilliSeconds = messageId.substr(messageId.lastIndexOf('-') + 1, messageId.length);
-       // var messageTimeDescription = UtilService.getMilliTimeToString(new Number(timeInMilliSeconds));
         var strTimeMii = timeInMilliSeconds.toString().substring(0, 10);
         UtilService.addMessage($rootScope.plustxtId, jid, body, strTimeMii, messageId, isSpecialMessage);
       }  
@@ -35,75 +29,24 @@
     var chatSDK = {
         //it keeps Connection string
         connection: null,
-        //it keeps Currenlty Displayed Div name 
-        /// displayedChatDiv: null,
-        // reconnectInProgress : "No",
-        // reconnectEnabled: "No",
-        //networkConnection :"DOWN",
-        // sendPingRef : null,
-       // connectionStatus: "NA",
-        //upTime : 0,
         pingRef : null,
-        // downTime : 0,
         PingCount: 0,
-        //uIExist :"No",
         reLoad: null,
         readACKO : [],
         kill:"No",
-        // It keeps already Opened ChatDiv 
-        //openedChatDiv: {},
-        // Connection url
-        //connectionurl: null,
-        // List of pending subscription
-        //contact_subsription: {},
-        // it keeps track of Name and jid_id mapping
-       // nameList: {},
-        // Mode of Operation 
-        //XMPPorAPIXMPP: 0,
-        // it keeps pending subscriber jid
-        //pending_subscriber: null,
-        //it keeps lastly performed ajax request
-        //jqueryStore: null,
-        /*
-         function                : jid_to_id()
-         parameters     input    : jid
-         parameters     output   : jid_id
-         parameter description   : jid_id  is the replacement of jid with all dots and @ replaced by underscore
-         
-         function  description   : convert jid to jid_id.
-         */
         jid_to_id: function(jid) {
             return Strophe.getBareJidFromJid(jid)
                     .replace("@", "-")
                     .replace(/\./g, "-");
         },
-        /*
-         function                : write_to_log()
-         parameters     input    : string
-         parameters     output   : 
-         parameter description   : message
-         
-         function  description   : Used to write the string to conole
-         */
+
         write_to_log: function(message) {
              console.log(message);
         },
-        /*
-         function                : on_roster()
-         parameters     input    : iq stanze
-         parameters     output   : 
-         parameter description   : 
-         
-         function  description   : Act as listener for roster. 
-         Function get called when new roster information available from server 
-         */
+
         on_roster: function(iq) {
             $rootScope.chatSDK.write_to_log('ChatCoreService: on_roster called');
             var JsonResponse = {};
-            // Function iterate each roster contact and prepare it as JSON object and
-            // Call the update roster function with created JSON Object
-            
-            
             $(iq).find('item').each(function() {
                 var Item = {};
                 var jid = $(this).attr('jid');
@@ -115,7 +58,6 @@
                 else{
                    Item['name'] = $(this).attr('name')
                 }
-                 // utility.comn.consoleLogger('name: ' + Item['name'] + ' jid: ' + jid);
                 Item['tegoid'] = Strophe.getNodeFromJid(Item['plustxtId']);
                 JsonResponse[jid] = Item;
             });
@@ -123,49 +65,7 @@
             // Send the presence information
             $rootScope.chatSDK.connection.send($pres());
         },
-        /*
-         function                : insert_contact()
-         parameters     input    : html li component
-         parameters     output   : 
-         parameter description   : 
-         
-         function  description   : Used to insert li element to ul
-         
-         */
-        insert_contact: function(elem) {
-          var jid = elem.find('.roster-jid').text();
-          var pres = $rootScope.chatSDK.presence_value(elem.find('.roster-contact'));
-          $rootScope.chatSDK.write_to_log('insert contact called ' + jid + '  ' + pres);
-          var contacts = $('#roster-area li');
-          // utility.comn.consoleLogger('contact length ' + contacts.length);
-          // If Ul contain contacts
-          if (contacts.length > 0) {
-              var inserted = false;
-              // Sort the insert the new contact 
-              contacts.each(function() {
-                  var cmp_pres = $rootScope.chatSDK.presence_value(
-                          $(this).find('.roster-contact'));
-                  var cmp_jid = $(this).find('.roster-jid').text();
-               //    utility.comn.consoleLogger('pres  ' + pres + 'cmp_pres ' + cmp_pres);
-                //   utility.comn.consoleLogger('  jid  ' + jid + 'cmp_jid ' + cmp_jid);
-                  if (pres > cmp_pres) {
-                    //   utility.comn.consoleLogger(' Reapeat pres  ' + pres + 'cmp_pres ' + cmp_pres);
-                      $(this).before(elem);
-                      inserted = true;
-                      return false;
-                  }
-              });
-              if (!inserted) {
-                  $rootScope.chatSDK.write_to_log('inside insert contact  !inserted called');
-                  $('#roster-area ul').append(elem);
-              }
-          }
-          // No new contatc , insert the contact directly.
-          else {
-              $rootScope.chatSDK.write_to_log('inside insert contact  inserted called');
-              $('#roster-area ul').append(elem);
-          }
-        },
+
         /*
          function                : presence_value()
          parameters     input    : html li component
@@ -210,35 +110,10 @@
 
         },
         /*
-         function                : scroll_chat()
-         parameters     input    : jid_id
-         parameters     output   : 
-         parameter description   : jid_id of receipents                           
-         function  description   : This function is used to scroll-Chat window                            
-         
-         */
-        scroll_chat: function(jid_id) {
-            // $('#DisplayDiv-' + jid_id).animate({scrollTop:$('#DisplayDiv-' + jid_id)[0].scrollHeight + 100}, 'slow')
-            try{
-              $('#DisplayDiv-' + jid_id).scrollTop($('#DisplayDiv-' + jid_id)[0].scrollHeight);
-              return false;
-            }
-            catch(e){
-
-            }
-        },
-        /*
          function                : on_message()
          parameters     input    : message stanze
          parameters     output   : 
          parameter description   : 
-         
-         function  description   : This function is the deault handler for message stanze
-         When a new message stanze becomes availble, this function will be called .
-         This Function will create JSON Object with attributes and childs available in message and
-         call UI function on_Message_Update_Chat for update UI .
-         If message stanze is an acknowleagement , correspsing message status will be updated. 
-         If a normal text message , then send an delivery acknowldement back to jabber Client
          */
         on_message: function(message) {
             console.log("ChatCoreService @on_message called :");
@@ -338,44 +213,11 @@
             return true;
         },
 
-
-
-
-        /*
-         function                : on_roster_changed()
-         parameters     input    : iq stanze
-         parameters     output   : 
-         parameter description   : 
-         
-         function  description   : This function is the deault handler for iq stanze
-         When a new iq stanze becomes availble, this function will be called .
-         This Function will create JSON Object with attributes and childs available in iq and
-         call UI function on_Roster_Changed_Update_Contact for update UI .
-         
-         */
-        on_roster_changed: function(iq) {
-            $rootScope.chatSDK.write_to_log('on_roster_changed called');
-            var JsonResponse = {};
-            $(iq).find('item').each(function() {
-                var Items = {};
-                var jid = $(this).attr('jid');
-                Items['sub'] = $(this).attr('subscription');
-                Items['jid'] = $(this).attr('jid');
-                Items['name'] = $(this).attr('name') || jid;
-                JsonResponse[jid] = Items;
-            });
-            //self.on_Roster_Changed_Update_Contact(JsonResponse);
-            return true;
-        },
-
        ping_handler : function (iq){
           console.log('ping_handler Called');
          if($rootScope.chatSDK.kill=="Yes"){
                    return false;
          }
-           // function  will be called to sent all message with status -1 .(status displayed should be sent .
-           // and modify the status sent .
-    //     // set variable to fixed value 
           $rootScope.chatSDK.PingCount=0;
           var offmessageArray= UtilService.getAllPendingMessages();       
            var jid;

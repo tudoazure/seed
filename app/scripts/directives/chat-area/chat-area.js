@@ -5,8 +5,6 @@
       return {
         restrict: 'EA',
         templateUrl: 'app/scripts/directives/chat-area/chat-area-template.html',
-        // transclude:true,
-        // replace: true,
         scope: false,
         link: function(scope, element, attrs) {
           //date picker
@@ -65,7 +63,7 @@
             promoObj.freeshipping = scope.isFreeShiping;
             promoObj.product_id = scope.product.productId;
             promoObj.user_id = scope.product.userId;
-            promoObj.valid_upto = scope.validDate;
+            promoObj.valid_upto = new Date(scope.validDate).getTime();
 
             var svc = httpService.callFunc(bargainPromo);
             svc.post(promoObj).then(function(response){
@@ -81,7 +79,7 @@
               }
               //send message()
             }, function(error){
-
+              console.log(error)
             })
             
           }

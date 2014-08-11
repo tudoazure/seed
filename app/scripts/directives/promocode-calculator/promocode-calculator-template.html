@@ -27,22 +27,22 @@
 			<div class="col-md-6 padd" ng-show="discountType == 'percentage'">
 				<label class="lbl">Discount (Rs)</label>
 				<br/>
-				<label class="f12">{{(product.price * discountPC)/100}}</label>
+				<label class="f12">{{roundOff((product.price * discountPC)/100)}}</label>
 			</div>
 			<div class="col-md-6 padd" ng-show="discountType == 'absolute'">
 				<label class="lbl">Discount (%)</label>
 				<br/>
-				<label class="f12">{{(discountABS/product.price) * 100}}</label>
+				<label class="f12">{{roundOff((discountABS/product.price) * 100)}}</label>
 			</div>
 			<div class="col-md-6 padd" ng-show="discountType == 'percentage'">
 				<label class="lbl">Final Price</label>
 				<br/>
-				<label class="f12">Rs {{product.price - ((product.price * discountPC)/100)}} </label>
+				<label class="f12">Rs {{roundOff(product.price - ((product.price * discountPC)/100))}} </label>
 			</div>
 			<div class="col-md-6 padd"  ng-show="discountType == 'absolute'">
 				<label class="lbl">Final Price</label>
 				<br/>
-				<label class="f12">Rs {{product.price - discountABS}} </label>
+				<label class="f12">Rs {{roundOff(product.price - discountABS)}} </label>
 			</div>
 		</li>
 	</ul>

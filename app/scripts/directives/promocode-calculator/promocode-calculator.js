@@ -24,6 +24,10 @@
           scope.$watch(function(){return scope.activeChatUser;}, function(value) {
             scope.product = scope.products[value];
           });
+
+          scope.roundOff = function(value){
+            return Math.round(value * 100) / 100;
+          }
         }
       }
     }]);
