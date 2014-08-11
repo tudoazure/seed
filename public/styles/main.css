@@ -52,13 +52,13 @@ ul li{
 }
 .p0{padding:0px;}
 .ml7{margin-left: 7px;}
-.padd{padding: 5px 0px 2px 0px;}
+.padd{padding: 5px 0px 2px 2px;}
 .padd1{padding: 5px 0px 5px 10px;}
 .mt3{margin-top: 3px;}
 .mt5{margin-top: 5px;}
 .mt10{margin-top: 10px;}
 .pt10{padding: 10px 0px 0px 0px;}
-
+.pt10n5{padding: 10px 5px 0px 5px;}
 .roaster{
 	background-color: #eaedee;
 	border: 1px solid #CDDADF;
@@ -79,8 +79,8 @@ ul li{
 	font-size: 10px;
 	font-weight: 500;
 	padding: 6px;
-	height: 120px;
-	overflow-y:auto;
+	height: 112px;
+	overflow: hidden;
 	/*margin-top: 10px; */
 }
 
@@ -132,6 +132,8 @@ ul li{
 .italicFont{font-style: italic; font-size: 10px; color:#5c6467;}
 .lbl{color: #9ea1a2; font-weight: normal;}
 .f12{font-size: 12px;}
+.f13{font-size: 13px;}
+.bold{ font-weight: 700;}
 .mrpText{
 	font-size: 11px;
 	border: 1px solid #00B8FF;
@@ -181,6 +183,74 @@ ul li{
 	height: 20px;
 	background-position: 0 6px;
 	background-repeat: no-repeat;
+}
+
+.bb-blue{
+	border-bottom: solid 1px #00B8FF;
+}
+
+.padd6 {
+	padding: 5px 6px 8px 6px;
+}
+.paddl{
+	padding: 5px 0px 5px 5px;
+}
+.paddr{
+	padding: 5px 5px 5px 0px;
+}
+
+.title {
+	font-weight: 700;
+	font-size: 11px;
+	color: #1093BB;
+	text-transform: capitalize;
+}
+
+.productArea {
+	/*border: solid 1px #00B8FF;*/
+	background-color: #f6fcff;
+	font-size: 11px;
+	font-weight: 500;
+	line-height: 1.43;
+	height: 350px;
+	overflow-y: auto; 
+	padding-bottom: 21px;
+	color: #979797;
+}
+
+.pos{
+	position: relative;
+	left: 133px;
+	top: 5px;
+}
+
+/*.templateArea {
+	/*border: solid 1px #00B8FF;*/
+	/*background-color: #f6fcff;
+	font-size: 11px;
+	font-weight: 500;
+	line-height: 1.43;
+	height: 350px;
+	overflow-y: auto; 
+	padding-bottom: 21px;
+	color: #979797;
+}*/
+
+.templateArea {
+	border: solid 1px #00B8FF;
+	background-color: #f6fcff;
+	font-size: 11px;
+	font-weight: 500;
+	line-height: 1.43;
+	height: 300px;
+	overflow-y: auto;
+	padding-bottom: 21px;
+	color: #979797;
+}
+
+.temp-li{
+	border-bottom: solid 1px #73CFFF;
+	padding: 6px 5px 5px 6px;
 }
 
 .productDetail{

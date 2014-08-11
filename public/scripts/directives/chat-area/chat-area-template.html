@@ -9,7 +9,7 @@
 				</div>
 			</li>
 			<li class="productDetail" ng-click="setFocus()">
-					<div class="col-md-3">
+					<div class="col-md-3" ng-click="showProductDetail()">
 						<img ng-src={{product.imageUrl}} class="productImg"></img>
 					</div>
 					<div class="col-md-9 productDescription">
@@ -28,7 +28,7 @@
 					</div>
 				</div>
 			</li>
-			<li class="chatArea" ng-show="!showPromo && !showTemplates" ng-click="setFocus()" chat-scroll-down>
+			<li class="chatArea" ng-show="!showPromo && !showTemplates && !showProduct" ng-click="setFocus()" chat-scroll-down>
 				<div style="margin-bottom:10px;">
 
 					<div class='chat-message fr reporter bgblue', ng-repeat='message in messages', ng-class="message.sender== chatData.userId ? 'user-mesg' : 'agent-mesg'" ng-if="!message.isProductDetails">
@@ -49,7 +49,97 @@
     			</div> -->
 				
 			</li>
-			<!-- Promo Code Template -->
+			<li class="chatArea" style="padding-top: 0px; border-top: solid 1px #00B8FF;" ng-show="showProduct">
+					<div style="margin-bottom:10px;" align="center">
+						<ul class="col-md-12" style="padding: 0px;">
+							<li class="productArea">
+								<i class=" closeIcon fa fa-times-circle pos" ng-click="closeWindow()"></i>
+								<ul class="col-md-12 pt10n5  f13">
+									<li ng-repeat="attr in productD.long_rich_desc">
+										<div class="col-md-12 padd6 bb-blue" align="left">
+											<span class="title">
+											{{attr.title}} </span>
+											<br/>
+											<span>
+												{{ attr.description}}
+												Zovi Regular Fit Solid Rock Grey Panelled Casual Shirt-Full Sleeves (Size-42)
+											</span>
+										</div>
+										<ul class="p0 col-md-12 bb-blue
+										" ng-if="attr.attributes && attr.title == 'Description'">
+										<li> 
+											<div class="col-md-12 padd6" align="left">
+												<span class="title"> Product Details
+												</span>
+											</div>
+										</li>
+										<li ng-repeat="(key, value) in attr.attributes">
+											<div class="col-md-4 paddl" align="left">
+													<span class="bold">{{key}} : </span>
+												</div>
+											<div class="col-md-8 paddr" align="left">
+											<span>
+											{{value}}
+											</span>
+										</div>
+										</li>
+
+										</ul>
+
+										<ul class="p0 col-md-12
+										" ng-if="attr.attributes && attr.title != 'Description'">
+										<li ng-repeat="(key, value) in attr.attributes">
+											<div class="col-md-12 padd6 bb-blue" align="left">
+												<span class="title">
+													{{key}} 
+												</span>
+												<br/>
+												<span>
+													{{value}}
+												</span>
+											</div>
+										</li>
+										</ul>
+									</li>
+									<li class="bb-blue">
+										<div class="col-md-4 paddl" align="left">
+											<span class="title">Actual Price : </span>
+										</div>
+										<div class="col-md-8 paddr" align="left">
+											<span>
+											Rs {{ product.actual_price}}
+												400
+											</span>
+										</div>
+									</li >
+									<li>
+										<div class="col-md-4 paddl" align="left">
+											<span class="title">Offer Price : </span>
+										</div>
+										<div class="col-md-8 paddr" align="left">
+											<span>
+											Rs {{ product.offer_price}}
+												400
+											</span>
+										</div>
+									</li >
+									<li>
+										<div class="col-md-4 paddl" align="left">
+											<span class="title">Promo Text : </span>
+										</div>
+										<div class="col-md-8 paddr" align="left">
+											<span>
+											{{ product.promo_text}}
+												Use promo code SHOP25 to get 25% cash back on this item (maximum cash back Rs 400)
+											</span>
+										</div>
+									</li >
+									
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</li>
 			<li class="chatArea" ng-show="showPromo" >
 					<div style="margin-bottom:10px;" align="center">
 						<ul class="col-md-12">
@@ -57,7 +147,7 @@
 								<div align="center" class="col-md-10">
 									Create Promotion Code
 								</div>
-								<i class="col-md-2 closeIcon fa fa-times-circle" ng-click="openPromoWindow()"></i>
+								<i class="col-md-2 closeIcon fa fa-times-circle" ng-click="closeWindow()"></i>
 							</li>
 							<li class="promoArea">
 								<ul class="col-md-12 pt10">
@@ -151,18 +241,23 @@
 			<!-- Message Templates -->
 			<li class="chatArea" ng-show="showTemplates">
 				<div style="margin-bottom:10px;" align="center">
-					<ul class="col-md-12">
+					<ul class="col-md-12 p0">
 						<li class="chatheader active-chat-header">
 							<div align="center" class="col-md-10">
 								Default Message Templates
 							</div>
 							<i class="col-md-2 closeIcon fa fa-times-circle" ng-click="openDefaultTemplates()"></i>
 						</li>
-						<li ng-repeat="(key, value) in templates" ng-click="submitTemplate(value.msg)">
-							<div class="col-md-12">
-								{{value.msg}}
-							</div>
+						<li class='templateArea' >
+							<ul class="col-md-12 pt10">
+								<li ng-repeat="(key, value) in templates" ng-click="submitTemplate(value.msg)">
+									<div class="col-md-12 temp-li" align="left">
+										{{value.msg}}
+									</div>
+								</li>
+							</ul>
 						</li>
+						
 					</ul>
 				</div>
 			</li>
@@ -170,12 +265,13 @@
 			<!-- Bottom Text Area -->
 			<li>
 				<div class="chatText col-md-12">
-					<div class="col-md-1 promolink" ng-click="openPromoWindow()" title="Promo Code">
+					<div class="col-md-1" ng-click="openPromoWindow()" style="line-height: 2em;padding-top: 4px;color: #00b8ff;">
 					  <i class="fa fa-circle fa-stack-2x"></i>
 					  <i class="fa fa-rupee fa-stack-1x fa-inverse"></i>
 					</div>
+					<!-- <i class="fa fa-inr col-md-1 promolink" ng-click="openPromoWindow()"></i> -->
 					<div class="col-md-9" style="padding-left:5px;">
-						<textarea type="text" placehoder="Send Message" class="chatTextArea" ng-enter="submitMessage()" ng-model="agentMessage" ng-focus="setFocus()"></textarea>
+						<textarea type="text" placehoder="send message" class="chatTextArea" ng-enter="submitMessage()" ng-model="agentMessage" ng-focus="setFocus()"></textarea>
 					</div>
 					<div class="col-md-1" ng-click="openDefaultTemplates()" title="Templates">
 					  <i class="fa fa-envelope templateLink"></i>

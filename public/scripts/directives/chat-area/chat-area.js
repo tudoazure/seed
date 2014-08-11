@@ -10,7 +10,9 @@
           
           scope.templates = scope.templates;
           scope.openDefaultTemplates = function(){
-            scope.showTemplates = !scope.showTemplates
+            scope.showPromo = false;
+            scope.showProduct = false;
+            scope.showTemplates = true;
           }
 
           scope.qty = 1;
@@ -58,8 +60,21 @@
           }
           scope.userName = scope.contact[scope.chatData.userId].name;
           scope.messages = scope.chatData.messages;
+
           scope.openPromoWindow = function(){
-            scope.showPromo = !scope.showPromo;
+            scope.showPromo = true;
+            scope.showProduct = false;
+          };
+
+          scope.closeWindow = function(){
+            scope.showPromo = false;
+            scope.showProduct = false;
+            scope.showTemplates = false;
+          };
+
+          scope.showProductDetail = function(){
+            scope.showProduct = true;
+            scope.showPromo = false;
           };
 
           scope.setPromoType = function(type){
@@ -74,6 +89,62 @@
             scope.percentCap = "";
             scope.absoluteCap = "";
           });
+
+          //to remove
+
+          scope.productD = {};
+            scope.productD.long_rich_desc = [
+            {
+            title: "Description",
+            description: "A smart casual rock grey shirt that can be worn over casual or formal trousers; transforming your overall look. This classic shirt is designed with a contrast colour mustard fabric strip on the inner placket along with full sleeves; panels in the front and a button down collar. This is one shirt that will never go out of fashion.Fabric: 100% Cotton",
+            attributes: {
+              "Brand": "Zovi",
+              "Product Code": "MSHIRT36SRM12706ZVGR42"
+            }
+            },
+            {
+            title: "Fabric Composition",
+            description: "Cotton",
+            attributes: { }
+            },
+            {
+            title: "Color Detail",
+            description: "Chocolate",
+            attributes: { }
+            },
+            {
+            title: "Shipping Details",
+            description: "This product is usually shipped in 2-4 days within Metro areas.",
+            attributes: {
+              "Estimated Arrival": "4-6 days",
+              "return Policy": "We will gladly accept returns for any reason within 15 days of receipt of delivery."
+            }
+            }
+
+        ];
+
+          //to remove end
+
+          scope.getProductDetail = function(){
+            
+          
+            var productUrl =  Globals.AppConfig.getProductDetail;
+             var svc = httpService.callFunc(productUrl);
+            svc.get(promoObj).then(function(response){
+              if (response) {
+                if(response){
+                  scope.productD = response
+                }
+                scope.showPromo = false;
+                scope.showProduct = true;
+              }
+              //send message()
+            }, function(error){
+              alert("Error occured in generating the promo code.")
+              console.log(error)
+            });
+          };
+          
           scope.savePromo = function(){
             scope.agentMessage = '';
             var bargainPromo =  Globals.AppConfig.PromoCodeCreate;
@@ -124,7 +195,8 @@
             if(templateMessage){
               scope.agentMessage = templateMessage;
               scope.submitMessage(false);
-              scope.showTemplates = !scope.showTemplates;
+              scope.closeWindow();
+              // scope.showTemplates = !scope.showTemplates;
             }
           };
 
