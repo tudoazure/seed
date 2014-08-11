@@ -8,6 +8,7 @@
         scope: false,
         link: function(scope, element, attrs) {
           //date picker
+          scope.qty = 1;
           scope.format = 'dd/MM/yyyy';
           scope.minDate =  new Date();
           scope.open = function($event) {
@@ -53,7 +54,7 @@
           }
 
           scope.savePromo = function(){
-            scope.agentMessage = 'new Promo';
+            scope.agentMessage = '';
             var bargainPromo =  Globals.AppConfig.PromoCodeCreate;
             var promoObj = {};
             promoObj.action = scope.promoType;
@@ -80,6 +81,7 @@
               }
               //send message()
             }, function(error){
+              alert("Error occured in generating the promo code.")
               console.log(error)
             })
             

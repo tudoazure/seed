@@ -35,6 +35,8 @@
 						case Strophe.Status.DISCONNECTING:
 							break;
 						case Strophe.Status.DISCONNECTED:
+							$scope.init();
+							$scope.loginToChatServer();
 							break;
 						case Strophe.Status.AUTHENTICATING:
 							break;
