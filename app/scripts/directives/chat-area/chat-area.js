@@ -68,7 +68,7 @@
             var svc = httpService.callFunc(bargainPromo);
             svc.post(promoObj).then(function(response){
               if (response) {
-                var promotext =  " USE PROMO CODE: " +response.code + " VALID TILL : " + UtilService.parseDateTime(response.valid_from) ;
+                var promotext =  " USE PROMO CODE: " +response.code + " VALID TILL : " + moment(response.valid_upto).format("MMM Do, h:mm a") ;
                 //   var promoCodeData = {message : message.trim(),
                 //       promocode : response.code,
                 //       validity : UtilService.parseDate(data.valid_upto) + " | " + UtilService.parseTime(data.valid_upto),
@@ -76,6 +76,7 @@
                 // };
                 scope.agentMessage = promotext;
                 scope.submitMessage();
+                scope.showPromo = !scope.showPromo;
               }
               //send message()
             }, function(error){
