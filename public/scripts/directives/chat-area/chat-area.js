@@ -64,6 +64,7 @@
           scope.openPromoWindow = function(){
             scope.showPromo = true;
             scope.showProduct = false;
+            scope.showTemplates = false;
           };
 
           scope.closeWindow = function(){
@@ -75,6 +76,7 @@
           scope.showProductDetail = function(){
             scope.showProduct = true;
             scope.showPromo = false;
+            scope.showTemplates = false;
           };
 
           scope.setPromoType = function(type){
