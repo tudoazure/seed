@@ -1,8 +1,4 @@
 "use strict";
-
-var util = require('util');
-var csv = require('ya-csv');
-
 var SERVER = require('../lib/oauth').SERVER;
 
 var chat = {
