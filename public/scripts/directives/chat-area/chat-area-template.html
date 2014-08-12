@@ -23,7 +23,7 @@
 					</div> -->
 				</div>
 			</li>
-			<li class="chatArea" ng-show="!showPromo && !showProduct" ng-click="setFocus()" chat-scroll-down>
+			<li class="chatArea" ng-show="!showPromo" ng-click="setFocus()" chat-scroll-down>
 				<div style="margin-bottom:10px;">
 
 					<div class='chat-message fr reporter bgblue', ng-repeat='message in messages', ng-class="message.sender== chatData.userId ? 'user-mesg' : 'agent-mesg'" ng-if="!message.isProductDetails">
@@ -41,85 +41,6 @@
     			</div> -->
 				
 			</li>
-			<li class="chatArea" ng-show='showProduct' >
-					<div style="margin-bottom:10px;" align="center">
-						<ul class="col-md-12" style="padding: 2px;">
-							<li class="chatheader active-chat-header">
-								<div align="center" class="col-md-10">
-									Product Detail
-								</div>
-								<i class="col-md-2 closeIcon fa fa-times-circle" ng-click="closeProduct()"></i>
-							</li>
-							<li class="productArea">
-								<ul class="col-md-12 pt10">
-									<li class="productdetail">
-										<div class="col-md-4"><img class="img" ng-src={{productD.imageUrl}}></img></div>
-										<div class="col-md-8 pmix" align="left">
-											<span>
-											{{ productD.name}}
-											</span>
-										</div>
-									</li>
-									<li>
-										<div class="col-md-4 pmix" align="left">
-											Actual Price : 
-										</div>
-										<div class="col-md-8 pmix" align="left">
-											<span>
-											Rs {{ productD.actual_price}}
-												400
-											</span>
-										</div>
-									</li >
-									<li>
-										<div class="col-md-4 pmix" align="left">
-											Offer Price : 
-										</div>
-										<div class="col-md-8 pmix" align="left">
-											<span>
-											Rs {{ productD.offer_price}}
-											</span>
-										</div>
-									</li >
-									<li>
-										<div class="col-md-4 pmix" align="left">
-											Promo Text : 
-										</div>
-										<div class="col-md-8 pmix" align="left">
-											<span>
-											{{ productD.promo_text}}
-											</span>
-										</div>
-									</li >
-									<li ng-repeat="attr in productD.long_rich_desc">
-										<div class="col-md-4 pmix" align="left">
-											{{attr.title}} : 
-										</div>
-										<div class="col-md-8 pmix" align="left">
-											<span>
-											{{ attr.description}}
-											</span>
-										</div>
-										<ul class="p0 col-md-12
-										" ng-if="attr.attributes">
-										<li ng-repeat="(key, value) in attr.attributes">
-											<div class="col-md-4 pmix" align="left">
-													{{key}} : 
-												</div>
-											<div class="col-md-8 pmix" align="left">
-											<span>
-											{{value}}
-											</span>
-										</div>
-										</li>
-
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</li>
 			<li class="chatArea" ng-show="showPromo" >
 					<div style="margin-bottom:10px;" align="center">
 						<ul class="col-md-12">
@@ -127,7 +48,7 @@
 								<div align="center" class="col-md-10">
 									Create Promotion Code
 								</div>
-								<i class="col-md-2 closeIcon fa fa-times-circle" ng-click="closePromo()"></i>
+								<i class="col-md-2 closeIcon fa fa-times-circle" ng-click="openPromoWindow()"></i>
 							</li>
 							<li class="promoArea">
 								<ul class="col-md-12 pt10">

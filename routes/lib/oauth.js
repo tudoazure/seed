@@ -117,8 +117,13 @@ var oauth = {
         if (SERVER.DOMAIN == 'bargain') {
           res.redirect('/');
           req.session.user.domain = 'bargain';
+        } else {
+          res.end('Not bargain server');
         }
+      } else {
+        res.end('Not an admin');
       }
+
     });
   },
 

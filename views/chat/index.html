@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bargain">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="">
+    <title>Paytm Marketplace Bargain Panel</title>
+
+    <!-- Bootstrap CSS -->
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link href="styles/main.css" rel="stylesheet">
+    <script>
+        user = <%- JSON.stringify(user) %>;
+        fulfillmentHost = <%- JSON.stringify(fulfillementHost) %>;
+        chatHost = <%- JSON.stringify(chatHost) %>;
+    </script>
+
+
+    <script src="scripts/vendor/jquery.js"></script>
+
+
+    <script src="scripts/config/AppConfig.js"></script>
+    <script src="scripts/vendor/angular.js"></script>
+    <script src="scripts/vendor/date-picker/ui-bootstrap-custom-0.10.0.js"></script>
+    <script src="scripts/vendor/date-picker/ui-bootstrap-custom-tpls-0.10.0.js"></script>
+    <script src="scripts/vendor/angular-resource.js"></script>
+    <script src="scripts/vendor/angular-route.js"></script>
+    <script src="scripts/vendor/angular-local-storage.js"></script>
+    <script src="scripts/vendor/angular-cookies.js"></script>
+    <script src="scripts/vendor/strophe.js"></script>
+    <script src="scripts/vendor/moment.js"></script>
+
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/AppCtrl.js"></script>
+    <script src="scripts/controllers/ChatCtrl.js"></script>
+    <script src="scripts/services/httpService.js"></script>
+    <script src="scripts/services/AuthService.js"></script>
+    <script src="scripts/services/ChatCoreService.js"></script>
+    <script src="scripts/services/StropheService.js"></script>
+    <script src="scripts/services/UtilService.js"></script>
+    <script src="scripts/directives/angular-enter/angular-enter.js"></script>
+    <script src="scripts/directives/angular-focus-blur/angular-focus-blur.js"></script>
+    <script src="scripts/directives/chat-scroll-down/chat-scroll-down.js"></script>
+    
+    <script src="scripts/directives/chat-area/chat-area.js"></script>
+    <script src="scripts/directives/chat-contact-list/chat-contact-list.js"></script>
+    <script src="scripts/directives/promocode-calculator/promocode-calculator.js"></script>
+
+
+</head>
+
+<body ng-controller="AppCtrl">
+
+    <input type="text" ng-init="userData =JSON.stringify(user)" ng-model="session" style="display:none">
+    <div id="header" class="header col-md-12">
+        <div class="col-md-3 logo"></div>
+        <div class="col-md-7 connectionStatus status-{{stropheStatus}}" >{{chatConnectionStatus}}</div>
+        <div class="col-md-2 mt5"  align="center"><a href="/logout">Logout</a></div>
+    </div>
+    <div ng-view ="" class="col-md-12 content"></div>
+   
+</body>
+</html>

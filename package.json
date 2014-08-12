@@ -16,11 +16,11 @@
         "useragent": "2.0.0",
         "ptmproc": "git+ssh://git@paytm.unfuddle.com:paytm/proc.git",
         "minifyjs": "git+ssh://git@paytm.unfuddle.com:paytm/minifyjs.git",
-        "market-oauth":"git+ssh://git@paytm.unfuddle.com:paytm/market-oauth.git#production",
+        "market-oauth":"git+ssh://git@paytm.unfuddle.com:paytm/market-oauth.git",
         "connect-assets": "2.5.2",
         "less": "1.4.1",
         "connect": "2.9.0",
-        "connect-redis": "*",
+        "connect-redis": "1.4",
         "mashape-oauth": "~0.1.6"
     },
     "devDependencies": {

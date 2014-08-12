@@ -8,18 +8,20 @@ var util = require('util');
 var http = require('http');
 var path = require('path');
 var proc = require('ptmproc');
-var connectAssets = require('connect-assets');
 var oauth = require('./routes/lib/oauth');
 
 var app = express();
 app.configure(function () {
 // all environments
     app.set('port', process.env.PORT || 4199);
-    app.use(connectAssets()); 
-    app.set('views', path.join(__dirname, 'app/views'));
+ 
+    app.use(express.favicon(path.join(__dirname, 'public', 'favicon.ico')));
+    app.use(express.static(path.join(__dirname, '.tmp')));
+    app.use(express.static(path.join(__dirname, 'public')));
+    app.set('views', __dirname + '/views');
+
     app.engine('.html', require('ejs').renderFile);
     app.set('view engine', 'html');
-    app.use(express.favicon());
     app.use(express.logger('dev'));
     app.use(express.bodyParser());
     app.use(express.cookieParser());

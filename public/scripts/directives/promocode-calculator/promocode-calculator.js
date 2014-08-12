@@ -4,7 +4,7 @@
     .directive('promocodeCalculator', ['$timeout', function( $timeout) {
       return {
         restrict: 'EA',
-        templateUrl: 'app/scripts/directives/promocode-calculator/promocode-calculator-template.html',
+        templateUrl: 'scripts/directives/promocode-calculator/promocode-calculator-template.html',
         scope: false,
         link: function(scope, element, attrs) {
           scope.discountPC = 0;

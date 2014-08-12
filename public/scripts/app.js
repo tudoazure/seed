@@ -5,11 +5,11 @@
 	app.config(['$routeProvider', function($routeProvider){
 		$routeProvider
 			.when('/',{
-				templateUrl:'app/views/partials/overallView.html',
+				templateUrl:'partials/overallView.html',
 				controller : ''
 			})
 			.when('/chat',{
-				templateUrl:'app/views/partials/chatview.html',
+				templateUrl:'partials/chatview.html',
 				controller : ''
 			})
 			.otherwise({
