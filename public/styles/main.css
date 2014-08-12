@@ -51,12 +51,14 @@ ul li{
 	margin-top: 30px;	
 }
 .p0{padding:0px;}
+.p8{padding: 8px;}
 .ml7{margin-left: 7px;}
 .padd{padding: 5px 0px 2px 2px;}
 .padd1{padding: 5px 0px 5px 10px;}
 .mt3{margin-top: 3px;}
 .mt5{margin-top: 5px;}
 .mt10{margin-top: 10px;}
+.ml5{margin-left: 5px;}
 .pt10{padding: 10px 0px 0px 0px;}
 .pt10n5{padding: 10px 5px 0px 5px;}
 .roaster{
@@ -66,7 +68,7 @@ ul li{
 	margin-bottom: 20px;
 	font-size: 12px;
 	font-weight: 500;
-	padding: 8px;
+	/*padding: 8px;*/
 	height: 400px;
 	overflow-y:auto; 
 }
@@ -156,6 +158,8 @@ ul li{
 	text-align: center;
 	padding-top: 11px;
 }
+
+.border-rad{border-radius: 1px 1px 0 0 !important;}
 
 .active-chat-header{
 	background-color: #00b8ff !important;

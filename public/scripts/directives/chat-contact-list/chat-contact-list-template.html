@@ -1,15 +1,15 @@
-<ul class="roaster">
-	<li>
+<ul class="roaster p0">
+	<li class="chatheader active-chat-header p0 border-rad">
 		<div class="col-md-12" ng-show="!activeWindows.length">No Users 
 		</div>
         <div class="col-md-12" ng-show="activeWindows.length">Now Chatting ...  
         </div>
 	</li>
     <li ng-repeat="user in contact" ng-click="openchatview(user)" class="row">
-    	<div class="col-md-10" ng-class="activeChatUser == user.id ? 'active' : '' " >{{ user.name }}
+    	<div class="col-md-9 ml5" ng-class="activeChatUser == user.id ? 'active' : '' " >{{ user.name }}
     		<br/>
     		<!-- <span class='italicFont'>...is typing</span> -->
     	</div>
-    	<div class="circle col-md-2 ml7" ng-if="getUnReadMessageCount(user)" ng-class="activeChatUser == user.id ? 'green' : '' " >{{getUnReadMessageCount(user)}}</div>
+    	<div class="circle col-md-3 ml7" ng-if="getUnReadMessageCount(user)" ng-class="activeChatUser == user.id ? 'green' : '' " >{{getUnReadMessageCount(user)}}</div>
     </li>
 </ul>
