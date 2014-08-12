@@ -126,7 +126,37 @@
 							break;
 					}
 					return messageState;
-				}
+				};
+				$scope.product = {};
+				$scope.product.long_rich_desc = [
+						{
+						title: "Description",
+						description: "A smart casual rock grey shirt that can be worn over casual or formal trousers; transforming your overall look. This classic shirt is designed with a contrast colour mustard fabric strip on the inner placket along with full sleeves; panels in the front and a button down collar. This is one shirt that will never go out of fashion.Fabric: 100% Cotton",
+						attributes: {
+							"Brand": "Zovi",
+							"Product Code": "MSHIRT36SRM12706ZVGR42"
+						}
+						},
+						{
+						title: "Fabric Composition",
+						description: "Cotton",
+						attributes: { }
+						},
+						{
+						title: "Color Detail",
+						description: "Chocolate",
+						attributes: { }
+						},
+						{
+						title: "Shipping Details",
+						description: "This product is usually shipped in 2-4 days within Metro areas.",
+						attributes: {
+							"Estimated Arrival": "4-6 days",
+							"return Policy": "We will gladly accept returns for any reason within 15 days of receipt of delivery."
+						}
+						}
+
+				]
       }]);
 })(angular);
 

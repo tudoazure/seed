@@ -41,9 +41,25 @@
           }
           scope.userName = scope.contact[scope.chatData.userId].name;
           scope.messages = scope.chatData.messages;
+
           scope.openPromoWindow = function(){
-            scope.showPromo = !scope.showPromo;
+            scope.showPromo = true;
+            scope.showProduct = false;
           };
+
+          scope.openProductWindow = function(){
+            scope.showPromo = false;
+            scope.showProduct = true;
+          };
+
+          scope.closePromo = function(){
+            scope.showPromo = false;
+          };
+
+          scope.closeProduct = function(){
+            scope.showProduct = false;
+          };
+
 
           scope.setPromoType = function(type){
             scope.promoType= type;
@@ -52,6 +68,24 @@
           scope.setFreeShip = function(){
             scope.isFreeShiping = !scope.isFreeShiping;
           }
+
+          scope.getProductDetail = function(){
+            var productUrl =  Globals.AppConfig.getProductDetail;
+             var svc = httpService.callFunc(productUrl);
+            svc.get(promoObj).then(function(response){
+              if (response) {
+                if(response){
+                  scope.productD = response
+                }
+                scope.showPromo = false;
+                scope.showProduct = true;
+              }
+              //send message()
+            }, function(error){
+              alert("Error occured in generating the promo code.")
+              console.log(error)
+            });
+          };
 
           scope.savePromo = function(){
             scope.agentMessage = '';
