@@ -67,8 +67,8 @@
 
 				$scope.loginToChatServer = function(){
 					AuthService.chatServerLogin.query({
-						email : "paytmagent5@mailinator.com", //$rootScope.bargainAgent.email,
-						access_token : "dea35671-9486-451e-a0fe-ab44e0bf3663", //$rootScope.bargainAgent.token,
+						email : $rootScope.bargainAgent.email,
+						access_token : $rootScope.bargainAgent.token,
 						device_type : "web",
 						device_id : navigator.userAgent,
 						utype : "Normal",
