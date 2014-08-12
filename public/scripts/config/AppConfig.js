@@ -11,6 +11,7 @@ var Globals = {
     MessageTemplates : "https://" + chatHostBaseURI + "/one97/get-template-messages/",
     StropheConnect : "https://" + chatHostBaseURI  + "/http-bind/",
     PromoCodeCreate : fulfillmentBaseURI + "admin/promocode/bargain",
-    DefaultPromoCodeValidity : 3
+    DefaultPromoCodeValidity : 3,
+    productUrl : "https://catalogapidev.paytm.com/v1/mobile/product/211244"
   }        
 })();

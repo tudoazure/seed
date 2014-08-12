@@ -9,7 +9,7 @@
 				</div>
 			</li>
 			<li class="productDetail" ng-click="setFocus()">
-					<div class="col-md-3" ng-click="showProductDetail()">
+					<div class="col-md-3" ng-click="getProductDetail()">
 						<img ng-src={{product.imageUrl}} class="productImg"></img>
 					</div>
 					<div class="col-md-9 productDescription">
@@ -62,7 +62,6 @@
 											<br/>
 											<span>
 												{{ attr.description}}
-												Zovi Regular Fit Solid Rock Grey Panelled Casual Shirt-Full Sleeves (Size-42)
 											</span>
 										</div>
 										<ul class="p0 col-md-12 bb-blue
@@ -107,8 +106,7 @@
 										</div>
 										<div class="col-md-8 paddr" align="left">
 											<span>
-											Rs {{ product.actual_price}}
-												400
+											Rs {{ productD.actual_price}}
 											</span>
 										</div>
 									</li >
@@ -118,19 +116,17 @@
 										</div>
 										<div class="col-md-8 paddr" align="left">
 											<span>
-											Rs {{ product.offer_price}}
-												400
+											Rs {{ productD.offer_price}}
 											</span>
 										</div>
 									</li >
-									<li>
+									<li ng-if="productD.promo_text">
 										<div class="col-md-4 paddl" align="left">
 											<span class="title">Promo Text : </span>
 										</div>
 										<div class="col-md-8 paddr" align="left">
 											<span>
-											{{ product.promo_text}}
-												Use promo code SHOP25 to get 25% cash back on this item (maximum cash back Rs 400)
+											{{ productD.promo_text}}
 											</span>
 										</div>
 									</li >
