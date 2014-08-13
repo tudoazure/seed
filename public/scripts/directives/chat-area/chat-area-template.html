@@ -1,8 +1,8 @@
 <!-- <div class="col-md-3"> -->
 	<div class="col-md-12" style="padding:0px;">
-		<ul class="chatUL">
+		<ul class="chatUL" ng-class="activeChatUser == chatData.userId ? 'activeChat' : 'inactive'">
 			
-			<li class="chatheader" ng-click="setFocus()" ng-class="activeChatUser == chatData.userId ? 'active-chat-header' : 'inactive-chat-header'">
+			<li class="chatheader" ng-click="setFocus()">
 				<div class="row">
 					<div class="col-md-10  h11" > {{userName}}</div>
 					<div class="col-md-1 fa fa-times closeIcon" ng-click="closeUserChat()"></div>
@@ -261,7 +261,7 @@
 			<!-- Bottom Text Area -->
 			<li>
 				<div class="chatText col-md-12">
-					<div class="col-md-1" ng-click="openPromoWindow()" style="line-height: 2em;padding-top: 4px;color: #00b8ff;" ng-show="!showPromo">
+					<div class="col-md-1 promoIcon" ng-click="openPromoWindow()" ng-show="!showPromo">
 					  <i class="fa fa-circle fa-stack-2x"></i>
 					  <i class="fa fa-rupee fa-stack-1x fa-inverse"></i>
 					</div>
