@@ -109,6 +109,10 @@
 					return UtilService.getLocalTime(ts);
 				}
 
+				$scope.getJsonParsedMesg = function(message){
+					return JSON.parse(message);
+				}
+
 				$scope.getMesgState = function(state){
 					var messageState = "Sending";
 					switch(state){

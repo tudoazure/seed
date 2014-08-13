@@ -27,11 +27,14 @@
 				<div style="margin-bottom:10px;">
 
 					<div class='chat-message fr reporter bgblue', ng-repeat='message in messages', ng-class="message.sender== chatData.userId ? 'user-mesg' : 'agent-mesg'" ng-if="!message.isProductDetails">
-	                	<div class='chat-name' ng-if="!message.isCloseChatMesg">
+	                	<div class='chat-name' ng-if="!message.isCloseChatMesg && !message.isPromoCode">
 	                		{{message.txt}}
 	            		</div>
 	            		<div class='leftConversation' ng-if="message.isCloseChatMesg">
 	                		User left the conversation
+	            		</div>
+	            		<div class='chat-name' ng-if="message.isPromoCode">
+	                		{{getJsonParsedMesg(message.txt).PRMCODE.message}}
 	            		</div>
 
 	            			<span style='float:right;font-size:9px'>{{ getMesgState(message.state)}} {{parsedDate(message.sent_on)}}</span>
