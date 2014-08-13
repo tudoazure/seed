@@ -131,7 +131,7 @@ var oauth = {
     var fulfillment_cookie = req.cookies[COOKIE];
     var jar = request.jar();
     var cookie = request.cookie(COOKIE + '=' + fulfillment_cookie);
-    jar.add(cookie);
+    jar.setCookie(cookie, '.paytm.com', function(error, cookie) {});
     request.get({
       url: SERVER.FULFILLMENT + '/logout',
       jar: jar
