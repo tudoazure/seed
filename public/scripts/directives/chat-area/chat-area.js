@@ -84,7 +84,7 @@
             svc.post(promoObj).then(function(response){
               if (response) {
                 var promoCodeData = {
-                  message : response.success_message.trim().replace('${amount}', discountVal).replace("Code applied:" , "Code:"),
+                  message : response.success_message.trim().replace('${amount}', discountVal).replace("Code applied:" , "Use Code:"),
                   promocode : response.code,
                   validity : moment(response.valid_upto).format("MMM Do, h:mm a") ,
                   minQuantity : promoObj.qty
