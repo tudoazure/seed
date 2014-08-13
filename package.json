@@ -11,9 +11,7 @@
         "ptmproc": "git+ssh://git@paytm.unfuddle.com:paytm/proc.git",
         "market-oauth":"git+ssh://git@paytm.unfuddle.com:paytm/market-oauth.git",
         "connect-redis": "1.4",
-        "mashape-oauth": "~0.1.6"
-    },
-    "devDependencies": {
+        "mashape-oauth": "~0.1.6",
         "request": "2.27.0"
     },
     "repository": "git+ssh@paytm.unfuddle.com:paytm/marketplace-bargain-panel.git",

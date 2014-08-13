@@ -10,13 +10,21 @@
     <link rel="shortcut icon" href="">
     <title>Paytm Marketplace Bargain Panel</title>
 
-    <!-- Bootstrap CSS -->
+    
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.css" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- In case cdn is not working. Use below and comment above CDN Path. -->
+   <!--  <link href="styles/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- Font-Awesome for Icons -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     
     <!-- Main CSS -->
     <link href="styles/main.css" rel="stylesheet">
+
     <script>
         user = <%- JSON.stringify(user) %>;
         fulfillmentHost = <%- JSON.stringify(fulfillementHost) %>;
@@ -25,12 +33,9 @@
 
 
     <script src="scripts/vendor/jquery.js"></script>
-
-
     <script src="scripts/config/AppConfig.js"></script>
     <script src="scripts/vendor/angular.js"></script>
-    <script src="scripts/vendor/date-picker/ui-bootstrap-custom-0.10.0.js"></script>
-    <script src="scripts/vendor/date-picker/ui-bootstrap-custom-tpls-0.10.0.js"></script>
+    <script src="scripts/vendor/ui-bootstrap-tpls-0.11.0.min.js"></script>
     <script src="scripts/vendor/angular-resource.js"></script>
     <script src="scripts/vendor/angular-route.js"></script>
     <script src="scripts/vendor/angular-local-storage.js"></script>

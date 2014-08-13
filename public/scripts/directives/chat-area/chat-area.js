@@ -7,16 +7,27 @@
         templateUrl: 'scripts/directives/chat-area/chat-area-template.html',
         scope: false,
         link: function(scope, element, attrs) {
-          //date picker
+          
           scope.qty = 1;
+          //date picker
           scope.promoType = 'percentage';
           scope.format = 'dd/MM/yyyy';
-          scope.minDate =  new Date();
+          scope.defaultDateForPromoCode = function() {
+            var someDate = new Date();
+            var numberOfDaysToAdd = 3;  // For default date validity of promo code.
+            someDate.setDate(someDate.getDate() + numberOfDaysToAdd); 
+            scope.validDate = someDate;
+          };
+          scope.defaultDateForPromoCode();
           scope.open = function($event) {
             $event.preventDefault();
             $event.stopPropagation();
             scope.opened = true;
           };
+          scope.toggleMin = function() {
+            scope.minDate = (scope.minDate ) ? null : new Date();
+          };
+          scope.toggleMin();
           //date picker
 
           scope.closeUserChat = function(){

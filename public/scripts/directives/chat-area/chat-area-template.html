@@ -70,6 +70,7 @@
 										</div>
 										<div class="col-md-5 padd mt3" ng-show="promoType == 'percentage'"}}>
 											<input type="text" class="col-md-8 p0" ng-model="percentCap">
+											<i class="icon-percent"></i>
 										</div>
 									</li>
 									<li  ng-show="promoType == 'percentage'">
@@ -78,6 +79,7 @@
 										</div>
 										<div class="col-md-5 padd mt3">
 											<input type="text" class="col-md-8 p0" ng-model="capLimit"/>
+											<i class="fa fa-inr"></i>
 										</div>
 									</li>
 									<li>
@@ -87,6 +89,7 @@
 										</div>
 										<div class="col-md-5 padd mt3" ng-show="promoType == 'absolute'">
 											<input type="text" class="col-md-8 p0" ng-model="absoluteCap"/>
+											<i class="fa fa-inr"></i>
 										</div>
 									</li>
 									<!-- <li  ng-if="promoType == 'percentage'">
@@ -111,7 +114,7 @@
 										</div>
 										<div class="col-md-5 padd mt3">
 											<p>
-												<input type="text" class="col-md-8 p0" ng-model="validDate" datepicker-popup="{{format}}" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" is-open="opened" show-weeks="false">
+												<input type="text" class="col-md-8 p0" ng-model="validDate" datepicker-popup="{{format}}" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" is-open="opened" show-weeks="false" ng-click="open($event)">
 											</p>
 											
 										</div>

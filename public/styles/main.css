@@ -365,4 +365,13 @@ font-size: 14px;}
 	padding: 15px 0 15px 0;
 }
 
+.icon-percent::before {
+    content: '%';
+    font-weight: bold;
+}
+
+.fw-bold{
+  font-weight: bold;
+}
+
 
