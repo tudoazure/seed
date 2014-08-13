@@ -635,6 +635,15 @@ background-image: -webkit-gradient(
 	border-bottom-color: #666;
 }
 
+.logout{
+	text-decoration: none;
+	border: solid 1px #00B8FF;
+	border-radius: 5px;
+	padding: 3px 10px 3px 15px;
+	background: #fff;
+	font-size: 15px;
+	color: #5c6467;
+}
 
 
 
