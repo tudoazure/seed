@@ -62,23 +62,14 @@
 									</li>
 									<li>
 										<div class="col-md-7 padd1"  align="left">
-											<input type="radio" name="promoType" value="percentage" ng-click="setPromoType('percentage')"/>
+											<input type="radio" name="promoType" checked value="percentage" ng-click="setPromoType('percentage')"/>
 											<label>Percentage</label>
 										</div>
-										<div class="col-md-5 padd mt3">
+										<div class="col-md-5 padd mt3" ng-show="promoType == 'percentage'"}}>
 											<input type="text" class="col-md-8 p0" ng-model="percentCap">
 										</div>
 									</li>
-									<li>
-										<div class="col-md-7 padd1"  align="left">
-											<input type="radio" name="promoType" value="absolute" ng-click="setPromoType('absolute')"/>
-											<label>Amount</label>
-										</div>
-										<div class="col-md-5 padd mt3">
-											<input type="text" class="col-md-8 p0" ng-model="absoluteCap"/>
-										</div>
-									</li>
-									<li>
+									<li  ng-show="promoType == 'percentage'">
 										<div class="col-md-7 padd1"  align="left">
 											<label>Upper Limit</label>
 										</div>
@@ -86,6 +77,23 @@
 											<input type="text" class="col-md-8 p0" ng-model="capLimit"/>
 										</div>
 									</li>
+									<li>
+										<div class="col-md-7 padd1"  align="left">
+											<input type="radio" name="promoType" value="absolute" ng-click="setPromoType('absolute')"/>
+											<label>Amount</label>
+										</div>
+										<div class="col-md-5 padd mt3" ng-show="promoType == 'absolute'">
+											<input type="text" class="col-md-8 p0" ng-model="absoluteCap"/>
+										</div>
+									</li>
+									<!-- <li  ng-if="promoType == 'percentage'">
+										<div class="col-md-7 padd1"  align="left">
+											<label>Upper Limit</label>
+										</div>
+										<div class="col-md-5 padd mt3">
+											<input type="text" class="col-md-8 p0" ng-model="capLimit"/>
+										</div>
+									</li> -->
 									<li>
 										<div class="col-md-7 padd1"  align="left">
 											<label>Minimum Quantity</label>
