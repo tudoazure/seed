@@ -43,11 +43,11 @@ ul li{
 .font24 {font-size:24px; line-height:26px;}
 .gray-font{color:#666; font-weight:500;}
 .B-padd20 {padding-bottom:20px;}
-.T-marg20 {
-	margin-top: 20px;
-}
 
 .mt30{
+	margin-top: 30px;	
+}
+.mt20{
 	margin-top: 30px;	
 }
 .p0{padding:0px;}
@@ -344,12 +344,16 @@ font-size: 14px;}
 }
 
 .promolink{
-	font-size: 22px;
-	padding: 10px 16px 6px 5px;
-	/*margin-left: -15px;*/
+	line-height: 2em;
+	padding-top: 4px;
+	color: #00b8ff;
 	cursor: pointer;
-	background-color: #00b8ff;
-	color: #fff;
+}
+
+.templateLink{
+	font-size: 26px;
+	padding-top: 5px;
+	color: #00b8ff;
 }
 
 .cancel{
