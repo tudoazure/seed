@@ -16,7 +16,6 @@
 					$rootScope.plustxtcacheobj.contact = {};
 					$rootScope.plustxtcacheobj.message = {};
 					$rootScope.plustxtcacheobj.products = {};
-					$rootScope.plustxtcacheobj.visibleChatContacts = [];
 					$rootScope.loginusername = null;
 					$rootScope.password = null;
 					$rootScope.usersCount = 0;

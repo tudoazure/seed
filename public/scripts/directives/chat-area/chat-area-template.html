@@ -4,7 +4,7 @@
 			
 			<li class="chatheader" ng-click="setFocus()">
 				<div class="row">
-					<div class="col-md-10  h11" > {{userName}}</div>
+					<div class="col-md-10  h11" > {{userName}} ({{chatData.userId}})</div>
 					<div class="col-md-1 fa fa-times closeIcon" ng-click="closeUserChat()"></div>
 				</div>
 			</li>
@@ -30,19 +30,19 @@
 			</li>
 			<li class="chatArea" ng-show="!showPromo && !showTemplates && !showProduct" ng-click="setFocus()" chat-scroll-down>
 				<div style="margin-bottom:10px;">
-
-					<div class='bubble fr reporter bgblue', ng-repeat='message in messages', ng-class="message.sender== chatData.userId ? 'user-mesg' : 'bubble--alt agent-mesg'" ng-if="!message.isProductDetails">
-	                	<div class='chat-name' ng-if="!message.isCloseChatMesg && !message.isPromoCode">
-	                		{{message.txt}}
-	            		</div>
-	            		<div class='leftConversation' ng-if="message.isCloseChatMesg">
+					<div ng-repeat='message in messages'>
+						<div class='bubble fr reporter bgblue', , ng-class="message.sender== chatData.userId ? 'user-mesg' : 'bubble--alt agent-mesg'" ng-if="!message.isProductDetails && !message.isCloseChatMesg">
+		                	<div class='chat-name' ng-if="!message.isCloseChatMesg && !message.isPromoCode">
+		                		{{message.txt}}
+		            		</div>
+		            		<div class='chat-name' ng-if="message.isPromoCode">
+		                		{{getJsonParsedMesg(message.txt).PRMCODE.message}}
+		            		</div>
+		            		<span style='float:right;font-size:9px'>{{ getMesgState(message.state)}} {{parsedDate(message.sent_on)}}</span>
+	        			</div>
+	        			<div class='leftConversation clear' ng-if="message.isCloseChatMesg">
 	                		User left the conversation
 	            		</div>
-	            		<div class='chat-name' ng-if="message.isPromoCode">
-	                		{{getJsonParsedMesg(message.txt).PRMCODE.message}}
-	            		</div>
-
-	            			<span style='float:right;font-size:9px'>{{ getMesgState(message.state)}} {{parsedDate(message.sent_on)}}</span>
         			</div>
     			<!-- <div class="linkBtn">
     				<a > show new messages</a>

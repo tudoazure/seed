@@ -39,9 +39,8 @@
 
           scope.closeUserChat = function(){
             console.log("Delete Chat from this user: ", scope.chatData.userId);
-            scope.agentMessage = '{"CLSCHAT" : "chat closed"}';
+            scope.agentMessage = Globals.AppConfig.CloseChatMessage;
             scope.submitMessage(false);
-            scope.$emit('Close-User-Chat', scope.chatData.userId);
           }
           scope.setFocus = function(){
             scope.$emit('Active-User-Changed', scope.chatData.userId);

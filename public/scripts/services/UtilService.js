@@ -73,7 +73,10 @@
 	                messageArray[key]['last_ts'] = intime;
 	            }
 	        }
-	        $rootScope.plustxtcacheobj['message'][inotherpartytigoid] = messageArray;
+	        // messageArray can be undefined after close chat
+	        if(messageArray){
+	        	$rootScope.plustxtcacheobj['message'][inotherpartytigoid] = messageArray;
+	    	}
 	    };
 
 	    var updateMessageStatusAsRead = function(inotherpartytigoid, intime){
@@ -87,7 +90,10 @@
 			        midread[midread.length] = messageArray[key]['mid'];
 			    }
 			}
-			$rootScope.plustxtcacheobj['message'][inotherpartytigoid] = messageArray;
+			// messageArray can be undefined after close chat
+			if(messageArray){
+				$rootScope.plustxtcacheobj['message'][inotherpartytigoid] = messageArray;
+			}
 			return midread;
 		};
 

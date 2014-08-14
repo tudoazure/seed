@@ -253,6 +253,11 @@
                strTimeMii = timeInMilliSecond.toString();
              //   utility.comn.consoleLogger(' local cache message status upadted from mid '+mid);
                UtilService.updateMessageStatus(mid, 0, Strophe.getNodeFromJid(jid), strTimeMii);
+
+               // For sending the closed message
+               if(body == Globals.AppConfig.CloseChatMessage){
+                 $rootScope.$broadcast("Close-User-Chat", Strophe.getNodeFromJid(jid));
+               }
             }
            }
           return true;
