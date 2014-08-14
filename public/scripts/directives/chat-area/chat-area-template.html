@@ -3,24 +3,29 @@
 		<ul class="chatUL">
 			
 			<li class="chatheader" ng-click="setFocus()" ng-class="activeChatUser == chatData.userId ? 'active-chat-header' : 'inactive-chat-header'">
-				<div>
-					<div class="col-md-1"></div>
-					<div class="col-md-9  h11" > {{userName}}</div>
-					<div class="col-md-1 fa fa-times-circle closeIcon" ng-click="closeUserChat()"></div>
+				<div class="row">
+					<div class="col-md-10  h11" > {{userName}}</div>
+					<div class="col-md-1 fa fa-times closeIcon" ng-click="closeUserChat()"></div>
 				</div>
 			</li>
-			<li class="productdetail" ng-click="setFocus()">
-				<div class="col-md-4"><img ng-src={{product.imageUrl}} class="img"></img></div>
-				<div class="col-md-8" style="padding:10px 0 0 0;">
-					<span class="detail">{{product.description}}</span>
+			<li class="productDetail" ng-click="setFocus()">
+					<div class="col-md-3">
+						<img ng-src={{product.imageUrl}} class="productImg"></img>
+					</div>
+					<div class="col-md-9 productDescription">
+						<span class="detail">{{product.description}}</span>
+					</div>
+				<div class="col-md-12">
 					<div class="col-md-4 price">
-						<span>Price</span>
+						<small style="font-weight:600;">Price</small>
 						<div class="priceDiv"> Rs. {{product.price}}</div>
 					</div>
-					<!-- <div class="col-md-4 disc">
-						<span>Discount</span>
-						<div class="discDiv"> None</div>
-					</div> -->
+					<div class="col-md-1">
+					</div>
+					<div class="col-md-6 price">
+						<small style="font-weight:600;">Discount</small>
+						<div class="priceDiv"> Details N/A</div>
+					</div>
 				</div>
 			</li>
 			<li class="chatArea" ng-show="!showPromo" ng-click="setFocus()" chat-scroll-down>
@@ -143,8 +148,17 @@
 			</li>
 			<li>
 				<div class="chatText col-md-12">
-					<i class="fa fa-inr col-md-1 promolink" ng-click="openPromoWindow()"></i>
-					<textarea type="text" placehoder="send message" class="chatTextArea col-md-11" ng-enter="submitMessage()" ng-model="agentMessage" ng-focus="setFocus()"></textarea>
+					<div class="col-md-1" ng-click="openPromoWindow()" style="line-height: 2em;padding-top: 4px;color: #00b8ff;">
+					  <i class="fa fa-circle fa-stack-2x"></i>
+					  <i class="fa fa-rupee fa-stack-1x fa-inverse"></i>
+					</div>
+					<!-- <i class="fa fa-inr col-md-1 promolink" ng-click="openPromoWindow()"></i> -->
+					<div class="col-md-9" style="padding-left:5px;">
+						<textarea type="text" placehoder="send message" class="chatTextArea" ng-enter="submitMessage()" ng-model="agentMessage" ng-focus="setFocus()"></textarea>
+					</div>
+					<div class="col-md-1" ng-click="openPromoWindow()">
+					  <i class="fa fa-envelope" style="font-size:font-size: 26px;font-size: 27px;padding-top: 5px;color: #00b8ff;"></i>
+					</div>
 				</div>
 			</li>
 		</ul>

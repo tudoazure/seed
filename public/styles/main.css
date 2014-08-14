@@ -96,7 +96,7 @@ ul li{
 
 .roaster li:first-child {
 	text-align: center;
-	padding: 4px 0 0 0;
+/*	padding: 4px 0 0 0;*/
 	height: 30px;
 	font-size: 14px;
 }
@@ -144,15 +144,15 @@ ul li{
 	color: #00B8ff;
 }
 .chatheader{
-		height: 36px;
+	height: 36px;
 	background-color: #E7EEEF;
 	border-radius: 5px 5px 0 0;
 	border-bottom: solid 1px #a6a6a6;
 	color: #afb4b4;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: 600;
 	text-align: center;
-	padding: 8px 0px 8px 0px;
+	padding-top: 11px;
 }
 
 .active-chat-header{
@@ -164,11 +164,10 @@ ul li{
 }
 .h11{
 	text-align: center;
-	padding-top: 5px;
 }
 
 .chatUL{
-	padding-left: 0px;
+	padding-left: 0%;
 	border: solid 1px #a6a6a6;
 	height: 562px;
 	border-radius: 5px;
@@ -184,33 +183,46 @@ ul li{
 	background-repeat: no-repeat;
 }
 
-.productdetail{
+.productDetail{
 	border-bottom: solid 1px #a6a6a6;
 	background-color: #f6fcff;
-	height: 100px;
+	height: 110px;
 	font-size: 11px;
 	font-weight: 500;
 	line-height: 1.43;
 }
-.img{
-	height: 55px;
-	width: 55px;
+
+.productDescription{
+	padding: 10px 10px 0 0;
+	display: -webkit-box;
+	height: 60px;
+	font-size: 12px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: block;
+  	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+.productImg{
+	height: 50px;
+	width: 50px;
 	border: solid 1px #a6a6a6;
 	border-radius: 5px;
-	margin: 10px 3px 0px 0px;
+	margin-top: 10px;
 }
 .price{
 	padding: 5px 0 0 0;
-	font-weight: 600;
 }
 .priceDiv{
-	background-color: #78D297;
-	padding: 3px 5px 3px 5px;
+	background-color: #fff;
+	padding: 2px 5px 2px 5px;
 	border-radius: 3px;
-	font-size: 10px;
-	width: 65px;
-	color:#fff;
-	margin-top: 2px;
+	font-size: 12px;
+	color: #78D297;
+	border-style: dashed;
+	border-width: 1px;
+	border-color: #999;
 }
 .discDiv{
 	background-color: #F0656C;
@@ -235,15 +247,27 @@ ul li{
 	padding: 0 0 0 0;
 }
 .chatArea{
-	height: 385px;
+	height: 375px;
 	overflow-y:	auto; 
 	padding-top: 10px
 }
 .chatTextArea{
-	padding: 5px 0 0 5px;
+	padding: 1px 1px 1px 1px;
 	font-size: 12px;
-	height: 38px;
+	height: 32px;
+	width: 112%;
+	margin-top: 3px;
+	line-height: 1.2;
+	border:none;
+	resize: none;
 }
+.chatTextArea:focus{
+    /*border: 1px;*/
+    outline: none !important;
+    border:1px solid #999;
+
+}
+
 .linkBtn{
 	color: #a6a6a6;
 	text-decoration: none;
@@ -348,6 +372,7 @@ font-size: 14px;}
 .closeIcon{
 	font-size: 18px;
 	cursor: pointer;
+	margin-top: -2px;
 }
 
 .leftConversation{
@@ -366,5 +391,7 @@ font-size: 14px;}
 .fw-bold{
   font-weight: bold;
 }
+
+
 
 
