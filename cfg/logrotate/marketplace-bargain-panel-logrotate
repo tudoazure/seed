@@ -1,0 +1,8 @@
+"/var/www/marketplace-bargain-panel/releases/current/logs/*.log" {
+  create 777 www-data www-data
+  rotate 720
+  compress
+  postrotate
+    reload marketplace-bargain-panel >/dev/null 2>&1 || true
+  endscript
+}

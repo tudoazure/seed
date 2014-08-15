@@ -1,11 +1,11 @@
-<div ng-controller='ChatCtrl' class="mt30">
+<div ng-controller='ChatCtrl' class="mt30 row">
 	<div class="col-md-3">
-		<div class="col-md-11">
+		<!-- <div class="col-md-11"> -->
 			<chat-contact-list contact="contact"></chat-contact-list>
 			<promocode-calculator></promocode-calculator>
-		</div>
+		<!-- </div> -->
 	</div>
-	<div ng-repeat="chatData in activeWindows" >
+	<div ng-repeat="chatData in activeWindows" class="col-md-3">
 		<chat-area chat-data="chatData"></chat-area>
 	</div>
 

@@ -12,7 +12,7 @@
         "market-oauth":"git+ssh://git@paytm.unfuddle.com:paytm/market-oauth.git",
         "connect-redis": "1.4",
         "mashape-oauth": "~0.1.6",
-        "request": "2.30.0"
+        "request": "2.33.0"
     },
     "repository": "git+ssh@paytm.unfuddle.com:paytm/marketplace-bargain-panel.git",
     "author": "Paytm",

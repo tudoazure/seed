@@ -22,10 +22,10 @@ ul li{
 }
 
 .logo{
-    margin-left:15px;
+/*    margin-left:15px;*/
 	background: url(../images/paytm-logo.png);
 	display: block;
-	width: 82px;
+	min-width: 82px;
 	height: 32px;
 	background-repeat: no-repeat;
 }
@@ -331,13 +331,6 @@ font-size: 14px;}
 .cancel{
 	margin-left: 26px;
 	position: absolute;
-}
-
-
-.connectionStatus{
-	margin-top: 5px;
-	font-size: 18px;
-	margin-left: 15%;
 }
 
 .status-1{
