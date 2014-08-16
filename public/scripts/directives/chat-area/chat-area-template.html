@@ -30,6 +30,7 @@
 			</li>
 			<li class="chatArea" ng-show="!showPromo && !showTemplates && !showProduct" ng-click="setFocus()" chat-scroll-down>
 				<div style="margin-bottom:10px;">
+					
 					<div ng-repeat='message in messages'>
 						<div class='bubble fr reporter bgblue', , ng-class="message.sender== chatData.userId ? 'user-mesg' : 'bubble--alt agent-mesg'" ng-if="!message.isProductDetails && !message.isCloseChatMesg">
 		                	<div class='chat-name' ng-if="!message.isCloseChatMesg && !message.isPromoCode">
