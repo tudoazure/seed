@@ -59,7 +59,7 @@ ul li{
 .mt5{margin-top: 5px;}
 .mt10{margin-top: 10px;}
 .ml5{margin-left: 15px;}
-.pt10{padding: 10px 0px 0px 0px;}
+.pt10{padding: 4px 5px 0px 5px;}
 .pt10n5{padding: 10px 5px 0px 5px;}
 .f14{font-size: 14px;}
 .f10{font-size: 10px;}
@@ -160,7 +160,7 @@ ul li{
 	height: 36px;
 	background-color: #666;
 	border-radius: 3px 3px 0 0;
-	border-bottom: solid 1px #a6a6a6;
+	border-bottom: solid 1px #666;
 	color: #fff;
 	font-size: 14px;
 	font-weight: 600;
@@ -260,10 +260,11 @@ ul li{
 
 .temp-li{
 	border-bottom: solid 1px #73CFFF;
-	padding: 6px 5px 5px 6px;
+	padding: 8px 5px 5px 15px;
 	height: auto;
-	min-height: 40px;
+	min-height: 35px;
 	cursor: pointer;
+	font-size: 13px;
 }
 
 .productDetail{
@@ -332,22 +333,47 @@ ul li{
 .promoIcon-Open {
 	line-height: 2em;
 	padding-top: 4px;
-	color: #00b8ff;
+	color: #73CFFF;
 	cursor: pointer;
 }
 .promoIcon-Open:hover {
-	color: #038dbf;
+	color: #00b8ff;
+	/*color: #038dbf;*/
 }
 
 .promoIcon {
 	line-height: 2em;
-	padding-top: 4px;
+	margin-top: 6px;
+	margin-left: 9px;
 	color: #00b8ff;
 	cursor: pointer;
+	background: url(../images/promoCode_enable.png);
+	width: 26px;
+	height: 26px;
+	background-repeat: no-repeat;
 }
+.inactive .promoIcon{
+	background: url(../images/promoCode_disable.png);
+}
+
 
 .promoIcon:hover {
 	color: #038dbf;
+}
+
+.messageIcon {
+	margin-top: 10px;
+	margin-left: 5px;
+	color: #00b8ff;
+	cursor: pointer;
+	background: url(../images/message_enable.png);
+	width: 25px;
+	height: 18px;
+	background-repeat: no-repeat;
+}
+
+.inactive .messageIcon{
+	background: url(../images/message_disable.png);
 }
 
 .inactive .promoIcon, .inactive  .promoIcon-Open{
@@ -400,9 +426,9 @@ ul li{
 	padding: 1px 1px 1px 1px;
 	font-size: 12px;
 	height: 32px;
-	width: 112%;
+	width: 100%;
 	margin-top: 3px;
-	line-height: 1.2;
+	line-height: 2.2;
 	border:none;
 	resize: none;
 }
@@ -467,14 +493,52 @@ font-size: 14px;}
 .promoArea {
 	border: solid 1px #00B8FF;
 	background-color: #f6fcff;
-	font-size: 11px;
-	font-weight: 500;
+	font-size: 13px;
+	font-weight: 600;
 	line-height: 1.43;
-	height: 300px;
+	height: 318px;
+}
+
+.inactive .promoArea {
+	background-color: #F8FAFB;
+	border: solid 1px #666;
+}
+
+.height35{
+	min-height: 35px !important;
+}
+.promoArea  li{
+	min-height: 40px;
+}
+
+.bbblue{
+	border-bottom: solid 1px #00B8FF;
+}
+
+.inactive .bbblue{
+	 border-bottom: solid 1px #a6a6a6;
 }
 
 .width65{
 	width: 65px;
+}
+.cal{
+	border: solid 1px #a6a6a6;
+	height: 20px;
+	width: 22px;
+	margin-left: -10px;
+	padding: 0px 3px 2px 4px;
+	background: #fff;
+}
+.calendar{
+	color: #00b8ff;
+	cursor: pointer;
+	background: url(../images/calendar.png);
+	width: 11px;
+	height: 13px;
+	background-repeat: no-repeat;
+	border: none;
+	margin-top: 3px;
 }
 .promoBtn{
 	color: #00B8FF;
@@ -483,14 +547,25 @@ font-size: 14px;}
 	border: solid 1px #00B8FF;
 	padding: 3px;
 	border-radius: 4px;
-	width: 90%;
+	width: 75%;
 	text-align: center;
 	cursor: pointer;
 }
 
+
 .promoBtn:hover{
 	color: #fff ;
 	background :#00B8FF ;
+}
+
+.inactive .promoBtn{
+	color: #666;
+	border: solid 1px #666;
+}
+
+.inactive .promoBtn:hover{
+	color: #fff ;
+	background :#666 ;
 }
 
 .promolink{
@@ -521,6 +596,10 @@ font-size: 14px;}
 	font-size: 18px;
 	cursor: pointer;
 	margin-top: -2px;
+	background: url(../images/close.png);
+	width: 12px;
+	height: 12px;
+	background-repeat: no-repeat;
 }
 
 .leftConversation{
