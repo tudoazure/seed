@@ -24,10 +24,12 @@ var chat = {
         user.type = req.session.user.type;
       }
     }
+    
     renderData.user = user;
     renderData.fulfillementHost = SERVER.FULFILLMENT + '/v1/';
     renderData.chatHost = SERVER.CHATHOST;
-    renderData.webUrl = SERVER.WEBURI;
+    renderData.webHost = SERVER.SELF;
+    renderData.catalogHost = SERVER.CATALOG;
     res.render(view, renderData);
   }
 };

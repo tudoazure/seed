@@ -25,7 +25,9 @@
 				$scope.logout = function(){
 					if($rootScope.chatSDK && $rootScope.chatSDK.connection){
 						$rootScope.chatSDK.connection.send($pres({"type": "unavailable"}));
+						$rootScope.chatSDK.connection = null;
 					}
+
 					window.location=Globals.AppConfig.logoutUrl;
 				};
 

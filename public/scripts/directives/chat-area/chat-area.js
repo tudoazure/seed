@@ -94,51 +94,48 @@
 
           //to remove
 
-          scope.productD = {};
-            scope.productD.long_rich_desc = [
-            {
-            title: "Description",
-            description: "A smart casual rock grey shirt that can be worn over casual or formal trousers; transforming your overall look. This classic shirt is designed with a contrast colour mustard fabric strip on the inner placket along with full sleeves; panels in the front and a button down collar. This is one shirt that will never go out of fashion.Fabric: 100% Cotton",
-            attributes: {
-              "Brand": "Zovi",
-              "Product Code": "MSHIRT36SRM12706ZVGR42"
-            }
-            },
-            {
-            title: "Fabric Composition",
-            description: "Cotton",
-            attributes: { }
-            },
-            {
-            title: "Color Detail",
-            description: "Chocolate",
-            attributes: { }
-            },
-            {
-            title: "Shipping Details",
-            description: "This product is usually shipped in 2-4 days within Metro areas.",
-            attributes: {
-              "Estimated Arrival": "4-6 days",
-              "return Policy": "We will gladly accept returns for any reason within 15 days of receipt of delivery."
-            }
-            }
+        //   scope.productD = {};
+        //     scope.productD.long_rich_desc = [
+        //     {
+        //     title: "Description",
+        //     description: "A smart casual rock grey shirt that can be worn over casual or formal trousers; transforming your overall look. This classic shirt is designed with a contrast colour mustard fabric strip on the inner placket along with full sleeves; panels in the front and a button down collar. This is one shirt that will never go out of fashion.Fabric: 100% Cotton",
+        //     attributes: {
+        //       "Brand": "Zovi",
+        //       "Product Code": "MSHIRT36SRM12706ZVGR42"
+        //     }
+        //     },
+        //     {
+        //     title: "Fabric Composition",
+        //     description: "Cotton",
+        //     attributes: { }
+        //     },
+        //     {
+        //     title: "Color Detail",
+        //     description: "Chocolate",
+        //     attributes: { }
+        //     },
+        //     {
+        //     title: "Shipping Details",
+        //     description: "This product is usually shipped in 2-4 days within Metro areas.",
+        //     attributes: {
+        //       "Estimated Arrival": "4-6 days",
+        //       "return Policy": "We will gladly accept returns for any reason within 15 days of receipt of delivery."
+        //     }
+        //     }
 
-        ];
+        // ];
 
           //to remove end
 
           scope.getProductDetail = function(){
-            
-          
-            var productUrl =  Globals.AppConfig.getProductDetail;
-             var svc = httpService.callFunc(productUrl);
-            svc.get(promoObj).then(function(response){
+            // var productUrl = "https://catalogapidev.paytm.com/v1/mobile/product/211244";
+            var productUrl =  Globals.AppConfig.productUrl;
+            var svc = httpService.callFunc(productUrl);
+            svc.get().then(function(response){
               if (response) {
-                if(response){
-                  scope.productD = response
-                }
-                scope.showPromo = false;
-                scope.showProduct = true;
+                console.log(response);
+                scope.productD = response;
+                scope.showProductDetail();
               }
               //send message()
             }, function(error){
@@ -203,31 +200,33 @@
           };
 
           scope.submitMessage = function(isPromoCode){
-            var timeInMilliSecond = UtilService.getTimeInLongString();
-            var strTimeMii = timeInMilliSecond.toString();
-            var messageId = scope.agentId + "-c-" + strTimeMii;
-            var mid = messageId.toString();
+            if(scope.agentMessage.trim() != ""){
+              var timeInMilliSecond = UtilService.getTimeInLongString();
+              var strTimeMii = timeInMilliSecond.toString();
+              var messageId = scope.agentId + "-c-" + strTimeMii;
+              var mid = messageId.toString();
 
-            var message = {
-              can_forward: "true",
-              delete_after: "-1",
-              deleted_on_sender: "false",
-              flags: 0,
-              id: "",
-              last_ts: strTimeMii.substring(0, 10),
-              mid: mid,
-              receiver: scope.chatData.userId ,
-              sender: scope.agentId,
-              sent_on: strTimeMii.substring(0, 10),
-              state: 0,
-              txt: scope.agentMessage,
-              isProductDetails : false,
-              isPromoCode : isPromoCode
+              var message = {
+                can_forward: "true",
+                delete_after: "-1",
+                deleted_on_sender: "false",
+                flags: 0,
+                id: "",
+                last_ts: strTimeMii.substring(0, 10),
+                mid: mid,
+                receiver: scope.chatData.userId ,
+                sender: scope.agentId,
+                sent_on: strTimeMii.substring(0, 10),
+                state: 0,
+                txt: scope.agentMessage,
+                isProductDetails : false,
+                isPromoCode : isPromoCode
+              }
+              scope.chatData.messages.push(message);
+              var jId = scope.chatData.userId + "@" + Globals.AppConfig.ChatHostURI;
+              scope.sendMessage(message, jId, timeInMilliSecond, mid);
+              scope.agentMessage = "";
             }
-            scope.chatData.messages.push(message);
-            var jId = scope.chatData.userId + "@" + Globals.AppConfig.ChatHostURI;
-            scope.sendMessage(message, jId, timeInMilliSecond, mid);
-            scope.agentMessage = "";
           }
 
           }

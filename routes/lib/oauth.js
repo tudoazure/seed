@@ -13,7 +13,7 @@ var SERVER = {
   FULFILLMENT: config.fulfillment.host,
   CHATHOST: config.chatServer.host,
   DOMAIN: config.domain,
-  WEBURI : config.host
+  CATALOG : config.catalog
 };
 
 var COOKIE = 'ff.sid';

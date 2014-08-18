@@ -4,7 +4,8 @@ var Globals = {
 (function() {
   var chatHostBaseURI = chatHost;
   var fulfillmentBaseURI  = fulfillmentHost;
-  var webUri = webUrl;
+  var webUri = webHost;
+  var catalogUri = catalogHost;
   Globals.AppConfig = {
   	ConcurrentChats : 3,
   	ChatHostURI : chatHostBaseURI,
@@ -13,6 +14,7 @@ var Globals = {
     StropheConnect : "https://" + chatHostBaseURI  + "/http-bind/",
     PromoCodeCreate : fulfillmentBaseURI + "admin/promocode/bargain",
     DefaultPromoCodeValidity : 3,
+    productUrl : catalogUri + "/v1/mobile/product/211244",
     logoutUrl : webUri + "/logout"
   }        
 })();
