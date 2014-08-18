@@ -54,7 +54,7 @@ ul li{
 .p8{padding: 8px;}
 .ml7{margin-left: 7px;}
 .padd{padding: 5px 0px 2px 2px;}
-.padd1{padding: 5px 0px 5px 10px;}
+.padd1{padding: 8px 0px 5px 10px;}
 .mt3{margin-top: 3px;}
 .mt5{margin-top: 5px;}
 .mt10{margin-top: 10px;}
@@ -145,6 +145,12 @@ ul li{
 .bold-x{font-weight: 600;}
 .f18{font-size: 18px;}
 .fnormal{font-weight: 500 !important;}
+.error{
+	font-size: 9px;
+	color: #ed2f55;
+	margin-top: -5px;
+	font-weight:500;
+}
 
 .mrpText{
 	font-size: 11px;
@@ -506,7 +512,7 @@ font-size: 14px;}
 	font-size: 13px;
 	font-weight: 600;
 	line-height: 1.43;
-	height: 318px;
+	height: 330px;
 }
 
 .inactive .promoArea {
@@ -517,8 +523,16 @@ font-size: 14px;}
 .height35{
 	min-height: 35px !important;
 }
+.expand li{
+	min-height: 50px !important;
+}
+.height399{
+	height: 398px !important;
+}
+
+
 .promoArea  li{
-	min-height: 40px;
+	min-height: 42px;
 }
 
 .bbblue{
@@ -536,7 +550,7 @@ font-size: 14px;}
 	border: solid 1px #a6a6a6;
 	height: 20px;
 	width: 22px;
-	margin-left: -10px;
+	border-left: none;
 	padding: 0px 3px 2px 4px;
 	background: #fff;
 }
