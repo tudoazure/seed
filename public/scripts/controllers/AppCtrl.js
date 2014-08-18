@@ -27,7 +27,6 @@
 						$rootScope.chatSDK.connection.send($pres({"type": "unavailable"}));
 						$rootScope.chatSDK.connection = null;
 					}
-
 					window.location=Globals.AppConfig.logoutUrl;
 				};
 
