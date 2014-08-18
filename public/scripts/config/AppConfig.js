@@ -14,7 +14,7 @@ var Globals = {
     StropheConnect : "https://" + chatHostBaseURI  + "/http-bind/",
     PromoCodeCreate : fulfillmentBaseURI + "admin/promocode/bargain",
     DefaultPromoCodeValidity : 3,
-    productUrl : catalogUri + "/v1/mobile/product/211244",
+    productUrl : catalogUri + "/v1/mobile/product/",
     logoutUrl : webUri + "/logout"
   }        
 })();
