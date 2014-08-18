@@ -144,6 +144,7 @@ ul li{
 .bold{ font-weight: 900;}
 .bold-x{font-weight: 600;}
 .f18{font-size: 18px;}
+.fnormal{font-weight: 500 !important;}
 
 .mrpText{
 	font-size: 11px;
@@ -172,6 +173,7 @@ ul li{
 
 .activeChat .chatheader, .active-chat-header{
 	background-color: #00b8ff !important;
+	border-bottom: solid 1px #00b8ff !important;
 	color: #fff !important;
 }
 
@@ -248,14 +250,18 @@ ul li{
 }*/
 
 .templateArea {
-	border: solid 1px #00B8FF;
+	/*border: solid 1px #00B8FF;*/
 	background-color: #f6fcff;
 	font-size: 11px;
 	font-weight: 500;
 	line-height: 1.43;
-	height: 340px;
+	height: 335px;
 	overflow-y: auto;
 	color: #979797;
+}
+
+.inactive .templateArea{
+	background-color: #F8FAFB;
 }
 
 .temp-li{
@@ -265,6 +271,10 @@ ul li{
 	min-height: 35px;
 	cursor: pointer;
 	font-size: 13px;
+}
+
+.inactive .temp-li{
+	border-bottom: solid 1px #a6a6a6;
 }
 
 .productDetail{
@@ -418,7 +428,7 @@ ul li{
 	padding: 0 0 0 0;
 }
 .chatArea{
-	height: 369px;
+	height: 370px;
 	overflow-y:	auto; 
 	padding-top: 10px
 }
