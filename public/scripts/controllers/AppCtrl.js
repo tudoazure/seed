@@ -1,8 +1,8 @@
 (function (angular){
 	"use strict;"
 	angular.module('bargain')
-		.controller('AppCtrl', ['$scope', '$rootScope', 'AuthService', 'StropheService', 'ChatCoreService', 'TemplateService','UtilService', 'IntimationService', '$timeout',
-			function ($scope, $rootScope, AuthService, StropheService, ChatCoreService, TemplateService, UtilService, IntimationService, $timeout) {
+		.controller('AppCtrl', ['$scope', '$rootScope', 'ChatServerService', 'StropheService', 'ChatCoreService', 'TemplateService','UtilService', 'IntimationService', '$timeout',
+			function ($scope, $rootScope, ChatServerService, StropheService, ChatCoreService, TemplateService, UtilService, IntimationService, $timeout) {
 				
 
 				$scope.init =function(){
@@ -86,7 +86,7 @@
 				};
 
 				$scope.loginToChatServer = function(){
-					AuthService.chatServerLogin.query({
+					ChatServerService.login.query({
 						email : $rootScope.bargainAgent.email,
 						access_token : $rootScope.bargainAgent.token,
 						device_type : "web",

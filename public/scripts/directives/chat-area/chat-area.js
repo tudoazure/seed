@@ -23,7 +23,7 @@
           scope.format = 'dd/MM/yyyy';
           scope.defaultDateForPromoCode = function() {
             var someDate = new Date();
-            var numberOfDaysToAdd = Globals.AppConfig.DefaultPromoCodeValidity;  // For default date validity of promo code.
+            var numberOfDaysToAdd = Globals.AppConfig.DefaultPromoCodeValidityDays;  // For default date validity of promo code.
             someDate.setDate(someDate.getDate() + numberOfDaysToAdd); 
             scope.validDate = someDate;
           };

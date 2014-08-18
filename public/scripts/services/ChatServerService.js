@@ -1,9 +1,9 @@
 (function (angular){
 	"use strict;"
 
-	angular.module('bargain').factory('AuthService', ['$resource', function ($resource) {
+	angular.module('bargain').factory('ChatServerService', ['$resource', function ($resource) {
 
-		var AuthService;
+		var ChatServerService;
 		var manageReqPacketTransform = function(Obj) {
 		    var str = [];
 		    for(var p in Obj){
@@ -25,10 +25,21 @@
 		  }
 		});
 
-		AuthService = {
-      		chatServerLogin: chatServerLogin,
+		var fetchUserHistory = $resource(Globals.AppConfig.ChatServerConnect, {}, {
+		  query: {
+		    method:'POST', 
+		    isArray: false, 
+		    params:{}, 
+		    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+		    transformRequest: manageReqPacketTransform
+		  }
+		});
+
+		ChatServerService = {
+      		login: chatServerLogin,
+      		fetchUserHistory: fetchUserHistory
       	}
 
-		return AuthService;
+		return ChatServerService;
 	}]);
 })(angular);
