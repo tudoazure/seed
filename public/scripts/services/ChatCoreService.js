@@ -107,6 +107,15 @@
             JsonResponse['type'] = ptype;
             JsonResponse['show'] = show;
             console.log("ChatCoreService @on_presence", JsonResponse);
+            if(Strophe.getNodeFromJid(from) == $rootScope.tigoId){
+              var resourceId = Strophe.getResourceFromJid(from);
+              if(!$rootScope.resourceId){
+                $rootScope.resourceId = resourceId;
+              }
+              else if($rootScope.resourceId != resourceId || ($rootScope.resourceId == resourceId && ptype=="unavailable")){
+                $rootScope.$broadcast("ChatMultipleSession");
+              }
+            }
             return true;
 
         },

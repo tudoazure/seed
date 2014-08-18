@@ -27,6 +27,7 @@ var chat = {
     renderData.user = user;
     renderData.fulfillementHost = SERVER.FULFILLMENT + '/v1/';
     renderData.chatHost = SERVER.CHATHOST;
+    renderData.webUrl = SERVER.WEBURI;
     res.render(view, renderData);
   }
 };

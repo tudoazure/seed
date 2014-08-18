@@ -12,7 +12,8 @@ var SERVER = {
   OAUTH: config.oauth.baseUrl, //http://10.0.20.55',
   FULFILLMENT: config.fulfillment.host,
   CHATHOST: config.chatServer.host,
-  DOMAIN: config.domain
+  DOMAIN: config.domain,
+  WEBURI : config.host
 };
 
 var COOKIE = 'ff.sid';

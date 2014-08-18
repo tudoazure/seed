@@ -29,6 +29,7 @@
         user = <%- JSON.stringify(user) %>;
         fulfillmentHost = <%- JSON.stringify(fulfillementHost) %>;
         chatHost = <%- JSON.stringify(chatHost) %>;
+        webUrl = <%- JSON.stringify(webUrl) %>;
     </script>
 
 
@@ -72,7 +73,7 @@
             <div class="row">
                 <div class="col-md-1 logo"></div>
                 <div class="col-md-9 fw-bold mt5 status-{{stropheStatus}}" align="left">{{chatConnectionStatus}}</div>
-                <div class="col-md-2 mt5"  align="center"><a href="/logout">Logout</a></div>
+                <div class="col-md-2 mt5"  align="center"><a ng-click="logout()">Logout</a></div>
             </div>
         </div>
     </div>

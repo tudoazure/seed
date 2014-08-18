@@ -11,6 +11,7 @@
 					$rootScope.plustxtId = null;
 					$rootScope.sessionid = null;
 					$rootScope.tigoId = null;
+					$rootScope.resourceId = null;
 					$rootScope.plustxtcacheobj = {};
 					$rootScope.plustxtcacheobj.contact = {};
 					$rootScope.plustxtcacheobj.message = {};
@@ -20,6 +21,21 @@
 					$rootScope.password = null;
 					$rootScope.usersCount = 0;
 				};
+
+				$scope.logout = function(){
+					if($rootScope.chatSDK && $rootScope.chatSDK.connection){
+						$rootScope.chatSDK.connection.send($pres({"type": "unavailable"}));
+					}
+					window.location=Globals.AppConfig.logoutUrl;
+				};
+
+				$rootScope.$on('ChatMultipleSession', function(event){
+					$timeout(function(){
+						$scope.chatConnectionStatus = "It seems you are logged in from another place. Going to logout";
+						$scope.logout();
+                	});
+
+				});
 
 				$rootScope.$on('StropheStatusChange', function(event, status, connection){
 					$rootScope.chatSDK.connection = connection;

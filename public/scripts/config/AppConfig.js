@@ -4,6 +4,7 @@ var Globals = {
 (function() {
   var chatHostBaseURI = chatHost;
   var fulfillmentBaseURI  = fulfillmentHost;
+  var webUri = webUrl;
   Globals.AppConfig = {
   	ConcurrentChats : 3,
   	ChatHostURI : chatHostBaseURI,
@@ -11,6 +12,7 @@ var Globals = {
     MessageTemplates : "https://" + chatHostBaseURI + "/one97/get-template-messages/",
     StropheConnect : "https://" + chatHostBaseURI  + "/http-bind/",
     PromoCodeCreate : fulfillmentBaseURI + "admin/promocode/bargain",
-    DefaultPromoCodeValidity : 3
+    DefaultPromoCodeValidity : 3,
+    logoutUrl : webUri + "/logout"
   }        
 })();
