@@ -58,16 +58,20 @@ ul li{
 .mt3{margin-top: 3px;}
 .mt5{margin-top: 5px;}
 .mt10{margin-top: 10px;}
-.ml5{margin-left: 5px;}
+.ml5{margin-left: 15px;}
 .pt10{padding: 10px 0px 0px 0px;}
 .pt10n5{padding: 10px 5px 0px 5px;}
+.f14{font-size: 14px;}
+.f10{font-size: 10px;}
+.f11{font-size: 11px;}
+.bold{font-weight: 600;}
 
 .roaster{
 	background-color: #eaedee;
 	border: 1px solid #CDDADF;
 	border-radius: 4px;
 	margin-bottom: 20px;
-	font-size: 12px;
+	font-size: 10px;
 	font-weight: 500;
 	/*padding: 8px;*/
 	height: 400px;
@@ -94,7 +98,7 @@ ul li{
 	line-height: 15px;
 	border-bottom: 1px solid #CDDADF;
 	height: 45px;
-	padding: 10px 10px 10px 0px;
+	padding: 10px 10px 25px 0px;
 	cursor: pointer;	
 }
 
@@ -114,7 +118,7 @@ ul li{
 	border: 1px solid #F3A117;
 	color: #fff;
 	text-align: center;
-	font-weight: 600;
+	font-weight: 700;
 }
 .green{
 	background: #A3CD75;
@@ -134,10 +138,13 @@ ul li{
 }
 .fr {float: right;}
 .italicFont{font-style: italic; font-size: 10px; color:#5c6467;}
-.lbl{color: #9ea1a2; font-weight: normal;}
+.lbl{color: #9ea1a2; font-weight: normal; font-size: 11px;}
 .f12{font-size: 12px;}
 .f13{font-size: 13px;}
-.bold{ font-weight: 700;}
+.bold{ font-weight: 900;}
+.bold-x{font-weight: 600;}
+.f18{font-size: 18px;}
+
 .mrpText{
 	font-size: 11px;
 	border: 1px solid #00B8FF;
@@ -262,7 +269,7 @@ ul li{
 .productDetail{
 	border-bottom: solid 1px #a6a6a6;
 	background-color: #f6fcff;
-	height: 110px;
+	height: 115px;
 	font-size: 11px;
 	font-weight: 500;
 	line-height: 1.43;
@@ -273,13 +280,14 @@ ul li{
 }
 
 .productDescription{
-	padding: 10px 10px 0 0;
+	padding: 12px 10px 0 0;
 	display: -webkit-box;
 	height: 60px;
-	font-size: 12px;
+	font-size: 14px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: block;
+	line-height: 16px;
   	display: -webkit-box;
 	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
@@ -290,6 +298,7 @@ ul li{
 	border: solid 1px #a6a6a6;
 	border-radius: 5px;
 	margin-top: 10px;
+	margin-left: -4px;
 	cursor: pointer;
 }
 
@@ -308,11 +317,12 @@ ul li{
 	background-color: #fff;
 	padding: 2px 5px 2px 5px;
 	border-radius: 3px;
-	font-size: 12px;
+	font-size: 14px;
 	color: #78D297;
 	border-style: dashed;
 	border-width: 1px;
 	border-color: #999;
+	font-weight: 600;
 }
 
 .inactive .priceDiv{
@@ -382,7 +392,7 @@ ul li{
 	padding: 0 0 0 0;
 }
 .chatArea{
-	height: 375px;
+	height: 369px;
 	overflow-y:	auto; 
 	padding-top: 10px
 }

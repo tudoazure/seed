@@ -1,12 +1,14 @@
 <ul class="roaster p0">
 	<li class="chatheader active-chat-header p0 border-rad">
-		<div class="col-md-12" ng-show="!activeWindows.length">No Users 
+		<div class="col-md-12 f14" ng-show="!activeWindows.length">
+            <div>No Users </div> 
 		</div>
-        <div class="col-md-12" ng-show="activeWindows.length">Active Chats ...
+        <div class="col-md-12 f14" ng-show="activeWindows.length">
+            <div> Active Chats ... </div>
         </div>
 	</li>
     <li ng-repeat="user in contact" ng-click="openchatview(user)" class="row">
-    	<div class="col-md-9 ml5" ng-class="activeChatUser == user.id ? 'active' : '' " >{{ user.name }}
+    	<div class="col-md-9 ml5 f14" ng-class="activeChatUser == user.id ? 'active' : '' " >{{ user.name }}
     		<br/>
     		<span class='italicFont' ng-if="user.chatState=='closed'">left the conversation</span>
     	</div>
