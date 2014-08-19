@@ -144,7 +144,7 @@
 						if(response && response.data && response.data['f_msg']){
 						 if($rootScope.flashMessage != response.data['f_msg']){
 						 	$rootScope.flashMessage = response.data['f_msg'];
-						 	alert(response.data['f_msg']);
+						 	// alert(response.data['f_msg']);
 						 }
 						}
 						$timeout($scope.getFlashMessage, 60000);

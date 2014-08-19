@@ -62,6 +62,7 @@
           }
 
           scope.openPromoWindow = function(){
+            scope.hideError();
             scope.showPromo = true;
             scope.showProduct = false;
             scope.showTemplates = false;
@@ -114,10 +115,15 @@
               scope.showProductDetail();
             }
           };
-          scope.validatePromocode = function(){
+          scope.hideError = function(){
+            scope.promoError = false;
             scope.percentCapError = ''; scope.capLimitError = ''; scope.qtyError = '';
             scope.validDateError = '';scope.absoluteCapError = '';
-            scope.promoError = false;
+          };
+
+          scope.validatePromocode = function(){
+            scope.hideError();
+            // scope.promoError = false;
             if(scope.promoType == 'percentage'){
               if(!scope.percentCap){ scope.percentCapError = "Please enter percentage value"} 
               if(!scope.capLimit){ scope.capLimitError = "Please enter upper limit"}
