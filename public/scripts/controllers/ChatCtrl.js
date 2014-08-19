@@ -23,6 +23,10 @@
 	    				$scope.activeWindows.splice(closeChatUserIndex, 1);
 	    				delete $scope.allMessages[closeChatUser];
 	    				delete $scope.contact[closeChatUser];
+	    				delete $scope.products[closeChatUser];
+	    				if($scope.activeWindows.length > 0){
+	    					$scope.activeChatUser = $scope.activeWindows[0].userId;
+	    				}
 
                     });
     			})
@@ -32,7 +36,6 @@
 					$scope.templates = $rootScope.templates;
 					$scope.$apply(function(){
 				        $scope.contact = chatObj.contact;
-				        console.log($scope.contact);
 				        $scope.allMessages = chatObj.message;
 				        $scope.products = chatObj.products;
 				        if($scope.activeWindows.length < Globals.AppConfig.ConcurrentChats){

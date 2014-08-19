@@ -15,6 +15,7 @@ var Globals = {
     PromoCodeCreate : fulfillmentBaseURI + "admin/promocode/bargain",
     DefaultPromoCodeValidity : 3,
     productUrl : catalogUri + "/v1/mobile/product/",
-    logoutUrl : webUri + "/logout"
+    logoutUrl : webUri + "/logout",
+    CloseChatMessage : '{"CLSCHAT" : "chat closed"}'
   }        
 })();
