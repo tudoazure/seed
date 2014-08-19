@@ -225,6 +225,10 @@ ul li{
 	text-transform: capitalize;
 }
 
+.inactive .title{
+	color: #666;
+}
+
 .productArea {
 	/*border: solid 1px #00B8FF;*/
 	background-color: #f6fcff;
@@ -237,7 +241,7 @@ ul li{
 	color: #979797;
 }
 
-.inactive .templateArea{
+.inactive .productArea{
 	background-color: #F8FAFB;
 }
 
