@@ -143,7 +143,12 @@
 					}, function success(response){
 						if(response && response.data && response.data['f_msg']){
 						 if($rootScope.flashMessage != response.data['f_msg']){
-						 	$rootScope.flashMessage = response.data['f_msg'];
+						 	$scope.flashMessage = $rootScope.flashMessage = response.data['f_msg'];
+						 	window.setTimeout(function(){
+						 		console.log('clear message')
+						 		$scope.flashMessage = $rootScope.flashMessage ='';
+						 		$scope.$apply();
+						 	}, 10000);
 						 	// alert(response.data['f_msg']);
 						 }
 						}

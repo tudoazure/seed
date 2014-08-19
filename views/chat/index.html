@@ -85,7 +85,7 @@
         </div>
     </div>
     <div ng-view ="" class="container" align="center"></div>
-    <div class="flashmsg container f14 fw-bold"> {{flashMessage}}</div>
+    <div class="flashmsg container f14 fw-bold" ng-if="flashMessage"> {{flashMessage}}</div>
    
 </body>
 </html>
