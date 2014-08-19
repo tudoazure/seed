@@ -58,10 +58,10 @@
     			</div> -->
 				
 			</li>
-			<li class="" style="" ng-show="showProduct">
+			<li class="" style="" ng-show="showProduct" ng-click="setFocus()">
 					<div align="center">
 						<ul class="col-md-12 p0">
-							<li class="chatheader active-chat-header">
+							<li class="chatheader">
 							<div align="center" class="col-md-10">
 								Product Details
 							</div>
@@ -70,7 +70,7 @@
 							<li class="productArea">
 								<ul class="col-md-12 pt10n5  f13">
 									<li ng-repeat="attr in productDetail.long_rich_desc">
-										<div class="col-md-12 padd6 bb-blue" align="left">
+										<div class="col-md-12 padd6 bbblue" align="left">
 											<span class="title">
 											{{attr.title}} </span>
 											<br/>
@@ -78,7 +78,7 @@
 												{{ attr.description}}
 											</span>
 										</div>
-										<ul class="p0 col-md-12 bb-blue
+										<ul class="p0 col-md-12 bbblue
 										" ng-if="attr.attributes && attr.title == 'Description'">
 										<li> 
 											<div class="col-md-12 padd6" align="left">
@@ -102,7 +102,7 @@
 										<ul class="p0 col-md-12
 										" ng-if="attr.attributes && attr.title != 'Description'">
 										<li ng-repeat="(key, value) in attr.attributes">
-											<div class="col-md-12 padd6 bb-blue" align="left">
+											<div class="col-md-12 padd6 bbblue" align="left">
 												<span class="title">
 													{{key}} 
 												</span>
@@ -114,7 +114,7 @@
 										</li>
 										</ul>
 									</li>
-									<li class="bb-blue">
+									<li class="bbblue">
 										<div class="col-md-4 paddl" align="left">
 											<span class="title">Actual Price : </span>
 										</div>
@@ -150,7 +150,7 @@
 						</ul>
 					</div>
 				</li>
-			<li class="chatArea" ng-show="showPromo" style="padding-top: 1px;" >
+			<li class="chatArea" ng-show="showPromo" ng-click="setFocus()" style="padding-top: 1px;" >
 					<div align="center">
 						<ul class="col-md-12 p0">
 							<li class="chatheader">
@@ -176,7 +176,7 @@
 											<span style="font-weight:400">Percentage</span>
 										</div>
 										<div class="col-md-5 padd mt3">
-											<input type="text" class="col-md-8 p0" ng-model="percentCap" input-type-number>
+											<input type="text" class="col-md-8 p0" ng-model="percentCap" input-type-number ng-disabled = "promoType == 'absolute'">
 											<i class="icon-percent"></i>
 										</div>
 										<div ng-if="percentCapError" class="col-md-12 error" align="right"> {{percentCapError}}</div>
@@ -189,7 +189,7 @@
 											<span style="font-weight:400">Amount</span>
 										</div>
 										<div class="col-md-5 padd mt3" >
-											<input type="text" class="col-md-8 p0" ng-model="absoluteCap" input-type-number>
+											<input type="text" class="col-md-8 p0" ng-model="absoluteCap" input-type-number ng-disabled = "promoType == 'percentage'">
 											<i class="fa fa-inr"></i>
 										</div>
 										<div ng-if="absoluteCapError" class="col-md-12 error" align="right"> {{absoluteCapError}}</div>
@@ -268,7 +268,7 @@
 			</li>
 
 			<!-- Message Templates -->
-			<li class="" ng-show="showTemplates">
+			<li class="" ng-show="showTemplates" ng-click="setFocus()">
 				<div align="center">
 					<ul class="col-md-12 p0">
 						<li class="chatheader">

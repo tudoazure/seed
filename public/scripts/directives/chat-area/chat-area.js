@@ -88,9 +88,12 @@
             scope.isFreeShiping = !scope.isFreeShiping;
           }
           scope.$watch('promoType', function(value) {
-            scope.capLimit = "";
-            scope.percentCap = "";
-            scope.absoluteCap = "";
+            if(scope.promoType == 'percentage'){
+              scope.absoluteCap = "";
+            }else{
+              scope.capLimit = "";
+              scope.percentCap = "";
+            }
           });
 
           scope.getProductDetail = function(){

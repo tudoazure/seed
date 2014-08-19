@@ -237,6 +237,10 @@ ul li{
 	color: #979797;
 }
 
+.inactive .templateArea{
+	background-color: #F8FAFB;
+}
+
 .pos{
 	position: relative;
 	left: 133px;
@@ -898,8 +902,7 @@ background-image: -webkit-gradient(
 .message-backdrop .modal-footer:after { clear: both; }
 .flashmsg{
 	height: 33px;
-	background: #666;
-	margin-bottom: 20px;
+	background: #00b8ff;
 	margin-top: 10px;
 	color: #fff;
 	padding: 9px 40px 0px 116px;
