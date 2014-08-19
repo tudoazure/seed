@@ -483,11 +483,14 @@ font-size: 14px;}
 }
 
 .leftConversation{
-	color: #00B8FF;
+	color: #78D297;
 	font-style: italic;
 	text-align: center;
-	background: #f8fafb !important;
-	padding: 15px 0 15px 0;
+	background: #fff !important;
+	padding: 10px 0 10px 0;
+	border-style: dashed;
+	border-width: 1px;
+	border-color: #999;
 }
 
 .icon-percent::before {
@@ -635,6 +638,9 @@ background-image: -webkit-gradient(
 	border-bottom-color: #666;
 }
 
+.clear{
+	clear: both;
+}
 
 
 
