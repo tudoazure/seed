@@ -112,7 +112,7 @@
               if(!$rootScope.resourceId){
                 $rootScope.resourceId = resourceId;
               }
-              else if($rootScope.resourceId != resourceId || ($rootScope.resourceId == resourceId && ptype=="unavailable")){
+              else if(($rootScope.resourceId == resourceId && ptype=="unavailable")){
                 $rootScope.$broadcast("ChatMultipleSession");
               }
             }

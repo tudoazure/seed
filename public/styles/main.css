@@ -286,6 +286,7 @@ ul li{
 	border: solid 1px #a6a6a6;
 	border-radius: 5px;
 	margin-top: 10px;
+	cursor: pointer;
 }
 .price{
 	padding: 5px 0 0 0;

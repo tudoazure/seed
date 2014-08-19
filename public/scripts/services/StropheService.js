@@ -30,7 +30,7 @@
 					statusMesg = "The authentication attempt failed";
 					break;
 				case "5" :
-					statusMesg = "Connected to Chat Server";
+					statusMesg = "Connected to Chat Server : " + user.email;
 					break;
 				case "6" :
 					statusMesg = "The connection has been terminated";

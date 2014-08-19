@@ -60,6 +60,8 @@
 						case Strophe.Status.CONNECTED:
 							break;
 						case Strophe.Status.CONNFAIL:
+							$scope.chatConnectionStatus = "It seems you are logged in from another place. Going to logout";
+							$scope.logout();
 							break;
 						case Strophe.Status.AUTHFAIL:
 							break;
