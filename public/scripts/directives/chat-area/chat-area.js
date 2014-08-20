@@ -1,13 +1,12 @@
 (function (angular){
   'use strict';
   angular.module('bargain')
-    .directive('chatArea', ['UtilService', 'httpService', function(UtilService, httpService) {
+    .directive('chatArea', ['UtilService', 'httpService', '$timeout', function(UtilService, httpService, $timeout) {
       return {
         restrict: 'EA',
         templateUrl: 'scripts/directives/chat-area/chat-area-template.html',
         scope: false,
-        link: function(scope, element, attrs) {
-          
+        link: function(scope, element, attrs) {         
           scope.templates = scope.templates;
           scope.openDefaultTemplates = function(){
             scope.showPromo = false;
@@ -48,15 +47,26 @@
           scope.removeFocus = function(){
           }
 
-          if(scope.products && scope.products[scope.chatData.userId]){
-            scope.product = scope.products[scope.chatData.userId];
-          }
-          else{
-            scope.product = {};
-            scope.product.imageUrl = "";
-            scope.product.description = "Product Information N/A";
-            scope.product.price = "N/A";
-          }
+          // scope.$watch(attrs.products[scope.chatData.userId], function() {
+          //    $timeout(function(){
+          //     scope.product = scope.products[scope.chatData.userId];
+          //   })
+          // })
+          // $timeout(function(){
+          //   if(scope.products && scope.products[scope.chatData.userId]){
+          //     scope.product = scope.products[scope.chatData.userId];
+          //   }
+          // })
+
+          // if(scope.products && scope.products[scope.chatData.userId]){
+          //   scope.product = scope.products[scope.chatData.userId];
+          // }
+          // else{
+          //   scope.product = {};
+          //   scope.product.imageUrl = "";
+          //   scope.product.description = "Product Information N/A";
+          //   scope.product.price = "N/A";
+          // }
           scope.userName = scope.contact[scope.chatData.userId].name;
           scope.messages = scope.chatData.messages;
 
@@ -92,7 +102,7 @@
           });
 
           scope.getProductDetail = function(){
-            var productUrl =  Globals.AppConfig.productUrl + scope.product.productId;
+            var productUrl =  Globals.AppConfig.productUrl + scope.products[chatData.userId].productId;
             var svc = httpService.callFunc(productUrl);
             svc.get().then(function(response){
               if (response) {
@@ -115,8 +125,8 @@
             promoObj.cap = scope.promoType == 'percentage' ? scope.capLimit : "";
             promoObj.qty = scope.qty;
             promoObj.freeshipping = scope.isFreeShiping;
-            promoObj.product_id = scope.product.productId;
-            promoObj.user_id = scope.product.userId;
+            promoObj.product_id = scope.products[chatData.userId].productId;
+            promoObj.user_id = scope.products[chatData.userId].userId;
             promoObj.valid_upto = new Date(scope.validDate).getTime();
 
             var discountVal = "";

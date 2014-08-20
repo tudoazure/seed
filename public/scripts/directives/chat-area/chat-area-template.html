@@ -10,15 +10,15 @@
 			</li>
 			<li class="productDetail" ng-click="setFocus()">
 					<div class="col-md-3" ng-click="getProductDetail()">
-						<img ng-src={{product.imageUrl}} class="productImg"></img>
+						<img ng-src={{products[chatData.userId].imageUrl}} class="productImg"></img>
 					</div>
 					<div class="col-md-9 productDescription">
-						<span class="detail">{{product.description}}</span>
+						<span class="detail">{{products[chatData.userId].description}}</span>
 					</div>
 				<div class="col-md-12">
 					<div class="col-md-4 price">
 						<small style="font-weight:600;">Price</small>
-						<div class="priceDiv"> Rs. {{product.price}}</div>
+						<div class="priceDiv"> Rs. {{products[chatData.userId].price}}</div>
 					</div>
 					<div class="col-md-1">
 					</div>
