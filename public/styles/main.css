@@ -61,6 +61,7 @@ ul li{
 .ml5{margin-left: 5px;}
 .pt10{padding: 10px 0px 0px 0px;}
 .pt10n5{padding: 10px 5px 0px 5px;}
+
 .roaster{
 	background-color: #eaedee;
 	border: 1px solid #CDDADF;
@@ -71,6 +72,7 @@ ul li{
 	/*padding: 8px;*/
 	height: 400px;
 	overflow-y:auto; 
+	overflow-x: hidden;
 }
 
 .discount{

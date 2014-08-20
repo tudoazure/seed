@@ -127,7 +127,12 @@
             var discountVal = "";
             if(scope.promoType == 'percentage'){
               var discount = Math.round(scope.percentCap * scope.products[scope.chatData.userId].price)/100;
-              discountVal = (discount > promoObj.cap) ?  promoObj.cap : discount ;
+              if(promoObj.cap != ""){
+                discountVal = (discount > promoObj.cap) ?  promoObj.cap : discount ;
+              }
+              else{
+                discountVal = discount;
+              }
             }
             else{
               discountVal = scope.absoluteCap;
