@@ -47,26 +47,6 @@
           scope.removeFocus = function(){
           }
 
-          // scope.$watch(attrs.products[scope.chatData.userId], function() {
-          //    $timeout(function(){
-          //     scope.product = scope.products[scope.chatData.userId];
-          //   })
-          // })
-          // $timeout(function(){
-          //   if(scope.products && scope.products[scope.chatData.userId]){
-          //     scope.product = scope.products[scope.chatData.userId];
-          //   }
-          // })
-
-          // if(scope.products && scope.products[scope.chatData.userId]){
-          //   scope.product = scope.products[scope.chatData.userId];
-          // }
-          // else{
-          //   scope.product = {};
-          //   scope.product.imageUrl = "";
-          //   scope.product.description = "Product Information N/A";
-          //   scope.product.price = "N/A";
-          // }
           scope.userName = scope.contact[scope.chatData.userId].name;
           scope.messages = scope.chatData.messages;
 
@@ -102,7 +82,7 @@
           });
 
           scope.getProductDetail = function(){
-            var productUrl =  Globals.AppConfig.productUrl + scope.products[chatData.userId].productId;
+            var productUrl =  Globals.AppConfig.productUrl + scope.products[scope.chatData.userId].productId;
             var svc = httpService.callFunc(productUrl);
             svc.get().then(function(response){
               if (response) {
@@ -115,6 +95,16 @@
               console.log(error);
             });
           };
+
+          scope.JSON_stringify = function (s, emit_unicode)
+          {
+             var json = JSON.stringify(s);
+             return emit_unicode ? json : json.replace(/[\u007f-\uffff]/g,
+                function(c) { 
+                  return '\\u'+('0000'+c.charCodeAt(0).toString(16)).slice(-4);
+                }
+             );
+          };
           
           scope.savePromo = function(){
             scope.agentMessage = '';
@@ -125,13 +115,13 @@
             promoObj.cap = scope.promoType == 'percentage' ? scope.capLimit : "";
             promoObj.qty = scope.qty;
             promoObj.freeshipping = scope.isFreeShiping;
-            promoObj.product_id = scope.products[chatData.userId].productId;
-            promoObj.user_id = scope.products[chatData.userId].userId;
+            promoObj.product_id = scope.products[scope.chatData.userId].productId;
+            promoObj.user_id = scope.products[scope.chatData.userId].userId;
             promoObj.valid_upto = new Date(scope.validDate).getTime();
 
             var discountVal = "";
             if(scope.promoType == 'percentage'){
-              var discount = Math.round(scope.percentCap * scope.product.price)/100;
+              var discount = Math.round(scope.percentCap * scope.products[scope.chatData.userId].price)/100;
               discountVal = (discount > promoObj.cap) ?  promoObj.cap : discount ;
             }
             else{
@@ -148,15 +138,13 @@
                   minQuantity : promoObj.qty
                 } 
                 var promoCodeMessage = {PRMCODE: promoCodeData} ;
-                promoCodeMessage = JSON.stringify(promoCodeMessage);
-                scope.agentMessage = promoCodeMessage;
+                scope.agentMessage = UtilService.stringifyEmitUnicode(promoCodeMessage, true);
                 scope.submitMessage(true);
                 scope.showPromo = !scope.showPromo;
               }
-              //send message()
             }, function(error){
               alert("Error occured in generating the promo code.")
-              console.log(error)
+              console.log(error);
             })
             
           };

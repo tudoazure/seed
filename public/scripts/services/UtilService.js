@@ -3,6 +3,15 @@
 
 	angular.module('bargain').factory('UtilService', ['$rootScope', function ($rootScope) {
 
+		var stringifyEmitUnicode = function(validObj, emitUnicode){
+			var json = JSON.stringify(validObj);
+             return emitUnicode ? json : json.replace(/[\u007f-\uffff]/g,
+                function(c) { 
+                  return '\\u'+('0000'+c.charCodeAt(0).toString(16)).slice(-4);
+                }
+             );
+		};
+
 		var getTimeInLongString = function(){
           return new Date().getTime();
         };
@@ -178,6 +187,7 @@
 	    };
 
 		UtilService = {
+			stringifyEmitUnicode : stringifyEmitUnicode,
       		getTimeInLongString: getTimeInLongString,
       		getMilliTimeToString : milliTimeToString,
       		getJidToId : jIdToId,
