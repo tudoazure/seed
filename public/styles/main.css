@@ -491,6 +491,7 @@ font-size: 14px;}
 	border-style: dashed;
 	border-width: 1px;
 	border-color: #999;
+	margin-bottom: 10px;
 }
 
 .icon-percent::before {
