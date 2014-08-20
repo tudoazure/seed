@@ -313,13 +313,43 @@ ul li{
 	color:#5c6467;
 }
 
+.promoIcon-Open {
+	line-height: 2em;
+	padding-top: 4px;
+	color: #00b8ff;
+	cursor: pointer;
+}
+.promoIcon-Open:hover {
+	color: #038dbf;
+}
+
 .promoIcon {
 	line-height: 2em;
 	padding-top: 4px;
 	color: #00b8ff;
+	cursor: pointer;
 }
 
-.inactive .promoIcon{
+.promoIcon:hover {
+	color: #038dbf;
+}
+
+.inactive .promoIcon, .inactive  .promoIcon-Open{
+	color: #e6e5eb;
+}
+
+.templateLink{
+	font-size: 26px;
+	padding-top: 5px;
+	color: #00b8ff;
+	cursor: pointer;
+}
+
+.templateLink:hover{
+	color: #038dbf;
+}
+
+.inactive .templateLink{
 	color: #e6e5eb;
 }
 
@@ -447,16 +477,6 @@ font-size: 14px;}
 	padding-top: 4px;
 	color: #00b8ff;
 	cursor: pointer;
-}
-
-.templateLink{
-	font-size: 26px;
-	padding-top: 5px;
-	color: #00b8ff;
-}
-
-.inactive .templateLink{
-	color: #e6e5eb;
 }
 
 .cancel{
