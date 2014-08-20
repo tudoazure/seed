@@ -640,6 +640,7 @@ background-image: -webkit-gradient(
 }
 
 
+
 .logout{
 	text-decoration: none;
 	border: solid 1px #00B8FF;
@@ -649,6 +650,12 @@ background-image: -webkit-gradient(
 	font-size: 15px;
 	color: #5c6467;
 }
+
+.logout:hover{
+	color: #fff ;
+	background :#00B8FF ;
+}
+
 .user{
 	color: #00B8FF;
 	border: solid 1px #00B8FF;
