@@ -11,6 +11,7 @@
       var composing = response['composing'];
       var body = response['body'];
       var messageId = response['id'];
+      var threadId = response['threadId'];
       var isProductDetails = false;
       if(response['id']){
         isSpecialMessage = response['isSpecialMessage'];
@@ -22,7 +23,7 @@
        if (body) {
         var timeInMilliSeconds = messageId.substr(messageId.lastIndexOf('-') + 1, messageId.length);
         var strTimeMii = timeInMilliSeconds.toString().substring(0, 10);
-        UtilService.addMessage($rootScope.plustxtId, jid, body, strTimeMii, messageId, isSpecialMessage);
+        UtilService.addMessage($rootScope.plustxtId, jid, body, strTimeMii, messageId, isSpecialMessage, threadId);
         //UtilService.updateMessageStatus(messageId, 2, Strophe.getNodeFromJid(jid), UtilService.getTimeInLongString());
       }  
     };
@@ -127,6 +128,7 @@
          */
         on_message: function(message) {
             console.log("ChatCoreService @on_message called :");
+            var threadId = $(message).find("thread").text();
             var body = $(message).find("html > body");
             if (body.length === 0) {
                 body = $(message).find('body');
@@ -151,6 +153,8 @@
             var response = {};
             response['full_jid'] = $(message).attr('from');
             response['id'] = $(message).attr('id');
+            response['id'] = $(message).attr('id');
+            response['threadId'] = threadId;
             var jid = $(message).attr('from');
             var messageID = $(message).attr('id');
             response['composing'] = $(message).find('composing');
@@ -242,11 +246,15 @@
            else{
               console.log("All Pending Messages Count : " + offmessageArray.length);
             for (var i=0 ; i < offmessageArray.length ; i++){
-                 console.log('tegoid ' + offmessageArray[i]['tegoid']+ ' mid '+offmessageArray[i]['mid']+ 'body '+ offmessageArray[i]['body'])
+                console.log('tegoid ' + offmessageArray[i]['tegoid']+ ' mid '+offmessageArray[i]['mid']+ 'body '+ offmessageArray[i]['body'])
                 jid=offmessageArray[i]['tegoid']+'@' + "chat-staging.paytm.com";
                 mid=offmessageArray[i]['mid'];
                 body=offmessageArray[i]['body'];
-                message = $msg({to: jid, "type": "chat", "id": mid}).c('body').t(body).up().c('active', {xmlns: "http://jabber.org/protocol/chatstates"}).up()
+
+                // Thread Id for multithreading
+                var thread = $rootScope.plustxtcacheobj.contact[offmessageArray[i]['tegoid']].threadId;
+                console.log("THREAD : " + thread);
+                message = $msg({to: jid, "type": "chat", "id": mid}).c('body').t(body).up().c('thread').t(thread).up().c('active', {xmlns: "http://jabber.org/protocol/chatstates"}).up()
                 .c('request', {xmlns: 'urn:xmpp:receipts'}).up().c('meta').c('acl', {deleteafter: "-1", canforward: "1", candownload: "1"});
                 $rootScope.chatSDK.connection.send(message);
                timeInMilliSecond = UtilService.getTimeInLongString();

@@ -154,7 +154,9 @@
 						$rootScope.plustxtcacheobj.products[otherpartyid] = productObj;
 
 						// Assigning ThreadId for a new chat
-						messageobj['threadId'] = productObj.productId + "-" + productObj.userId;
+						if(!messageobj.threadId){
+							messageobj['threadId'] = productObj.productId + "-" + productObj.userId;
+						}
 			        }
 			        else if(specialMessage.CLSCHAT){
 			        	messageobj['isCloseChatMesg'] = true;
