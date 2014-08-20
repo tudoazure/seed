@@ -11,7 +11,7 @@
           scope.openDefaultTemplates = function(){
             scope.showPromo = false;
             scope.showProduct = false;
-            scope.showTemplates = true;
+            scope.showTemplates = !scope.showTemplates;
           }
 
           scope.qty = 1;
@@ -63,7 +63,7 @@
           };
 
           scope.showProductDetail = function(){
-            scope.showProduct = true;
+            scope.showProduct = !scope.showProduct;
             scope.showPromo = false;
             scope.showTemplates = false;
           };
@@ -82,18 +82,23 @@
           });
 
           scope.getProductDetail = function(){
-            var productUrl =  Globals.AppConfig.productUrl + scope.products[scope.chatData.userId].productId;
-            var svc = httpService.callFunc(productUrl);
-            svc.get().then(function(response){
-              if (response) {
-                console.log(response);
-                scope.productD = response;
-                scope.showProductDetail();
-              }
-            }, function(error){
-              alert("Error occured in fetching the product details.")
-              console.log(error);
-            });
+            if(!scope.productDetail){
+              var productUrl =  Globals.AppConfig.productUrl + scope.products[scope.chatData.userId].productId;
+              var svc = httpService.callFunc(productUrl);
+              svc.get().then(function(response){
+                if (response) {
+                  console.log(response);
+                  scope.productDetail = response;
+                  scope.showProductDetail();
+                }
+              }, function(error){
+                alert("Error occured in fetching the product details.")
+                console.log(error);
+              });
+            }
+            else{
+              scope.showProductDetail();
+            }
           };
 
           scope.JSON_stringify = function (s, emit_unicode)

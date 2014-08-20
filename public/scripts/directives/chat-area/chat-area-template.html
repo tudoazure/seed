@@ -55,7 +55,7 @@
 							<li class="productArea">
 								<i class=" closeIcon fa fa-times-circle pos" ng-click="closeWindow()"></i>
 								<ul class="col-md-12 pt10n5  f13">
-									<li ng-repeat="attr in productD.long_rich_desc">
+									<li ng-repeat="attr in productDetail.long_rich_desc">
 										<div class="col-md-12 padd6 bb-blue" align="left">
 											<span class="title">
 											{{attr.title}} </span>
@@ -106,7 +106,7 @@
 										</div>
 										<div class="col-md-8 paddr" align="left">
 											<span>
-											Rs {{ productD.actual_price}}
+											Rs {{ productDetail.actual_price}}
 											</span>
 										</div>
 									</li >
@@ -116,17 +116,17 @@
 										</div>
 										<div class="col-md-8 paddr" align="left">
 											<span>
-											Rs {{ productD.offer_price}}
+											Rs {{ productDetail.offer_price}}
 											</span>
 										</div>
 									</li >
-									<li ng-if="productD.promo_text">
+									<li ng-if="productDetail.promo_text">
 										<div class="col-md-4 paddl" align="left">
 											<span class="title">Promo Text : </span>
 										</div>
 										<div class="col-md-8 paddr" align="left">
 											<span>
-											{{ productD.promo_text}}
+											{{ productDetail.promo_text}}
 											</span>
 										</div>
 									</li >
