@@ -11,6 +11,8 @@ var Globals = {
   	ChatHostURI : chatHostBaseURI,
     ChatServerConnect : "https://" + chatHostBaseURI + "/accounts/connect/",
     MessageTemplates : "https://" + chatHostBaseURI + "/one97/get-template-messages/",
+    ChatStartedUrl : "https://" + chatHostBaseURI + "/one97/chat-started/",
+    ChatClosedUrl : "https://" + chatHostBaseURI + "/one97/chat-closed/",
     StropheConnect : "https://" + chatHostBaseURI  + "/http-bind/",
     PromoCodeCreate : fulfillmentBaseURI + "admin/promocode/bargain",
     DefaultPromoCodeValidity : 3,
