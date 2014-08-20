@@ -1,7 +1,7 @@
 (function (angular){
 	"use strict;"
 
-	angular.module('bargain').factory('UtilService', ['$rootScope', function ($rootScope) {
+	angular.module('bargain').factory('UtilService', ['$rootScope', 'IntimationService', function ($rootScope, IntimationService) {
 
 		var stringifyEmitUnicode = function(validObj, emitUnicode){
 			var json = JSON.stringify(validObj);
@@ -106,7 +106,7 @@
 			return midread;
 		};
 
-    	var addMessage = function(inRecieverJID, inSenderJID, inMessage, inTime, mid, isSpecialMessage) {
+    	var addMessage = function(inRecieverJID, inSenderJID, inMessage, inTime, mid, isSpecialMessage, threadId) {
         	var otherpartyid;
 	        var messagelist = [];
 	        var receiverTigoId = inRecieverJID.substring(0, inRecieverJID.lastIndexOf('@'));
@@ -126,6 +126,9 @@
 	        messageobj['state'] = 0;//0-sending;1-sent;2-Delivered;3-read
 	        messageobj['isProductDetails'] = false;
 	        messageobj['isCloseChatMesg'] = false;
+	        if(threadId){
+	        	messageobj['threadId'] = threadId;
+	    	}
 
 	        
 
@@ -149,6 +152,9 @@
 						productObj.userId = specialMessage.PRDCNTXT.user_id;
 						productObj.productUrl = specialMessage.PRDCNTXT.product_url;
 						$rootScope.plustxtcacheobj.products[otherpartyid] = productObj;
+
+						// Assigning ThreadId for a new chat
+						messageobj['threadId'] = productObj.productId + "-" + productObj.userId;
 			        }
 			        else if(specialMessage.CLSCHAT){
 			        	messageobj['isCloseChatMesg'] = true;
@@ -160,6 +166,13 @@
 
 	        if ($rootScope.plustxtcacheobj['contact'].hasOwnProperty(otherpartyid))
 	        {
+	        	if(messageobj.isCloseChatMesg){
+	        		$rootScope.plustxtcacheobj.contact[otherpartyid].chatState = "closed";
+	        	}
+	        	if(messageobj.isProductDetails){
+	        		$rootScope.plustxtcacheobj.contact[otherpartyid].chatState = "open";
+	        		$rootScope.plustxtcacheobj.contact[otherpartyid].threadId = messageobj.threadId;
+	        	}
 	        	$rootScope.plustxtcacheobj.contact[otherpartyid].lastActive = getTimeInLongString();
 	        }
 	        else {
@@ -168,6 +181,8 @@
 	        	contactObj.name = "Guest " + $rootScope.usersCount;
 	        	contactObj.id   = otherpartyid;
 	        	contactObj.lastActive = getTimeInLongString();
+	        	contactObj.chatState = "open";
+	        	contactObj.threadId = messageobj.threadId;
 	        	$rootScope.plustxtcacheobj['contact'][otherpartyid] = contactObj;
 	        } 
 
@@ -184,7 +199,56 @@
 	        }          
 	        $rootScope.plustxtcacheobj['message'][otherpartyid] = messagelist;
 	        $rootScope.$broadcast("ChatObjectChanged", $rootScope.plustxtcacheobj);
+
+	        var threadId = $rootScope.plustxtcacheobj['contact'][otherpartyid].threadId;
+	        if(messageobj.isProductDetails){
+	        	var totalChats = getTotalActiveChatUsers();
+	        	chatStarted($rootScope.sessionid, otherpartyid, totalChats, threadId);
+	        }
+	        if(messageobj.isCloseChatMesg){
+	        	var totalChats = getTotalActiveChatUsers() + 1;
+	        	chatClosed($rootScope.sessionid, otherpartyid, totalChats, threadId);
+	        }
+
 	    };
+
+	    var getTotalActiveChatUsers = function(){
+	    	var totalChats = 0;
+	    	angular.forEach($rootScope.plustxtcacheobj.contact, function(value, index){
+	    		if(value.chatState == "open"){
+	    			totalChats++ ;
+	    		}
+	    	})
+	    	return totalChats;
+	    }
+
+	    // Intimating Server about New Chat Begin
+	    var chatStarted = function(sessionid, otherpartyid, totalChats, threadId){
+	    	IntimationService.chatStarted.query({
+				session_id : sessionid,
+				started_with : otherpartyid,
+				t_chats : totalChats,
+				c_thread : threadId
+			}, function success(response){
+				console.log("Sucessfully Intimated Chat Start with : " + otherpartyid);		
+			}, function failure(error){
+				console.log("Error in Intimating Chat Start with : " + otherpartyid, error);	
+			})
+	    }
+
+	    // Intimating Server about Chat being Closed
+	    var chatClosed = function(sessionid, otherpartyid, totalChats, threadId){
+	    	IntimationService.chatClosed.query({
+				session_id : sessionid,
+				started_with : otherpartyid,
+				t_chats : getTotalActiveChatUsers() + 1,
+				c_thread : threadId
+			}, function success(response){
+				console.log("Sucessfully Intimated Chat End with : " + otherpartyid);		
+			}, function failure(error){
+				console.log("Error in Intimating Chat End with : " + otherpartyid, error);	
+			})
+	    }
 
 		UtilService = {
 			stringifyEmitUnicode : stringifyEmitUnicode,

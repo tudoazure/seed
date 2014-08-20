@@ -34,7 +34,6 @@
 						$scope.chatConnectionStatus = "It seems you are logged in from another place. Going to logout";
 						$scope.logout();
                 	});
-
 				});
 
 				$rootScope.$on('StropheStatusChange', function(event, status, connection){
