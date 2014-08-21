@@ -10,6 +10,10 @@
             scope.openchatview = function(user){
               scope.changeActiveWindow(user);
             };
+
+            scope.closeChatFromLeftNav = function(user){
+              scope.$emit("Close-User-Chat", user.id);
+            }
           }
         }
     }]);
