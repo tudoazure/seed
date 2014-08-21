@@ -3,6 +3,18 @@
 
 	angular.module('bargain').factory('UtilService', ['$rootScope', 'IntimationService', function ($rootScope, IntimationService) {
 
+		var guid = function() {
+			function s4() {
+			return Math.floor((1 + Math.random()) * 0x10000)
+			           .toString(16)
+			           .substring(1);
+			}
+			return function() {
+			return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+			       s4() + '-' + s4() + s4() + s4();
+			};
+		};
+
 		var stringifyEmitUnicode = function(validObj, emitUnicode){
 			var json = JSON.stringify(validObj);
              return emitUnicode ? json : json.replace(/[\u007f-\uffff]/g,
@@ -155,7 +167,7 @@
 
 						// Assigning ThreadId for a new chat
 						if(!messageobj.threadId){
-							messageobj['threadId'] = productObj.productId + "-" + productObj.userId;
+							messageobj['threadId'] = productObj.productId + "-" + guid();
 						}
 			        }
 			        else if(specialMessage.CLSCHAT){
@@ -228,7 +240,7 @@
 	    var chatStarted = function(sessionid, otherpartyid, totalChats, threadId){
 	    	IntimationService.chatStarted.query({
 				session_id : sessionid,
-				started_with : otherpartyid,
+				c_user : otherpartyid,
 				t_chats : totalChats,
 				c_thread : threadId
 			}, function success(response){
@@ -242,8 +254,8 @@
 	    var chatClosed = function(sessionid, otherpartyid, totalChats, threadId){
 	    	IntimationService.chatClosed.query({
 				session_id : sessionid,
-				started_with : otherpartyid,
-				t_chats : getTotalActiveChatUsers() + 1,
+				c_user : otherpartyid,
+				t_chats : getTotalActiveChatUsers(),
 				c_thread : threadId
 			}, function success(response){
 				console.log("Sucessfully Intimated Chat End with : " + otherpartyid);		
@@ -261,8 +273,10 @@
       		getAllPendingMessages : getAllPendingMessages,
       		updateMessageStatus : updateMessageStatus,
       		updateMessageStatusAsRead : updateMessageStatusAsRead,
-      		getLocalTime : getLocalTime
-
+      		getLocalTime : getLocalTime,
+      		getTotalActiveChatUsers : getTotalActiveChatUsers,
+      		chatStarted : chatStarted,
+      		chatClosed : chatClosed
       	}
 
 		return UtilService;

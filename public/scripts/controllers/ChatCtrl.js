@@ -15,6 +15,12 @@
     			$scope.$on('Close-User-Chat', function(event, closeChatUser){		
     				$timeout(function(){
     					var closeChatUserIndex;
+    					
+    					if($scope.contact[closeChatUser].chatState != "closed"){
+    						$scope.contact[closeChatUser].chatState = "closed";
+    						var threadId = $scope.contact[closeChatUser].threadId;
+	    					UtilService.chatClosed($rootScope.sessionid, closeChatUser, "",  threadId);
+    					}
     					angular.forEach($scope.activeWindows, function(value, index){
     						if(value.userId ==closeChatUser){
     							closeChatUserIndex = index;
@@ -27,6 +33,7 @@
 	    				if($scope.activeWindows.length > 0){
 	    					$scope.activeChatUser = $scope.activeWindows[0].userId;
 	    				}
+
 
                     });
     			})
