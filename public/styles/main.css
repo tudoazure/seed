@@ -699,5 +699,11 @@ background-image: -webkit-gradient(
 	color: #333;
 }
 
-
+.showLoading{
+	background: url(../images/ajax-loader.gif);
+	display: block;
+	min-width: 82px;
+	height: 32px;
+	background-repeat: no-repeat;
+}
 
