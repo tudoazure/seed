@@ -695,5 +695,9 @@ background-image: -webkit-gradient(
 	clear: both;
 }
 
+.templateli:hover{
+	color: #333;
+}
+
 
 
