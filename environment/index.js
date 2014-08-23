@@ -7,6 +7,6 @@ module.exports = {
    		host: 'http://fulfillment-dev.paytm.com'
     },
 	chatServer: {
-		host: 'chat-staging.paytm.com'
+		host: 'https://chat-staging.paytm.com'
 	}
 };
