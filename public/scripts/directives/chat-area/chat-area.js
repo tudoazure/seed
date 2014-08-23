@@ -83,6 +83,7 @@
 
           scope.getProductDetail = function(){
             if(!scope.productDetail){
+              scope.showLoader=true;
               var productUrl =  Globals.AppConfig.productUrl + scope.products[scope.chatData.userId].productId;
               var svc = httpService.callFunc(productUrl);
               svc.get().then(function(response){
@@ -91,9 +92,11 @@
                   scope.productDetail = response;
                   scope.showProductDetail();
                 }
+                scope.showLoader=false;
               }, function(error){
                 alert("Error occured in fetching the product details.")
                 console.log(error);
+                scope.showLoader=false;
               });
             }
             else{
@@ -112,6 +115,7 @@
           };
           
           scope.savePromo = function(){
+            scope.showLoader=true;
             scope.agentMessage = '';
             var bargainPromo =  Globals.AppConfig.PromoCodeCreate;
             var promoObj = {};
@@ -152,9 +156,11 @@
                 scope.submitMessage(true);
                 scope.showPromo = !scope.showPromo;
               }
+              scope.showLoader=false;
             }, function(error){
               alert("Error occured in generating the promo code.")
               console.log(error);
+              scope.showLoader=false;
             })
             
           };

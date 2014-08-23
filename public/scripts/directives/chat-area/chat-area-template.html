@@ -28,9 +28,15 @@
 					</div>
 				</div>
 			</li>
+			<li ng-show="showLoader">
+				<div id="loader" class="initialLoader">
+					<div>
+						<i class="three-quarters"></i>
+					</div>
+				</div>
+			</li>
 			<li class="chatArea" ng-show="!showPromo && !showTemplates && !showProduct" ng-click="setFocus()" chat-scroll-down>
 				<div style="margin-bottom:10px;">
-					
 					<div ng-repeat='message in messages'>
 						<div class='bubble fr reporter bgblue', , ng-class="message.sender== chatData.userId ? 'user-mesg' : 'bubble--alt agent-mesg'" ng-if="!message.isProductDetails && !message.isCloseChatMesg">
 		                	<div class='chat-name' ng-if="!message.isCloseChatMesg && !message.isPromoCode">
@@ -224,7 +230,7 @@
 									<li>
 										<div class="col-md-12 mt10" align="center">
 											<div class="promoBtn" ng-click="savePromo()">
-						        				<a > Generate code</a>
+						        				<span> Generate code</span>
 						        			</div>
 										</div>
 									</li>
@@ -260,16 +266,7 @@
 			</li>
 
 			<!-- Message Templates -->
-			<li >
-				<div align="center">
-					<ul class="col-md-12 p0">
-						<li>
-							<div align="center" class="showLoading">
-							</div>
-						</li>
-					</ul>
-				</div>
-			</li>
+			
 
 			<!-- Bottom Text Area -->
 			<li>

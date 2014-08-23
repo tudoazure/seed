@@ -22,7 +22,8 @@
                         headers: {
                             'Content-type': 'application/json'
                         },
-                        'dataType': 'json'
+                        'dataType': 'json',
+                        withCredentials: true
                     };
 
                     $http.post(self.url, params, config).success(function (data) {
