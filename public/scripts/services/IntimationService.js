@@ -35,9 +35,21 @@
 		  }
 		});
 
+		var agentPingBack = $resource(Globals.AppConfig.AgentPingBack, {}, {
+		  query: {
+		    method:'POST', 
+		    isArray: false, 
+		    params:{}, 
+		    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+		    transformRequest: manageReqPacketTransform
+		  }
+		});
+
+
 		IntimationService = {
       		chatStarted: chatStarted,
-      		chatClosed : chatClosed
+      		chatClosed : chatClosed,
+      		agentPingBack : agentPingBack 
       	}
 
 		return IntimationService;

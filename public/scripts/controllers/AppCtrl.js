@@ -1,8 +1,8 @@
 (function (angular){
 	"use strict;"
 	angular.module('bargain')
-		.controller('AppCtrl', ['$scope', '$rootScope', 'AuthService', 'StropheService', 'ChatCoreService', 'TemplateService', '$timeout',
-			function ($scope, $rootScope, AuthService, StropheService, ChatCoreService, TemplateService, $timeout) {
+		.controller('AppCtrl', ['$scope', '$rootScope', 'AuthService', 'StropheService', 'ChatCoreService', 'TemplateService','UtilService', 'IntimationService', '$timeout',
+			function ($scope, $rootScope, AuthService, StropheService, ChatCoreService, TemplateService, UtilService, IntimationService, $timeout) {
 				
 
 				$scope.init =function(){
@@ -73,11 +73,14 @@
 
 				$scope.connectedState = function(){
 					$rootScope.chatSDK.kill = "No";
+
+					$scope.agentPingBack();
+
 					$rootScope.chatSDK.connection.addHandler($rootScope.chatSDK.ping_handler, null, "iq", null, "ping1"); 
 				    $rootScope.chatSDK.connection.addHandler($rootScope.chatSDK.ping_handler_readACK, null, "iq", null, "readACK");   
 				    var iq = $iq({type: 'get'}).c('query', {xmlns: 'jabber:iq:roster'});
 				    $rootScope.chatSDK.connection.sendIQ(iq, $rootScope.chatSDK.on_roster); 
-				    
+			
 				    $rootScope.chatSDK.write_to_log("IQ for fetching contact information is send : " + iq);
 				    $rootScope.chatSDK.connection.addHandler($rootScope.chatSDK.on_message, null, "message", "chat");
 				};
@@ -117,6 +120,18 @@
 							console.log("Templates could not be loaded.")
 						})
 					}
+				}
+
+				$scope.agentPingBack = function(){
+					IntimationService.agentPingBack.query({
+						session_id : $rootScope.sessionid,
+						t_chats : UtilService.getTotalActiveChatUsers(),
+					}, function success(response){
+						 $timeout($scope.agentPingBack, 60000);
+						console.log("Sucessfully Ping Back");		
+					}, function failure(error){
+						console.log("Error in Pinging Back Chat Server");	
+					})
 				}
 
 				$scope.init();

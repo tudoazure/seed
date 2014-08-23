@@ -220,7 +220,7 @@
 	        	chatStarted($rootScope.sessionid, otherpartyid, totalChats, threadId);
 	        }
 	        if(messageobj.isCloseChatMesg){
-	        	var totalChats = getTotalActiveChatUsers() + 1;
+	        	var totalChats = getTotalActiveChatUsers();
 	        	chatClosed($rootScope.sessionid, otherpartyid, totalChats, threadId);
 	        }
 

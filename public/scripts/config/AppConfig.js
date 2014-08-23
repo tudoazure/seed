@@ -14,6 +14,7 @@ var Globals = {
     ChatStartedUrl : "https://" + chatHostBaseURI + "/one97/chat-started/",
     ChatClosedUrl : "https://" + chatHostBaseURI + "/one97/chat-closed/",
     StropheConnect : "https://" + chatHostBaseURI  + "/http-bind/",
+    AgentPingBack : "https://" + chatHostBaseURI  + "/one97/agent-pingback/",
     PromoCodeCreate : fulfillmentBaseURI + "admin/promocode/bargain",
     DefaultPromoCodeValidity : 3,
     productUrl : catalogUri + "/v1/mobile/product/",
