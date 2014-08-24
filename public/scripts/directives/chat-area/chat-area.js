@@ -1,7 +1,7 @@
 (function (angular){
   'use strict';
   angular.module('bargain')
-    .directive('chatArea', ['UtilService', 'MessageService', 'httpService', '$timeout', function(UtilService, MessageService, httpService, $timeout) {
+    .directive('chatArea', ['UtilService', 'MessageService', 'ChatServerService', 'httpService', '$timeout', function(UtilService, MessageService, ChatServerService, httpService, $timeout) {
       return {
         restrict: 'EA',
         templateUrl: 'scripts/directives/chat-area/chat-area-template.html',
@@ -222,6 +222,8 @@
               scope.agentMessage = "";
             }
           }
+
+          
 
           }
         }

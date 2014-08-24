@@ -2,6 +2,67 @@
 	"use strict;"
 
 	angular.module('bargain').factory('UtilService', ['$rootScope', 'IntimationService', function ($rootScope, IntimationService) {
+		var ua = navigator.userAgent.toLowerCase();
+		var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+		if (ua.indexOf(" chrome/") >= 0 || ua.indexOf(" firefox/") >= 0 || ua.indexOf(' gecko/') >= 0) {
+		    var StringMaker = function() {
+		        this.str = "";
+		        this.length = 0;
+		        this.append = function(s) {
+		            this.str += s;
+		            this.length += s.length;
+		        }
+		        this.prepend = function(s) {
+		            this.str = s + this.str;
+		            this.length += s.length;
+		        }
+		        this.toString = function() {
+		            return this.str;
+		        }
+		    }
+		} else {
+		    var StringMaker = function() {
+		        this.parts = [];
+		        this.length = 0;
+		        this.append = function(s) {
+		            this.parts.push(s);
+		            this.length += s.length;
+		        }
+		        this.prepend = function(s) {
+		            this.parts.unshift(s);
+		            this.length += s.length;
+		        }
+		        this.toString = function() {
+		            return this.parts.join('');
+		        }
+		    }
+		}
+
+		decode64 = function(input) {
+		    var output = new StringMaker();
+		    var chr1, chr2, chr3;
+		    var enc1, enc2, enc3, enc4;
+		    var i = 0;
+		    // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
+		    input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+		    while (i < input.length) {
+		        enc1 = keyStr.indexOf(input.charAt(i++));
+		        enc2 = keyStr.indexOf(input.charAt(i++));
+		        enc3 = keyStr.indexOf(input.charAt(i++));
+		        enc4 = keyStr.indexOf(input.charAt(i++));
+		        chr1 = (enc1 << 2) | (enc2 >> 4);
+		        chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+		        chr3 = ((enc3 & 3) << 6) | enc4;
+		        output.append(String.fromCharCode(chr1));
+		        if (enc3 != 64) {
+		            output.append(String.fromCharCode(chr2));
+		        }
+		        if (enc4 != 64) {
+		            output.append(String.fromCharCode(chr3));
+		        }
+		    }
+		    return output.toString();
+		};
 
 		var guid = function() {
 			function s4() {
@@ -62,6 +123,42 @@
         var jIdToId = function(jid) {
 	        return Strophe.getBareJidFromJid(jid).replace("@", "-").replace(/\./g, "-");
     	};
+
+    	var syncHistory = function(messageList){
+        	var messageArray = []; var state = 0;
+        	angular.forEach(messageList, function(value, index){
+        		var messageObj ={};
+        		messageObj['deleted_on_sender'] = value['deleted_on_sender'];
+	            messageObj['sender'] = value['sender'];
+	            messageObj['receiver'] = value['receiver'];
+	            messageObj['can_forward'] = value['can_forward'];
+	            messageObj['delete_after'] = value['delete_after'];
+	            messageObj['last_ts'] = value['last_ts'];
+	            messageObj['sent_on'] = value['sent_on'];
+	            try{
+	                messageObj['txt'] = decode64(value['txt']);
+	            }
+	            catch(e){
+	                
+	            }
+	            messageObj['id'] = value['id'];
+	            messageObj['mid'] = value['mid'];
+	            messageObj['flags'] = 0;
+	            if (value['read_on'] != undefined)
+	                state = 3;
+	            else if (value['received_on'] != undefined)
+	                state = 2;
+	            else if (value['sent_on'] != undefined)
+	                state = 1;
+	            else
+	                state = 0;
+	            messageObj['state'] = state;//0-sending;1-sent;2-Delivered;3-read
+	            if(value['sender'] && value['receiver']){
+	                messageArray.push(messageObj);
+	            }
+        	})
+			return messageArray;
+	    };
 
     	var getAllPendingMessages = function(){
 	        var messageArray = [];
@@ -161,7 +258,7 @@
 						productObj.price = specialMessage.PRDCNTXT.price.replace("Rs" , "").trim();
 						productObj.merchantId = specialMessage.PRDCNTXT.merchant_id;
 						productObj.productId = specialMessage.PRDCNTXT.id;
-						productObj.userId = specialMessage.PRDCNTXT.user_id;
+						productOb = specialMessage.PRDCNTXT.user_id;
 						productObj.productUrl = specialMessage.PRDCNTXT.product_url;
 						$rootScope.plustxtcacheobj.products[otherpartyid] = productObj;
 
@@ -270,6 +367,7 @@
       		getMilliTimeToString : milliTimeToString,
       		getJidToId : jIdToId,
       		addMessage : addMessage,
+      		syncHistory : syncHistory,
       		getAllPendingMessages : getAllPendingMessages,
       		updateMessageStatus : updateMessageStatus,
       		updateMessageStatusAsRead : updateMessageStatusAsRead,

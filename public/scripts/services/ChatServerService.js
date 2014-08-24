@@ -25,7 +25,7 @@
 		  }
 		});
 
-		var fetchUserHistory = $resource(Globals.AppConfig.ChatServerConnect, {}, {
+		var fetchUserHistory = $resource(Globals.AppConfig.GetUserHistory, {}, {
 		  query: {
 		    method:'POST', 
 		    isArray: false, 

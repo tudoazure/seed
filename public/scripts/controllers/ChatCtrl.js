@@ -1,8 +1,8 @@
 (function (angular){
 	"use strict;"
 	angular.module('bargain')
-		.controller('ChatCtrl', ['$scope', '$rootScope', 'ChatCoreService', 'UtilService', '$filter', '$timeout',
-			function ($scope, $rootScope, ChatCoreService, UtilService, $filter, $timeout) {
+		.controller('ChatCtrl', ['$scope', '$rootScope', 'ChatCoreService', 'ChatServerService', 'UtilService', '$filter', '$timeout',
+			function ($scope, $rootScope, ChatCoreService, ChatServerService, UtilService, $filter, $timeout) {
 				$scope.activeWindows = [];
     			$scope.contact = $rootScope.plustxtcacheobj.contact;
     			$scope.products = $rootScope.plustxtcacheobj.products;
@@ -147,6 +147,25 @@
 							break;
 					}
 					return messageState;
+				}
+
+				$scope.loadHistory = function(userId){
+					alert("History Called for " + userId);	
+					ChatServerService.fetchUserHistory.query({
+					  session_id : $rootScope.sessionid,
+					  converser : userId,
+					  merchant_id : 1
+					}, function success(response){
+						console.log(response.data.messages);
+						if(response && response.data && response.data.messages){
+							$timeout(function(){
+								var messageArray = UtilService.syncHistory(response.data.messages);
+								$scope.allMessages[userId] = messageArray;
+							});
+						}       
+					}, function failure(error){
+					  // console.log("Templates could not be loaded.")
+					})
 				}
       }]);
 })(angular);
