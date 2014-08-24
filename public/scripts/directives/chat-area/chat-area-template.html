@@ -45,8 +45,9 @@
 		            		<div class='chat-name' ng-if="message.isPromoCode">
 		                		{{getJsonParsedMesg(message.txt).PRMCODE.message}}
 		            		</div>
-		            		<span ng-if="message.sender != chatData.userId" style='float:right;font-size:9px'>{{ getMesgState(message.state)}} {{parsedDate(message.sent_on)}}</span>
+		            		<span ng-if="message.sender != chatData.userId" style='float:right;font-size:9px'>{{ getMesgState(message.state)}}</span>
 	        			</div>
+	        			<div align="center" class="clear messageTime" ng-if="message.sender != chatData.userId" style='font-size:9px' >{{parsedDate(message.sent_on)}}</div>
 	        			<div class='leftConversation clear' ng-if="message.isCloseChatMesg">
 	                		User left the conversation
 	            		</div>
@@ -306,7 +307,7 @@
 						</div>
 					</div>
 					<div class="col-md-9 p0" style="padding-left:5px;">
-						<textarea type="text" placeholder="send a message" class="chatTextArea" ng-enter="submitMessage()" ng-model="agentMessage" ng-focus="setFocus()" ng-disabled="contact[chatData.userId].chatState =='closed'"></textarea>
+						<textarea type="text" placeholder="Send a message" class="chatTextArea" ng-enter="submitMessage()" ng-model="agentMessage" ng-focus="setFocus()" ng-disabled="contact[chatData.userId].chatState =='closed'"></textarea>
 					</div>
 					<div class="col-md-1 p0 messageIcon" ng-click="openDefaultTemplates()" title="Message Templates">
 					  <!-- <i class="fa fa-envelope templateLink"></i> -->

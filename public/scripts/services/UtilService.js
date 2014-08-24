@@ -49,7 +49,7 @@
 		};
 
 		var getLocalTime = function(ts) {
-			return moment.unix(ts).format("h:mm:ss a");
+			return moment.unix(ts).format("Do MMM  h:mm A");
             //return moment.unix(ts).format("MMM Do, h:mm:ss a");
         };
 

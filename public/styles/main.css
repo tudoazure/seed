@@ -339,7 +339,7 @@ ul li{
 	border-style: dashed;
 	border-width: 1px;
 	border-color: #999;
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .inactive .priceDiv{
@@ -444,7 +444,7 @@ ul li{
 	height: 32px;
 	width: 100%;
 	margin-top: 3px;
-	line-height: 2.2;
+	line-height: 1.2;
 	border:none;
 	resize: none;
 }
@@ -812,6 +812,13 @@ background-image: -webkit-gradient(
 }
 .clear{
 	clear: both;
+}
+
+.messageTime {
+	margin-right: 10%;
+	float: right;
+	margin-top: -10px;
+	margin-bottom: 10px;
 }
 
 .templateli:hover{
