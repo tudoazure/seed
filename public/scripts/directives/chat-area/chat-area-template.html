@@ -174,7 +174,7 @@
 											<label>Percentage</label>
 										</div>
 										<div class="col-md-5 padd mt3">
-											<input type="text" class="col-md-8 p0" ng-model="percentCap">
+											<input type="text" class="col-md-8 p0" ng-model="percentCap" input-type-number>
 											<i class="icon-percent"></i>
 										</div>
 										<div ng-if="percentCapError" class="col-md-12 error" align="right"> {{percentCapError}}</div>
@@ -187,7 +187,7 @@
 											<label>Amount</label>
 										</div>
 										<div class="col-md-5 padd mt3" >
-											<input type="text" class="col-md-8 p0" ng-model="absoluteCap"/>
+											<input type="text" class="col-md-8 p0" ng-model="absoluteCap" input-type-number>
 											<i class="fa fa-inr"></i>
 										</div>
 										<div ng-if="absoluteCapError" class="col-md-12 error" align="right"> {{absoluteCapError}}</div>
@@ -199,7 +199,7 @@
 											<label>Upper Limit</label>
 										</div>
 										<div class="col-md-5 padd mt3">
-											<input type="text" class="col-md-8 p0" ng-model="capLimit"/>
+											<input type="text" class="col-md-8 p0" ng-model="capLimit" input-type-number>
 											<i class="fa fa-inr"></i>
 										</div>
 										<div  ng-if="capLimitError" class="col-md-12 error" align="right"> {{capLimitError}}</div>
@@ -220,7 +220,7 @@
 											<label>Minimum Quantity</label>
 										</div>
 										<div class="col-md-5 padd mt3">
-											<input type="text" class="col-md-8 p0" ng-model="qty"/>
+											<input type="text" class="col-md-8 p0" ng-model="qty" input-type-number/>
 										</div>
 										<div ng-if="qtyError" class="col-md-12 error" align="right"> {{qtyError}}</div>
 										</div>

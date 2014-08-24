@@ -624,6 +624,7 @@ font-size: 14px;}
 	width: 12px;
 	height: 12px;
 	background-repeat: no-repeat;
+	float: right;
 }
 
 .leftConversation{
