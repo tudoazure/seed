@@ -118,7 +118,7 @@
             scope.validDateError = '';scope.absoluteCapError;
             scope.promoError = false;
             if(scope.promoType == 'percentage'){
-              if(!scope.percentCap){ scope.percentCapError = "Please enter cap value"} 
+              if(!scope.percentCap){ scope.percentCapError = "Please enter percentage value"} 
               if(!scope.capLimit){ scope.capLimitError = "Please enter upper limit"}
             }else{
               if(!scope.absoluteCap){scope.absoluteCapError = "Please enter ammount value"}

@@ -151,7 +151,7 @@
 				</li>
 			<li class="chatArea" ng-show="showPromo" style="padding-top: 1px;" >
 					<div align="center">
-						<ul class="col-md-12">
+						<ul class="col-md-12 p0">
 							<li class="chatheader">
 								<div align="center" class="col-md-10">
 									Create Promotion Code
@@ -162,7 +162,7 @@
 								<ul class="col-md-12 pt10">
 									<li class="height35">
 										<div class="col-md-7 padd1"  align="left">
-											<label>Discount Value</label>
+											<span>Discount Value</span>
 										</div>
 										<div class="col-md-5 padd mt3">
 											
@@ -172,7 +172,7 @@
 										<div class="col-md-12 p0">
 										<div class="col-md-7 padd1"  align="left">
 											<input type="radio" name="promoType" checked value="percentage" ng-click="setPromoType('percentage')"/>
-											<label>Percentage</label>
+											<span style="font-weight:400">Percentage</span>
 										</div>
 										<div class="col-md-5 padd mt3">
 											<input type="text" class="col-md-8 p0" ng-model="percentCap" input-type-number>
@@ -185,7 +185,7 @@
 										<div class="col-md-12 p0">
 										<div class="col-md-7 padd1"  align="left">
 											<input type="radio" name="promoType" value="absolute" ng-click="setPromoType('absolute')"/>
-											<label>Amount</label>
+											<span style="font-weight:400">Amount</span>
 										</div>
 										<div class="col-md-5 padd mt3" >
 											<input type="text" class="col-md-8 p0" ng-model="absoluteCap" input-type-number>
@@ -197,7 +197,7 @@
 									<li class="bbblue" ng-show="promoType == 'percentage'">
 										<div class="col-md-12 p0">
 										<div class="col-md-7 padd1"  align="left">
-											<label>Upper Limit</label>
+											<span>Upper Limit</span>
 										</div>
 										<div class="col-md-5 padd mt3">
 											<input type="text" class="col-md-8 p0" ng-model="capLimit" input-type-number>
@@ -218,7 +218,7 @@
 									<li class="bbblue">
 										<div class="col-md-12 p0">
 										<div class="col-md-7 padd1"  align="left">
-											<label>Minimum Quantity</label>
+											<span>Minimum Quantity</span>
 										</div>
 										<div class="col-md-5 padd mt3">
 											<input type="text" class="col-md-8 p0" ng-model="qty" input-type-number/>
@@ -229,7 +229,7 @@
 									<li class="bbblue">
 										<div class="col-md-12 p0">
 										<div class="col-md-7 padd1"  align="left">
-											<label>Validity</label>
+											<span>Validity</span>
 										</div>
 										<div class="col-md-5 padd mt3">
 											<p>
@@ -246,7 +246,7 @@
 									<li class="bbblue">
 										<div class="col-md-7 padd1"  align="left">
 											<input type="checkbox" ng-model="isFreeShiping" ng-click="setFreeShip()">
-											<label>Free Shipping</label>
+											<span>Free Shipping</span>
 										</div>
 										<div class="col-md-5 padd mt3">
 											
@@ -296,22 +296,20 @@
 			<!-- Bottom Text Area -->
 			<li>
 				<div class="chatText col-md-12">
-					<div class="col-md-1 p0 promoIcon" ng-click="openPromoWindow()" ng-show="!showPromo" title="Create Promocode">
-					  <!-- <i class="fa fa-circle fa-stack-2x"></i>
-					  <i class="fa fa-rupee fa-stack-1x fa-inverse"></i> -->
+					<div class="col-md-1 p0 promoIcon" ng-click="openPromoWindow()" ng-if="!showPromo" title="Create Promocode">
 					</div>
-					<div class="col-md-1 p0 promoIcon-Open" ng-click="closeWindow()" ng-show="showPromo" title="Close Promocode">
-						<div>
-							<i class="fa fa-square fa-stack-2x"></i>
-					  		<i class="fa fa-rupee fa-stack-1x fa-inverse"></i>
-						</div>
+					<div class="col-md-1 p0 promoIcon-Open" ng-click="closeWindow()" ng-if="showPromo" title="Close Promocode">
 					</div>
-					<div class="col-md-9 p0" style="padding-left:5px;">
+					<div class="col-md-8 p0">
 						<textarea type="text" placeholder="Send a message" class="chatTextArea" ng-enter="submitMessage()" ng-model="agentMessage" ng-focus="setFocus()" ng-disabled="contact[chatData.userId].chatState =='closed'"></textarea>
 					</div>
-					<div class="col-md-1 p0 messageIcon" ng-click="openDefaultTemplates()" title="Message Templates">
+					<div class="col-md-1 p0 messageIcon" ng-click="openDefaultTemplates()" ng-if="!showTemplates" title="Message Templates">
 					  <!-- <i class="fa fa-envelope templateLink"></i> -->
 					</div>
+					<div class="col-md-1 p0 messageIcon-open" ng-click="openDefaultTemplates()" ng-if="showTemplates" title="Close Message Templates">
+					  <!-- <i class="fa fa-envelope templateLink"></i> -->
+					</div>
+					
 				</div>
 			</li>
 		</ul>
