@@ -59,8 +59,13 @@
 			<li class="chatArea" style="padding-top: 0px; border-top: solid 1px #00B8FF;" ng-show="showProduct">
 					<div style="margin-bottom:10px;" align="center">
 						<ul class="col-md-12" style="padding: 0px;">
+							<li class="chatheader active-chat-header">
+							<div align="center" class="col-md-10">
+								Product Details
+							</div>
+							<i class="col-md-2 closeIcon fa fa-times-circle" ng-click="closeWindow()"></i>
+							</li>
 							<li class="productArea">
-								<i class=" closeIcon fa fa-times-circle pos" ng-click="closeWindow()"></i>
 								<ul class="col-md-12 pt10n5  f13">
 									<li ng-repeat="attr in productDetail.long_rich_desc">
 										<div class="col-md-12 padd6 bb-blue" align="left">

@@ -736,3 +736,23 @@ background-image: -webkit-gradient(
 
 .three-quarters { font-family: sans-serif; font-weight: 100; }
 .three-quarters:not(:required) { -webkit-animation: three-quarters 1250ms infinite linear; -moz-animation: three-quarters 1250ms infinite linear; -ms-animation: three-quarters 1250ms infinite linear; -o-animation: three-quarters 1250ms infinite linear; animation: three-quarters 1250ms infinite linear; border: 8px solid #3388ee; border-right-color: transparent; -webkit-border-radius: 24px; border-radius: 24px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; display: inline-block; position: relative; overflow: hidden; text-indent: -9999px; width: 32px; height: 32px; }
+
+
+.message-body.error, .message-body.info, .message-body.success { padding: 15px; color: #72612b; background: #ffedbb; border: 1px solid #f2d083; position: absolute; top: 42px; right: 20px; z-index: 105; max-width: 300px; -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
+.message-body.error span, .message-body.info span, .message-body.success span { width: 95%; }
+.message-body.error .button, .message-body.info .button, .message-body.success .button { font-size: 16px; cursor: pointer; position: relative; top: -8px; right: -8px; }
+.message-body.info { background: #f0f8db; border: 1px solid #f2d083; position: absolute; top: 42px; left: 37.083335%; z-index: 105; width: 30%; }
+.message-body.error { background: #ffe4e4; border-color: #eed3d7; color: #b94a48; }
+.message-body.success { background: #f0f8db; border-color: #d6e9c6; color: #468847; }
+.message-backdrop { position: fixed; background: rgba(221, 221, 221, 0.6); top: 0; right: 0; bottom: 0; left: 0; overflow: auto; z-index: 105; }
+.message-backdrop .message-text { font-size: 14px; }
+.message-backdrop .modal { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1040; display: none; overflow: auto; overflow-y: scroll; }
+.message-backdrop .modal-dialog { z-index: 1050; margin: 0 auto; width: 24%; position: absolute; top: 45%; left: 0; right: 0; }
+.message-backdrop .modal-content { position: relative; -webkit-box-shadow: rgba(0, 0, 0, 0.175) 0 2px 6px; -moz-box-shadow: rgba(0, 0, 0, 0.175) 0 2px 6px; box-shadow: rgba(0, 0, 0, 0.175) 0 2px 6px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border: 1px solid rgba(0, 0, 0, 0.3); background: #fff; padding: 4px; outline: none; }
+.message-backdrop .modal-backdrop { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1030; background-color: #000000; }
+.message-backdrop .modal-body { position: relative; padding: 10px; }
+.message-backdrop .modal-footer { padding: 10px; text-align: right; }
+.message-backdrop .modal-footer:before, .message-backdrop .modal-footer:after { display: table; content: " "; }
+.message-backdrop .modal-footer:after { clear: both; }
+.message-backdrop .modal-footer:before, .message-backdrop .modal-footer:after { display: table; content: " "; }
+.message-backdrop .modal-footer:after { clear: both; }

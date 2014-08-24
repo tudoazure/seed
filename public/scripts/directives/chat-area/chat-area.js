@@ -1,13 +1,16 @@
 (function (angular){
   'use strict';
   angular.module('bargain')
-    .directive('chatArea', ['UtilService', 'httpService', '$timeout', function(UtilService, httpService, $timeout) {
+    .directive('chatArea', ['UtilService', 'MessageService', 'httpService', '$timeout', function(UtilService, MessageService, httpService, $timeout) {
       return {
         restrict: 'EA',
         templateUrl: 'scripts/directives/chat-area/chat-area-template.html',
         scope: false,
         link: function(scope, element, attrs) {         
           scope.templates = scope.templates;
+          scope.userName = scope.contact[scope.chatData.userId].name;
+          scope.messages = scope.chatData.messages;
+
           scope.openDefaultTemplates = function(){
             scope.showPromo = false;
             scope.showProduct = false;
@@ -38,17 +41,24 @@
 
           scope.closeUserChat = function(){
             console.log("Delete Chat from this user: ", scope.chatData.userId);
-            scope.agentMessage = Globals.AppConfig.CloseChatMessage;
-            scope.submitMessage(false);
+            if(scope.contact[scope.chatData.userId].chatState != "closed"){
+              MessageService.confirm("Are you sure you want to close conversation with " + scope.userName + " ?")
+              .then(function() {
+                scope.agentMessage = Globals.AppConfig.CloseChatMessage;
+                scope.submitMessage(false);
+              });
+            }
+            else{
+              scope.agentMessage = Globals.AppConfig.CloseChatMessage;
+              scope.submitMessage(false);
+            }
           }
+
           scope.setFocus = function(){
             scope.$emit('Active-User-Changed', scope.chatData.userId);
           }
           scope.removeFocus = function(){
           }
-
-          scope.userName = scope.contact[scope.chatData.userId].name;
-          scope.messages = scope.chatData.messages;
 
           scope.openPromoWindow = function(){
             scope.showPromo = true;
@@ -103,16 +113,6 @@
               scope.showProductDetail();
             }
           };
-
-          scope.JSON_stringify = function (s, emit_unicode)
-          {
-             var json = JSON.stringify(s);
-             return emit_unicode ? json : json.replace(/[\u007f-\uffff]/g,
-                function(c) { 
-                  return '\\u'+('0000'+c.charCodeAt(0).toString(16)).slice(-4);
-                }
-             );
-          };
           
           scope.savePromo = function(){
             scope.showLoader=true;
@@ -157,9 +157,8 @@
                 scope.showPromo = !scope.showPromo;
               }
               scope.showLoader=false;
-            }, function(error){
-              alert("Error occured in generating the promo code.")
-              console.log(error);
+            }, function(errorObj){
+              MessageService.displayError("Error in generating the promo code for " + scope.userName + " : " + errorObj.error);
               scope.showLoader=false;
             })
             
