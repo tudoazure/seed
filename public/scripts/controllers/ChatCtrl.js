@@ -30,6 +30,18 @@
 	    				delete $scope.allMessages[closeChatUser];
 	    				delete $scope.contact[closeChatUser];
 	    				delete $scope.products[closeChatUser];
+	    				angular.forEach($scope.contact, function(value, index){
+	    					var isChatExist = $filter('filter')($scope.activeWindows, {userId : value.id}, true);
+							if(isChatExist.length){
+								return;
+							}
+							else if($scope.activeWindows.length < Globals.AppConfig.ConcurrentChats){
+								var conversation = {};
+								conversation.userId = value.id;
+								conversation.messages =  $scope.allMessages[value.id];
+								$scope.activeWindows.push(conversation);
+							}
+	    				})
 	    				if($scope.activeWindows.length > 0){
 	    					$scope.activeChatUser = $scope.activeWindows[0].userId;
 	    				}
