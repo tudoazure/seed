@@ -260,6 +260,7 @@
 						productObj.productId = specialMessage.PRDCNTXT.id;
 						productOb = specialMessage.PRDCNTXT.user_id;
 						productObj.productUrl = specialMessage.PRDCNTXT.product_url;
+						productObj.userId = specialMessage.PRDCNTXT.user_id;
 						$rootScope.plustxtcacheobj.products[otherpartyid] = productObj;
 
 						// Assigning ThreadId for a new chat

@@ -1,7 +1,8 @@
 (function (angular){
   'use strict';
   angular.module('bargain')
-    .directive('chatArea', ['UtilService', 'MessageService', 'ChatServerService', 'httpService', '$timeout', function(UtilService, MessageService, ChatServerService, httpService, $timeout) {
+    .directive('chatArea', ['$rootScope', 'UtilService', 'MessageService', 'ChatServerService', 'httpService', '$timeout', 
+        function($rootScope, UtilService, MessageService, ChatServerService, httpService, $timeout) {
       return {
         restrict: 'EA',
         templateUrl: 'scripts/directives/chat-area/chat-area-template.html',
@@ -142,7 +143,9 @@
               promoObj.value =  scope.promoType == 'percentage' ? scope.percentCap : scope.absoluteCap;
               promoObj.cap = scope.promoType == 'percentage' ? scope.capLimit : "";
               promoObj.qty = scope.qty;
-              promoObj.freeshipping = scope.isFreeShiping;
+              if(scope.isFreeShiping){
+                promoObj.freeshipping = scope.isFreeShiping;
+              }
               promoObj.product_id = scope.products[scope.chatData.userId].productId;
               promoObj.user_id = scope.products[scope.chatData.userId].userId;
               promoObj.valid_upto = new Date(scope.validDate).getTime();
@@ -222,6 +225,34 @@
               scope.agentMessage = "";
             }
           }
+
+          scope.loadHistory = function(userId){
+            alert("History Called for " + userId);  
+            ChatServerService.fetchUserHistory.query({
+              session_id : $rootScope.sessionid,
+              converser : userId,
+              merchant_id : 1
+            }, function success(response){
+              console.log(response.data.messages);
+              if(response && response.data && response.data.messages){
+                //$timeout(function(){
+                  var messageArray = UtilService.syncHistory(response.data.messages);
+                  $timeout(function(){
+                    scope.chatData.messages = messageArray;
+                    scope.messages = messageArray;
+                  })
+                  // $scope.allMessages[userId] = messageArray;
+                  // angular.forEach($scope.activeWindows, function(value, index){
+                  //       if (value.userId == userId){
+                  //         value.messages =  messageArray;
+                  //       }
+                  //     });
+                // });
+              }       
+            }, function failure(error){
+              // console.log("Templates could not be loaded.")
+            })
+        }
 
           
 
