@@ -58,10 +58,10 @@
 					        		if($scope.activeWindows.length == 0){
 						        		$scope.activeChatUser = key;
 						        	}
-						        	var converstion = {};
-						        	converstion.userId = key;
-						        	converstion.messages =  val;
-						        	$scope.activeWindows.push(converstion);
+						        	var conversation = {};
+						        	conversation.userId = key;
+						        	conversation.messages =  val;
+						        	$scope.activeWindows.push(conversation);
 
 					        	}
 					        })
