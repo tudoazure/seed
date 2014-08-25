@@ -14,6 +14,7 @@ var Globals = {
     ChatServerConnect :  chatHostBaseURI + "/accounts/connect/",
     MessageTemplates : chatHostBaseURI + "/one97/get-template-messages/",
     GetUserHistory : chatHostBaseURI + "/one97/get-user-conversation/",
+    GetFlashMessage : chatHostBaseURI + "/one97/get-flash-message/",
     ChatStartedUrl : chatHostBaseURI + "/one97/chat-started/",
     ChatClosedUrl : chatHostBaseURI + "/one97/chat-closed/",
     StropheConnect : chatHostBaseURI  + "/http-bind/",

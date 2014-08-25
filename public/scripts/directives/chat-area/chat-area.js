@@ -116,7 +116,7 @@
           };
           scope.validatePromocode = function(){
             scope.percentCapError = ''; scope.capLimitError = ''; scope.qtyError = '';
-            scope.validDateError = '';scope.absoluteCapError;
+            scope.validDateError = '';scope.absoluteCapError = '';
             scope.promoError = false;
             if(scope.promoType == 'percentage'){
               if(!scope.percentCap){ scope.percentCapError = "Please enter percentage value"} 

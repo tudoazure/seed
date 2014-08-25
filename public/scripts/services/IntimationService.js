@@ -45,11 +45,21 @@
 		  }
 		});
 
+		var flashMessage = $resource(Globals.AppConfig.GetFlashMessage, {}, {
+		  query: {
+		    method:'POST', 
+		    isArray: false, 
+		    params:{}, 
+		    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+		    transformRequest: manageReqPacketTransform
+		  }
+		});
 
 		IntimationService = {
       		chatStarted: chatStarted,
       		chatClosed : chatClosed,
-      		agentPingBack : agentPingBack 
+      		agentPingBack : agentPingBack,
+      		flashMessage : flashMessage
       	}
 
 		return IntimationService;

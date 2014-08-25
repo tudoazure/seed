@@ -17,6 +17,7 @@
 					$rootScope.plustxtcacheobj.message = {};
 					$rootScope.plustxtcacheobj.products = {};
 					$rootScope.loginusername = null;
+					$rootScope.flashMessage = "";
 					$rootScope.password = null;
 					$rootScope.usersCount = 0;
 				};
@@ -76,6 +77,8 @@
 
 					$scope.agentPingBack();
 
+					$scope.getFlashMessage();
+
 					$rootScope.chatSDK.connection.addHandler($rootScope.chatSDK.ping_handler, null, "iq", null, "ping1"); 
 				    $rootScope.chatSDK.connection.addHandler($rootScope.chatSDK.ping_handler_readACK, null, "iq", null, "readACK");   
 				    var iq = $iq({type: 'get'}).c('query', {xmlns: 'jabber:iq:roster'});
@@ -127,10 +130,27 @@
 						session_id : $rootScope.sessionid,
 						t_chats : UtilService.getTotalActiveChatUsers(),
 					}, function success(response){
-						 $timeout($scope.agentPingBack, 60000);
+						$timeout($scope.agentPingBack, 60000);
 						console.log("Sucessfully Ping Back");		
 					}, function failure(error){
 						console.log("Error in Pinging Back Chat Server");	
+					})
+				}
+
+				$scope.getFlashMessage = function(){
+					IntimationService.flashMessage.query({
+						session_id : $rootScope.sessionid
+					}, function success(response){
+						if(response && response.data && response.data['f_msg']){
+						 if($rootScope.flashMessage != response.data['f_msg']){
+						 	$rootScope.flashMessage = response.data['f_msg'];
+						 	alert(response.data['f_msg']);
+						 }
+						}
+						$timeout($scope.getFlashMessage, 60000);
+						console.log("Sucessfully Flash Message Call");		
+					}, function failure(error){
+						console.log("Error in Flash Message Call");	
 					})
 				}
 

@@ -4,7 +4,7 @@ module.exports = {
    domain: 'bargain',
    oauth : require('./oauth'),
    fulfillment: {
-   		host: 'http://fulfillment-dev.paytm.com'
+   		host: 'https://fulfillment-dev.paytm.com'
     },
 	chatServer: {
 		host: 'https://chat-staging.paytm.com'
