@@ -11,16 +11,20 @@
     <link href="styles/main.css" rel="stylesheet">
   </head>
   <body>
-    <div class="span4 center account">
-      <div>
-        <div><img src="/images/login-home.png">
-          <h1 class="font24 gray-font">Welcome</h1>
-          <p class="B-padd20 font12"></p>Welcome to the Paytm Marketplace Bargain Interface. Please login to chat with the customers
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 center account">
+          <div><img src="/images/login-home.png">
+            <h1 class="font24 gray-font">Welcome</h1>
+            <p class="B-padd20 font12"></p>Welcome to the Paytm Marketplace Bargain Panel. Please login to chat with your customers.
+          </div>
+          <form class="form-signin mt20">
+            <button type="submit" onclick="javascript:window.location.href='/authorize'; return false;" class="btn btn-large btn-primary"> Click Here to Login</button>
+          </form>
         </div>
-        <form class="form-signin T-marg20">
-          <button type="submit" onclick="javascript:window.location.href='/authorize'; return false;" class="btn btn-large btn-primary"> Click Here to Login</button>
-        </form>
-      </div>
+        <div class="col-md-4"></div>
+    </div>
     </div>
   </body>
 </html>

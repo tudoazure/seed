@@ -33,9 +33,7 @@ ul li{
 .account p {
 	font-size: 13px;
 	color: #676767;
-	margin-bottom: 50px;
 	line-height: 15px;
-	margin-top: 20px;
 }
 .center {text-align:center;}
 .span4  {width: 300px;}
@@ -924,4 +922,10 @@ background-image: -webkit-gradient(
 	color: #fff;
 	padding: 10px 25px 0px 25px;
 	text-align: center;
+	cursor: pointer;
+}
+
+.flashmsg:hover{
+	color: #fff ;
+	background :#17b0e8 ;
 }
