@@ -13,6 +13,7 @@ var Globals = {
   	ChatHostURI : chatHostBaseURI.replace(/.*?:\/\//g, ""),
     ChatServerConnect :  chatHostBaseURI + "/accounts/connect/",
     MessageTemplates : chatHostBaseURI + "/one97/get-template-messages/",
+    LogoutRequest : chatHostBaseURI + "/one97/agent-logoff-request/",
     GetUserHistory : chatHostBaseURI + "/one97/get-user-conversation/",
     GetFlashMessage : chatHostBaseURI + "/one97/get-flash-message/",
     ChatStartedUrl : chatHostBaseURI + "/one97/chat-started/",

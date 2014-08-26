@@ -55,11 +55,22 @@
 		  }
 		});
 
+		var agentLogoutRequest = $resource(Globals.AppConfig.LogoutRequest, {}, {
+		  query: {
+		    method:'POST', 
+		    isArray: false, 
+		    params:{}, 
+		    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+		    transformRequest: manageReqPacketTransform
+		  }
+		});
+
 		IntimationService = {
       		chatStarted: chatStarted,
       		chatClosed : chatClosed,
       		agentPingBack : agentPingBack,
-      		flashMessage : flashMessage
+      		flashMessage : flashMessage,
+      		agentLogoutRequest : agentLogoutRequest
       	}
 
 		return IntimationService;

@@ -20,14 +20,32 @@
 					$rootScope.flashMessage = "";
 					$rootScope.password = null;
 					$rootScope.usersCount = 0;
+					$rootScope.logoutRequestRaised = null;
 				};
 
 				$scope.logout = function(){
-					if($rootScope.chatSDK && $rootScope.chatSDK.connection){
-						$rootScope.chatSDK.connection.send($pres({"type": "unavailable"}));
-						$rootScope.chatSDK.connection = null;
+					if(!$rootScope.logoutRequestRaised){
+						IntimationService.agentLogoutRequest.query({
+							session_id : $rootScope.sessionid
+						}, function success(response){
+							if(response.message == "success" && response.status === 0){
+								// $rootScope.logoutRequestRaised = true;
+								$rootScope.$broadcast("Agent-Logout-Request");
+							}
+						}, function failure(error){
+						})
 					}
-					window.location=Globals.AppConfig.logoutUrl;
+					else{
+						$rootScope.$broadcast("Agent-Logout-Request");
+					}
+					
+					// var activeConversations = 0;
+					// angular.forEach()
+					// if($rootScope.chatSDK && $rootScope.chatSDK.connection){
+					// 	$rootScope.chatSDK.connection.send($pres({"type": "unavailable"}));
+					// 	$rootScope.chatSDK.connection = null;
+					// }
+					// window.location=Globals.AppConfig.logoutUrl;
 				};
 
 				$rootScope.$on('ChatMultipleSession', function(event){

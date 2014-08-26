@@ -1,13 +1,35 @@
 (function (angular){
 	"use strict;"
 	angular.module('bargain')
-		.controller('ChatCtrl', ['$scope', '$rootScope', 'ChatCoreService', 'ChatServerService', 'UtilService', '$filter', '$timeout',
-			function ($scope, $rootScope, ChatCoreService, ChatServerService, UtilService, $filter, $timeout) {
+		.controller('ChatCtrl', ['$scope', '$rootScope', 'ChatCoreService', 'ChatServerService', 'MessageService', 'UtilService', '$filter', '$timeout',
+			function ($scope, $rootScope, ChatCoreService, ChatServerService, MessageService, UtilService, $filter, $timeout) {
 				$scope.activeWindows = [];
     			$scope.contact = $rootScope.plustxtcacheobj.contact;
     			$scope.products = $rootScope.plustxtcacheobj.products;
     			$scope.templates = $rootScope.templates;
     			
+    			$scope.$on('Agent-Logout-Request', function(event, activeUser){
+    				var activeConversations = 0;
+    				angular.forEach($scope.contact, function(value, index){
+    					if(value.chatState != "closed" || value.chatState == "open" ){
+    						++activeConversations;
+    					}
+    				})
+    				if(activeConversations){
+    					$rootScope.logoutRequestRaised = true;
+    					MessageService.confirm("You still have " + activeConversations + " active conversation/s. Please close them.")
+			              .then(function() {
+			              });
+    				}
+    				else{
+    					if($rootScope.chatSDK && $rootScope.chatSDK.connection){
+							$rootScope.chatSDK.connection.send($pres({"type": "unavailable"}));
+							$rootScope.chatSDK.connection = null;
+						}
+						window.location=Globals.AppConfig.logoutUrl;
+    				}
+    			})
+
     			$scope.$on('Active-User-Changed', function(event, activeUser){
     				$scope.activeChatUser = activeUser;
     			})
