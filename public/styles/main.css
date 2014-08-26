@@ -814,20 +814,19 @@ background-image: -webkit-gradient(
 
 .logoutDiv{
 	background-color: #fff;
-	padding: 4px 0px 2px 0px;
 	width: 10%;
 	border: solid 1px #00B8FF;
 	border-radius: 5px;
+	height: 29px;
 }
 
 .logout{
-	text-decoration: none;
 	border-left: solid 1px #00B8FF;
-	/* border-radius: 0px 5px 5px 0px; */
-	padding: 2px 10px 2px 15px;
-	background: #fff;
 	font-size: 15px;
-	color: #5c6467
+	color: #5c6467;
+	margin-left: 23px;
+	padding: 6px;
+	cursor: pointer;
 }
 
 .logout:hover{
@@ -836,13 +835,13 @@ background-image: -webkit-gradient(
 }
 
 .user{
-	margin-left: 6px;
-	background: #fff;
 	height: 20px;
 	width: 21px;
 	background: url(../images/userProfile.png);
 	background-repeat: no-repeat;
 	float: left;
+	margin-top: 4px;
+	margin-left: -5px;
 }
 .clear{
 	clear: both;
