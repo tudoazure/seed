@@ -139,7 +139,7 @@ ul li{
 }
 .fr {float: right;}
 .italicFont{font-style: italic; font-size: 10px; color:#5c6467;}
-.lbl{color: #9ea1a2; font-weight: normal; font-size: 11px;}
+.lbl{color: #9ea1a2; font-weight: normal; font-size: 10px;}
 .f12{font-size: 12px;}
 .f13{font-size: 13px;}
 .bold{ font-weight: 900;}
@@ -580,8 +580,9 @@ font-size: 14px;}
 	height: 20px;
 	width: 22px;
 	border-left: none;
-	padding: 0px 3px 2px 4px;
+	padding: 0px 3px 2px 7px;
 	background: #fff;
+	margin-left: -16px;
 }
 .calendar{
 	color: #00b8ff;
@@ -675,6 +676,10 @@ font-size: 14px;}
 
 .fw-bold{
   font-weight: bold;
+}
+
+.fw-semi-bold{
+  font-weight: 600;
 }
 
 /*bubble classes blue ((189, 231, 255) green 216, 245, 185)*/

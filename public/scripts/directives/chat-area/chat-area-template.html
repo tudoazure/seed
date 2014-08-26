@@ -17,13 +17,13 @@
 					</div>
 				<div class="col-md-12">
 					<div class="col-md-4 price">
-						<span class="f11 fw-bold">Price</span>
+						<span class="f11 fw-semi-bold">Price</span>
 						<div class="priceDiv"> Rs. {{products[chatData.userId].price}}</div>
 					</div>
 					<div class="col-md-1">
 					</div>
 					<div class="col-md-6 price">
-						<span class="f11 fw-bold">Discount</span>
+						<span class="f11 fw-semi-bold">Discount</span>
 						<div class="priceDiv"> Details N/A</div>
 					</div>
 				</div>
@@ -235,9 +235,9 @@
 										<div class="col-md-5 padd mt3">
 											<p>
 												<input type="text" class="col-md-8 p0" ng-model="validDate" datepicker-popup="{{format}}" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" is-open="opened" show-weeks="false" ng-click="open($event)" style="width: 80px;">
-												<a class="cal">
+												<span class="cal">
                 <button type="button" class="calendar" ng-click="open($event)"></button>
-              </a>
+              </span>
 											</p>
 											
 										</div>
