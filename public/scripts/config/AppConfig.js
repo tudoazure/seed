@@ -22,6 +22,9 @@ var Globals = {
     PromoCodeCreate : fulfillmentBaseURI + "admin/promocode/bargain",
     productUrl : catalogUri + "/v1/mobile/product/",
     logoutUrl : webUri + "/logout",
-    CloseChatMessage : '{"CLSCHAT" : "chat closed"}'
+    CloseChatMessage : '{"CLSCHAT" : "chat closed"}',
+    FlashMessageCallTime : 60000,
+    FlashMessageVisibility : 6000000,
+    AgentPingbackCallTime : 60000
   }        
 })();

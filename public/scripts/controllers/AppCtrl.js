@@ -130,7 +130,7 @@
 						session_id : $rootScope.sessionid,
 						t_chats : UtilService.getTotalActiveChatUsers(),
 					}, function success(response){
-						$timeout($scope.agentPingBack, 60000);
+						$timeout($scope.agentPingBack, Globals.AppConfig.AgentPingbackCallTime);
 						console.log("Sucessfully Ping Back");		
 					}, function failure(error){
 						console.log("Error in Pinging Back Chat Server");	
@@ -142,17 +142,16 @@
 						session_id : $rootScope.sessionid
 					}, function success(response){
 						if(response && response.data && response.data['f_msg']){
-						 if($rootScope.flashMessage != response.data['f_msg']){
-						 	$scope.flashMessage = $rootScope.flashMessage = response.data['f_msg'];
-						 	window.setTimeout(function(){
-						 		console.log('clear message')
-						 		$scope.flashMessage = $rootScope.flashMessage ='';
-						 		$scope.$apply();
-						 	}, 10000);
-						 	// alert(response.data['f_msg']);
-						 }
+							if($scope.flashMessage != response.data['f_msg']){
+								$scope.flashMessage = response.data['f_msg'];
+								if($scope.flashMessage){
+								 	window.setTimeout(function(){
+								 		$scope.$apply();
+								 	}, Globals.AppConfig.FlashMessageVisibility);
+								}
+							}
 						}
-						$timeout($scope.getFlashMessage, 60000);
+						$timeout($scope.getFlashMessage, Globals.AppConfig.FlashMessageCallTime);
 						console.log("Sucessfully Flash Message Call");		
 					}, function failure(error){
 						console.log("Error in Flash Message Call");	
