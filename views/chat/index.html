@@ -86,7 +86,9 @@
         </div>
     </div>
     <div ng-view ="" class="container" align="center"></div>
-    <div class="flashmsg container f14 fw-bold" ng-if="flashMessage"> {{flashMessage}}</div>
+    <div class="flashmsg container f14 fw-bold" ng-if="flashMessage"> 
+        <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" style="padding-bottom: 10px;">{{flashMessage}}</marquee>
+    </div>
    
 </body>
 </html>
