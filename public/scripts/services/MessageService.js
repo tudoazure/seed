@@ -58,6 +58,10 @@
             messageBody.remove();
             deferred.reject();
           });
+          $(window.document).keyup(function(e){
+            messageBody.remove();
+            deferred.reject();
+          });
           $("body").append(messageBody);
         });
         return deferred.promise;
