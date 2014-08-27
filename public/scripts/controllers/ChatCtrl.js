@@ -67,8 +67,6 @@
 	    				if($scope.activeWindows.length > 0){
 	    					$scope.activeChatUser = $scope.activeWindows[0].userId;
 	    				}
-
-
                     });
     			})
     			
@@ -96,7 +94,6 @@
 						        	conversation.userId = key;
 						        	conversation.messages =  val;
 						        	$scope.activeWindows.push(conversation);
-
 					        	}
 					        })
 					    }

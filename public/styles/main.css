@@ -896,9 +896,9 @@ background-image: -webkit-gradient(
 .three-quarters:not(:required) { -webkit-animation: three-quarters 1250ms infinite linear; -moz-animation: three-quarters 1250ms infinite linear; -ms-animation: three-quarters 1250ms infinite linear; -o-animation: three-quarters 1250ms infinite linear; animation: three-quarters 1250ms infinite linear; border: 8px solid #3388ee; border-right-color: transparent; -webkit-border-radius: 24px; border-radius: 24px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; display: inline-block; position: relative; overflow: hidden; text-indent: -9999px; width: 32px; height: 32px; }
 
 
-.message-body.error, .message-body.info, .message-body.success { padding: 15px; color: #72612b; background: #ffedbb; border: 1px solid #f2d083; position: absolute; top: 42px; right: 20px; z-index: 105; max-width: 300px; -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
+.message-body.error, .message-body.info, .message-body.success { font-size: 16px; padding: 15px; color: #72612b; background: #ffedbb; border: 1px solid #f2d083; position: absolute; top: 42px; right: 90px; z-index: 105; max-width: 300px; -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
 .message-body.error span, .message-body.info span, .message-body.success span { width: 95%; }
-.message-body.error .button, .message-body.info .button, .message-body.success .button { font-size: 16px; cursor: pointer; position: relative; top: -8px; right: -8px; }
+.message-body.error .button, .message-body.info .button, .message-body.success .button { font-size: 16px; cursor: pointer; position: relative; right: -70px; }
 .message-body.info { background: #f0f8db; border: 1px solid #f2d083; position: absolute; top: 42px; left: 37.083335%; z-index: 105; width: 30%; }
 .message-body.error { background: #ffe4e4; border-color: #eed3d7; color: #b94a48; }
 .message-body.success { background: #f0f8db; border-color: #d6e9c6; color: #468847; }

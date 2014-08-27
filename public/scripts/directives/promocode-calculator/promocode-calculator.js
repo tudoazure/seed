@@ -7,8 +7,8 @@
         templateUrl: 'scripts/directives/promocode-calculator/promocode-calculator-template.html',
         scope: false,
         link: function(scope, element, attrs) {
-          scope.discountPC = 0;
-          scope.discountABS = 0;
+          scope.discountPC = "";
+          scope.discountABS = "";
           scope.discountType = "percentage"; 
           scope.$watch(function(){return scope.activeChatUser;}, function(value) {
             scope.product = scope.products[value];

@@ -109,7 +109,7 @@
                 }
                 scope.showLoader=false;
               }, function(error){
-                alert("Error occured in fetching the product details.")
+                MessageService.displayError("Error occured in fetching the product details for " + scope.userName);
                 console.log(error);
                 scope.showLoader=false;
               });
@@ -128,12 +128,38 @@
             scope.hideError();
             // scope.promoError = false;
             if(scope.promoType == 'percentage'){
-              if(!scope.percentCap){ scope.percentCapError = "Please enter percentage value"} 
-              if(!scope.capLimit){ scope.capLimitError = "Please enter upper limit"}
+              if(!scope.percentCap){ 
+                scope.percentCapError = "Discount % is required" ;
+              }
+              else if(scope.percentCap > 50){
+                scope.percentCapError = "Please enter a value less than 50";
+              }
+              else if(scope.percentCap <= 0){
+                scope.percentCapError = "Please enter a value greater than 0";
+              }  
+              if(!scope.capLimit){ 
+                scope.capLimitError = "Please enter upper limit"
+              }
+              else if(scope.capLimit <= 0){
+                scope.capLimitError = "Please enter a limit greater than 0"
+              }
             }else{
-              if(!scope.absoluteCap){scope.absoluteCapError = "Please enter ammount value"}
+              if(!scope.absoluteCap){
+                scope.absoluteCapError = "Discount amount is required"
+              }
+              else if(scope.absoluteCap <= 0){
+                scope.absoluteCapError = "Please enter a value greater than 0"
+              }
             }
-            if(!scope.qty){scope.qtyError = "Please enter minimum quantity"}
+            if(!scope.qty){
+              scope.qtyError = "Please enter minimum quantity";
+            }
+            else if (scope.qty <= 0){
+              scope.qtyError = "Please enter a value greater than 0";
+            }
+            else if (scope.qty >5){
+              scope.qtyError = "Please enter a value less than 5";
+            }
             if(!scope.validDate){scope.validDateError = "Please enter validity date"}
             if(scope.percentCapError || scope.capLimitError || scope.qtyError || scope.validDateError 
               || scope.absoluteCapError ){
@@ -155,43 +181,50 @@
               if(scope.isFreeShiping){
                 promoObj.freeshipping = scope.isFreeShiping;
               }
-              promoObj.product_id = scope.products[scope.chatData.userId].productId;
-              promoObj.user_id = scope.products[scope.chatData.userId].userId;
-              promoObj.valid_upto = new Date(scope.validDate).getTime();
+              if(scope.products && scope.products[scope.chatData.userId]){
+                promoObj.product_id = scope.products[scope.chatData.userId].productId;
+                promoObj.user_id = scope.products[scope.chatData.userId].userId;
+                promoObj.valid_upto = new Date(scope.validDate).getTime();
 
-              var discountVal = "";
-              if(scope.promoType == 'percentage'){
-                var discount = Math.round(scope.percentCap * scope.products[scope.chatData.userId].price)/100;
-                if(promoObj.cap != ""){
-                  discountVal = (discount > promoObj.cap) ?  promoObj.cap : discount ;
+                var discountVal = "";
+                if(scope.promoType == 'percentage'){
+                  var discount = Math.round(scope.percentCap * scope.products[scope.chatData.userId].price)/100;
+                  if(promoObj.cap != ""){
+                    discountVal = (discount > promoObj.cap) ?  promoObj.cap : discount ;
+                  }
+                  else{
+                    discountVal = discount;
+                  }
                 }
                 else{
-                  discountVal = discount;
+                  discountVal = scope.absoluteCap;
                 }
+
+                var svc = httpService.callFunc(bargainPromo);
+                svc.post(promoObj).then(function(response){
+                  if (response) {
+                    var promoCodeData = {
+                      message : response.success_message.trim().replace('${amount}', discountVal).replace("Code applied:" , "Use Code:"),
+                      promocode : response.code,
+                      validity : moment(response.valid_upto).format("MMM Do, h:mm a") ,
+                      minQuantity : promoObj.qty
+                    } 
+                    var promoCodeMessage = {PRMCODE: promoCodeData} ;
+                    scope.agentMessage = UtilService.stringifyEmitUnicode(promoCodeMessage, true);
+                    scope.submitMessage(true);
+                    scope.showPromo = !scope.showPromo;
+                    MessageService.displaySuccess("Promo code generated for " + scope.userName );
+                  }
+                  scope.showLoader=false;
+                }, function(errorObj){
+                  MessageService.displayError("Error in generating the promo code for " + scope.userName + " : " + errorObj.error);
+                  scope.showLoader=false;
+                });
               }
               else{
-                discountVal = scope.absoluteCap;
+                scope.showLoader=false;
+                MessageService.displayError("No product details available. Promo code could not be generated for  " + scope.userName);
               }
-
-              var svc = httpService.callFunc(bargainPromo);
-              svc.post(promoObj).then(function(response){
-                if (response) {
-                  var promoCodeData = {
-                    message : response.success_message.trim().replace('${amount}', discountVal).replace("Code applied:" , "Use Code:"),
-                    promocode : response.code,
-                    validity : moment(response.valid_upto).format("MMM Do, h:mm a") ,
-                    minQuantity : promoObj.qty
-                  } 
-                  var promoCodeMessage = {PRMCODE: promoCodeData} ;
-                  scope.agentMessage = UtilService.stringifyEmitUnicode(promoCodeMessage, true);
-                  scope.submitMessage(true);
-                  scope.showPromo = !scope.showPromo;
-                }
-                scope.showLoader=false;
-              }, function(errorObj){
-                MessageService.displayError("Error in generating the promo code for " + scope.userName + " : " + errorObj.error);
-                scope.showLoader=false;
-              });
             }
           };
 
