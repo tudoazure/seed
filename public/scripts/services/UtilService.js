@@ -64,17 +64,17 @@
 		    return output.toString();
 		};
 
-		var guid = function() {
-			function s4() {
-			return Math.floor((1 + Math.random()) * 0x10000)
-			           .toString(16)
-			           .substring(1);
-			}
-			return function() {
-			return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-			       s4() + '-' + s4() + s4() + s4();
-			};
-		};
+		var guid = (function() {
+			  function s4() {
+			    return Math.floor((1 + Math.random()) * 0x10000)
+			               .toString(16)
+			               .substring(1);
+			  }
+			  return function() {
+			    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+			           s4() + '-' + s4() + s4() + s4();
+			  };
+		})();
 
 		var stringifyEmitUnicode = function(validObj, emitUnicode){
 			var json = JSON.stringify(validObj);
@@ -366,6 +366,7 @@
       		getTimeInLongString: getTimeInLongString,
       		getMilliTimeToString : milliTimeToString,
       		getJidToId : jIdToId,
+      		guid : guid,
       		addMessage : addMessage,
       		syncHistory : syncHistory,
       		getAllPendingMessages : getAllPendingMessages,

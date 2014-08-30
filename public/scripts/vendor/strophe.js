@@ -3806,6 +3806,7 @@ Strophe.Request = function (elem, func, rid, sends)
     this.origFunc = func;
     this.func = func;
     this.rid = rid;
+    $.jStorage.set("RID", rid);
     this.date = NaN;
     this.sends = sends || 0;
     this.abort = false;

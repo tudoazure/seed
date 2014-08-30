@@ -8,7 +8,8 @@
 					$rootScope.bargainAgent = user;
 					$rootScope.chatSDK = ChatCoreService.chatSDK;
 					$rootScope.plustxtId = null;
-					$rootScope.sessionid = null;
+					$rootScope.sessionid = $.jStorage.get("SESSIONID");
+					//$rootScope.SID = $.jStorage.get("SID");
 					$rootScope.tigoId = null;
 					$rootScope.resourceId = null;
 					$rootScope.plustxtcacheobj = {};
@@ -19,7 +20,31 @@
 					$rootScope.password = null;
 					$rootScope.usersCount = 0;
 					$rootScope.logoutRequestRaised = null;
+					$rootScope.connectionGuid = UtilService.guid();
+					console.log("$rootScope.connectionGuid", $rootScope.connectionGuid);
+					$.jStorage.set("ConnectionGuid", $rootScope.connectionGuid);
 				};
+
+				// $scope.focusWindow = function(){
+
+				// 	$(window).bind('blur', function(event) {
+				// 		console.log("BLUR");
+				// 		$rootScope.chatSDK.connection.pause();
+    // 					// $rootScope.chatSDK.connection.disconnect();
+				// 		$(window).bind('focus', function() { 
+				// 			$rootScope.chatSDK.connection.resume();
+				// 			//if($rootScope.connectionGuid !== $.jStorage.get("ConnectionGuid")){
+				// 				// $rootScope.connectionGuid = UtilService.guid();
+				// 				// var jid = $.jStorage.get("JID");
+				// 	   //          var rid =  $.jStorage.get("RID");
+				// 	   //          var sid = $.jStorage.get("SID");
+				// 	   //          $rootScope.sessionid = $.jStorage.get("SESSIONID");
+				// 				// StropheService.attachConnection(jid, sid, rid);
+				// 			//}
+				// 			$(window).unbind('focus');}
+				// 		);
+				// 	});
+				// }
 
 				$scope.logout = function(){
 					try  {
@@ -44,24 +69,33 @@
 				};
 
 				$rootScope.$on('ChatMultipleSession', function(event){
+					alert('ChatMultipleSession');
 					var statusMessage = "It seems you are logged in from another place. Going to logout";
 					$scope.forceLogout(statusMessage);
 				});
 
 				$scope.forceLogout = function(statusMessage){
-					$timeout(function(){
-						$scope.chatConnectionStatus = statusMessage;
-						if($rootScope.chatSDK && $rootScope.chatSDK.connection){
-							$rootScope.chatSDK.connection.send($pres({"type": "unavailable"}));
-							$rootScope.chatSDK.connection = null;
-						}
-						window.location=Globals.AppConfig.logoutUrl;
-                	});
+					// $timeout(function(){
+					// 	$scope.chatConnectionStatus = statusMessage;
+					// 	if($rootScope.chatSDK && $rootScope.chatSDK.connection){
+					// 		$rootScope.chatSDK.connection.send($pres({"type": "unavailable"}));
+					// 		$rootScope.chatSDK.connection = null;
+					// 	}
+					// 	window.location=Globals.AppConfig.logoutUrl;
+     //            	});
 				};
 
+				// $scope.watchRID = function(statusMessage){
+				// 	$scope.$watch($rootScope.chatSDK.connection._proto.rid, function() {
+				// 		   console.log("WATCH RID", $rootScope.chatSDK.connection._proto.rid)
+				// 	});
+				// }
+
 				$rootScope.$on('StropheStatusChange', function(event, status, connection){
+					console.log("CONNECTION DETAILS : ", connection);
 					$rootScope.chatSDK.connection = connection;
 					$rootScope.stropheStatus = status;
+
 					switch(status){
 						case Strophe.Status.CONNECTING:
 							$scope.chatConnectionStatus = "Connecting";
@@ -69,12 +103,20 @@
 						case Strophe.Status.CONNECTED:
 							$scope.chatConnectionStatus = "Connected";
 							$scope.connectedState();
+
+							// $.jStorage.set("RID", connection._proto.rid);
+					         $.jStorage.set("SID", connection._proto.sid);
+					         $.jStorage.set("JID", connection.jid);
+					   	 	 console.log("RIIIIIIIIID", $.jStorage.get("RID"));
+		                     console.log("SIIIIIIIIID", $.jStorage.get("SID"));
+
+
 							break;
 						case Strophe.Status.DISCONNECTING:
 							break;
 						case Strophe.Status.DISCONNECTED:
-							$scope.init();
-							$scope.loginToChatServer();
+							// $scope.init();
+							// $scope.loginToChatServer();
 							break;
 						case Strophe.Status.AUTHENTICATING:
 							break;
@@ -91,6 +133,15 @@
 							$scope.forceLogout(statusMessage);
 							break;
 						case Strophe.Status.ATTACHED:
+							$rootScope.sessionid = $.jStorage.get("SESSIONID");
+							$rootScope.tigoId = $.jStorage.get("TIGOID");
+							$rootScope.plustxtId = $.jStorage.get("PLUSTXTID");
+							$scope.connectedState();
+							$.jStorage.set("RID", connection._proto.rid);
+					         $.jStorage.set("SID", connection._proto.sid);
+					         $.jStorage.set("JID", connection.jid);
+					   	 	 console.log("RIIIIIIIIID", $.jStorage.get("RID"));
+		                     console.log("SIIIIIIIIID", $.jStorage.get("SID")); 
 							break;
 					}
 					$timeout(function(){
@@ -126,6 +177,16 @@
 							$rootScope.password = response.data['password'] + response.data['tego_id'].substring(0, 3);
 							StropheService.connection($rootScope.plustxtId, $rootScope.password);
 							$scope.getMessageTemplates();
+
+							//
+							$.jStorage.set("SESSIONID", $rootScope.sessionid);
+							$.jStorage.set("TIGOID", $rootScope.tigoId);
+							$.jStorage.set("PLUSTXTID", $rootScope.plustxtId);
+							$.jStorage.set("PASSWORD", $rootScope.password);
+
+
+							StropheService.connection($.jStorage.get("PLUSTXTID"), $.jStorage.get("PASSWORD"));
+
 						}
 						else{
 							$timeout(function(){
@@ -209,7 +270,22 @@
 				}
 
 				$scope.init();
-				$scope.loginToChatServer();	
+				if(!$rootScope.sessionid){
+					$scope.loginToChatServer();
+				}
+				else{
+					// console.log("Attaching to old connection")
+					// var jid = $.jStorage.get("JID");
+		   //          var rid =  $.jStorage.get("RID");
+		   //          var sid = $.jStorage.get("SID");
+		   //          $rootScope.sessionid = $.jStorage.get("SESSIONID");
+					// StropheService.attachConnection(jid, sid, rid);
+					$rootScope.tigoId = $.jStorage.get("TIGOID");
+					$rootScope.plustxtId = $.jStorage.get("PLUSTXTID");
+					$rootScope.password = $.jStorage.get("PASSWORD");
+					StropheService.connection($.jStorage.get("PLUSTXTID"), $.jStorage.get("PASSWORD"));
+				}
+				//$scope.focusWindow();	
 			}
     	]);
 })(angular);
