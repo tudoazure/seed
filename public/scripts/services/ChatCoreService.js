@@ -17,8 +17,6 @@
         isSpecialMessage = response['isSpecialMessage'];
       }
       var jid = Strophe.getBareJidFromJid(full_jid);
-
-
       var jid_id = UtilService.getJidToId(jid);
 
       var MessID='mid-'+messageId;
@@ -115,9 +113,9 @@
               if(!$rootScope.resourceId){
                 $rootScope.resourceId = resourceId;
               }
-              // else if(($rootScope.resourceId == resourceId && ptype=="unavailable")){
-              //   $rootScope.$broadcast("ChatMultipleSession");
-              // }
+              else if(($rootScope.resourceId == resourceId && ptype=="unavailable")){
+                $rootScope.$broadcast("ChatMultipleSession");
+              }
             }
             return true;
 
@@ -132,7 +130,6 @@
             console.log("ChatCoreService @on_message called :");
             var threadId = $(message).find("thread").text();
             var body = $(message).find("html > body");
-            console.log("INCOMING MESSAGE", $(message)[0]);
             if (body.length === 0) {
                 body = $(message).find('body');
                 if (body.length > 0) {
@@ -155,6 +152,7 @@
             console.log("ChatCoreService  @on_message - Message Text :", body);
             var response = {};
             response['full_jid'] = $(message).attr('from');
+            response['id'] = $(message).attr('id');
             response['id'] = $(message).attr('id');
             response['threadId'] = threadId;
             var jid = $(message).attr('from');
@@ -249,7 +247,7 @@
               console.log("All Pending Messages Count : " + offmessageArray.length);
             for (var i=0 ; i < offmessageArray.length ; i++){
                 console.log('tegoid ' + offmessageArray[i]['tegoid']+ ' mid '+offmessageArray[i]['mid']+ 'body '+ offmessageArray[i]['body'])
-                jid=offmessageArray[i]['tegoid']+'@' + "chat-staging.paytm.com";
+                jid=offmessageArray[i]['tegoid']+'@' + Globals.AppConfig.ChatHostURI;
                 mid=offmessageArray[i]['mid'];
                 body=offmessageArray[i]['body'];
 
@@ -265,7 +263,8 @@
                UtilService.updateMessageStatus(mid, 0, Strophe.getNodeFromJid(jid), strTimeMii);
 
                // For sending the closed message
-               if(body == Globals.AppConfig.CloseChatMessage){
+               var closeChatMesg = {CLSCHAT : "chat closed" };
+               if(body == JSON.stringify(closeChatMesg)){
                  $rootScope.$broadcast("Close-User-Chat", Strophe.getNodeFromJid(jid));
                }
             }

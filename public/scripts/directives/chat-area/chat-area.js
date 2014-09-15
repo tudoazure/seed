@@ -45,12 +45,16 @@
             if(scope.contact[scope.chatData.userId].chatState != "closed"){
               MessageService.confirm("Are you sure you want to close conversation with " + scope.userName + " ?")
               .then(function() {
-                scope.agentMessage = Globals.AppConfig.CloseChatMessage;
+                var body = {CLSCHAT : "chat closed" };
+                body = UtilService.stringifyEmitUnicode(body, true);
+                scope.agentMessage = body;
                 scope.submitMessage(false);
               });
             }
             else{
-              scope.agentMessage = Globals.AppConfig.CloseChatMessage;
+              var body = {CLSCHAT : "chat closed" };
+              body = UtilService.stringifyEmitUnicode(body, true);
+              scope.agentMessage = body;
               scope.submitMessage(false);
             }
           }
@@ -257,7 +261,7 @@
                 sender: scope.agentId,
                 sent_on: strTimeMii.substring(0, 10),
                 state: 0,
-                txt: scope.agentMessage,
+                txt: scope.agentMessage.replace(/\r?\n/g, " "),
                 isProductDetails : false,
                 isPromoCode : isPromoCode
               }

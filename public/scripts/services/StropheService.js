@@ -11,15 +11,6 @@
 				$rootScope.$emit("StropheStatusChange", status, connect);
 			})
 		};
-
-		var attachConnection = function(jid, sid, rid) {
-			var connection = new Strophe.Connection(Globals.AppConfig.StropheConnect);
-			connection.attach(jid, sid, parseInt(rid, 10)+1, function (status) {
-				console.log("StropheService Status Attach : " + status);
-				$rootScope.$emit("StropheStatusChange", status, connection);
-			})
-		};
-
 		var connectionStatus = function(status){
 			var statusMesg = "";
 			switch(status.toString()){
@@ -56,7 +47,6 @@
 		}
 		StropheService = {
       		connection: connection,
-      		attachConnection : attachConnection,
       		connectionStatus : connectionStatus 
       	}
 		return StropheService;
