@@ -9,7 +9,7 @@
         scope: false,
         link: function(scope, element, attrs) {         
           scope.templates = scope.templates;
-          scope.userName = scope.contact[scope.chatData.userId].name;
+          scope.userName = scope.contact[scope.chatData.threadId].name;
           scope.messages = scope.chatData.messages;
 
           scope.openDefaultTemplates = function(){
@@ -103,7 +103,7 @@
           scope.getProductDetail = function(){
             if(!scope.productDetail){
               scope.showLoader=true;
-              var productUrl =  Globals.AppConfig.productUrl + scope.products[scope.chatData.userId].productId;
+              var productUrl =  Globals.AppConfig.productUrl + scope.products[scope.chatData.threadId].productId;
               var svc = httpService.callFunc(productUrl);
               svc.get().then(function(response){
                 if (response) {
@@ -185,14 +185,14 @@
               if(scope.isFreeShiping){
                 promoObj.freeshipping = scope.isFreeShiping;
               }
-              if(scope.products && scope.products[scope.chatData.userId]){
-                promoObj.product_id = scope.products[scope.chatData.userId].productId;
-                promoObj.user_id = scope.products[scope.chatData.userId].userId;
+              if(scope.products && scope.products[scope.chatData.threadId]){
+                promoObj.product_id = scope.products[scope.chatData.threadId].productId;
+                promoObj.user_id = scope.products[scope.chatData.threadId].userId;
                 promoObj.valid_upto = new Date(scope.validDate).getTime();
 
                 var discountVal = "";
                 if(scope.promoType == 'percentage'){
-                  var discount = Math.round(scope.percentCap * scope.products[scope.chatData.userId].price)/100;
+                  var discount = Math.round(scope.percentCap * scope.products[scope.chatData.threadId].price)/100;
                   if(promoObj.cap != ""){
                     discountVal = (discount > promoObj.cap) ?  promoObj.cap : discount ;
                   }
@@ -263,7 +263,8 @@
                 state: 0,
                 txt: scope.agentMessage.replace(/\r?\n/g, " "),
                 isProductDetails : false,
-                isPromoCode : isPromoCode
+                isPromoCode : isPromoCode,
+                threadId : scope.chatData.threadId
               }
               scope.chatData.messages.push(message);
               var jId = scope.chatData.userId + "@" + Globals.AppConfig.ChatHostURI;

@@ -179,8 +179,9 @@
 	        return midread;
 	    };
 
-	    var updateMessageStatus = function(inmessageid, instatus, inotherpartytigoid, intime){
-	        var messageArray =  $rootScope.plustxtcacheobj['message'][inotherpartytigoid];
+	    var updateMessageStatus = function(inmessageid, instatus, inotherpartytigoid, intime, threadId){
+	        //var messageArray =  $rootScope.plustxtcacheobj['message'][inotherpartytigoid];
+	        var messageArray =  $rootScope.plustxtcacheobj['message'][threadId];
 	        for (var key in messageArray)
 	        {
 	            if (messageArray[key]['mid'] == inmessageid) {
@@ -190,12 +191,14 @@
 	        }
 	        // messageArray can be undefined after close chat
 	        if(messageArray){
-	        	$rootScope.plustxtcacheobj['message'][inotherpartytigoid] = messageArray;
+	        	//$rootScope.plustxtcacheobj['message'][inotherpartytigoid] = messageArray;
+	        	$rootScope.plustxtcacheobj['message'][threadId] = messageArray;
 	    	}
 	    };
 
-	    var updateMessageStatusAsRead = function(inotherpartytigoid, intime){
-			var messageArray = $rootScope.plustxtcacheobj['message'][inotherpartytigoid];
+	    var updateMessageStatusAsRead = function(inotherpartytigoid, intime, threadId){
+	    	var messageArray = $rootScope.plustxtcacheobj['message'][threadId];
+			//var messageArray = $rootScope.plustxtcacheobj['message'][inotherpartytigoid];
 			var midread = [];
 			for (var key in messageArray)
 			{
@@ -207,7 +210,8 @@
 			}
 			// messageArray can be undefined after close chat
 			if(messageArray){
-				$rootScope.plustxtcacheobj['message'][inotherpartytigoid] = messageArray;
+				//$rootScope.plustxtcacheobj['message'][inotherpartytigoid] = messageArray;
+				$rootScope.plustxtcacheobj['message'][threadId] = messageArray;
 			}
 			return midread;
 		};
@@ -249,7 +253,11 @@
 	        		var specialMessage = JSON.parse(inMessage);
 	        		if(specialMessage.PRDCNTXT){
 		        		messageobj['isProductDetails'] = true;
-						var productObj ={}
+		        		// Assigning ThreadId for a new chat
+						if(!messageobj.threadId){
+							messageobj['threadId'] = productObj.productId + "-" + guid();
+						}
+						var productObj ={};
 						productObj.imageUrl = specialMessage.PRDCNTXT.image_url;
 						productObj.description = specialMessage.PRDCNTXT.description;
 						productObj.price = specialMessage.PRDCNTXT.price.replace("Rs" , "").trim();
@@ -257,12 +265,9 @@
 						productObj.productId = specialMessage.PRDCNTXT.id;
 						productObj.userId = specialMessage.PRDCNTXT.user_id;
 						productObj.productUrl = specialMessage.PRDCNTXT.product_url;
-						$rootScope.plustxtcacheobj.products[otherpartyid] = productObj;
+						$rootScope.plustxtcacheobj.products[threadId] = productObj;
 
-						// Assigning ThreadId for a new chat
-						if(!messageobj.threadId){
-							messageobj['threadId'] = productObj.productId + "-" + guid();
-						}
+						
 			        }
 			        else if(specialMessage.CLSCHAT){
 			        	messageobj['isCloseChatMesg'] = true;
@@ -272,16 +277,16 @@
 	            }
 	        }
 
-	        if ($rootScope.plustxtcacheobj['contact'].hasOwnProperty(otherpartyid))
+	        if ($rootScope.plustxtcacheobj['contact'].hasOwnProperty(threadId))
 	        {
 	        	if(messageobj.isCloseChatMesg){
-	        		$rootScope.plustxtcacheobj.contact[otherpartyid].chatState = "closed";
+	        		$rootScope.plustxtcacheobj.contact[threadId].chatState = "closed";
 	        	}
 	        	if(messageobj.isProductDetails){
-	        		$rootScope.plustxtcacheobj.contact[otherpartyid].chatState = "open";
-	        		$rootScope.plustxtcacheobj.contact[otherpartyid].threadId = messageobj.threadId;
+	        		$rootScope.plustxtcacheobj.contact[threadId].chatState = "open";
+	        		$rootScope.plustxtcacheobj.contact[threadId].id = otherpartyid;
 	        	}
-	        	$rootScope.plustxtcacheobj.contact[otherpartyid].lastActive = getTimeInLongString();
+	        	$rootScope.plustxtcacheobj.contact[threadId].lastActive = getTimeInLongString();
 	        }
 	        else {
 	            $rootScope.usersCount = $rootScope.usersCount + 1;
@@ -291,24 +296,23 @@
 	        	contactObj.lastActive = getTimeInLongString();
 	        	contactObj.chatState = "open";
 	        	contactObj.threadId = messageobj.threadId;
-	        	$rootScope.plustxtcacheobj['contact'][otherpartyid] = contactObj;
+	        	$rootScope.plustxtcacheobj['contact'][threadId] = contactObj;
 	        } 
 
 
 
-	        if ($rootScope.plustxtcacheobj['message'].hasOwnProperty(otherpartyid))
+	        if ($rootScope.plustxtcacheobj['message'].hasOwnProperty(threadId))
 	        {
-	            messagelist = $rootScope.plustxtcacheobj['message'][otherpartyid];
+	            messagelist = $rootScope.plustxtcacheobj['message'][threadId];
 	            messagelist.push(messageobj)
 	        }
 	        else {
 	            messagelist = [];
 	            messagelist.push(messageobj);
 	        }          
-	        $rootScope.plustxtcacheobj['message'][otherpartyid] = messagelist;
+	        $rootScope.plustxtcacheobj['message'][threadId] = messagelist;
 	        $rootScope.$broadcast("ChatObjectChanged", $rootScope.plustxtcacheobj);
 
-	        var threadId = $rootScope.plustxtcacheobj['contact'][otherpartyid].threadId;
 	        if(messageobj.isProductDetails){
 	        	var totalChats = getTotalActiveChatUsers();
 	        	chatStarted($rootScope.sessionid, otherpartyid, totalChats, threadId);

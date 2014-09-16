@@ -1,24 +1,24 @@
 <!-- <div class="col-md-3"> -->
 	<div class="col-md-12" style="padding:0px;">
-		<ul class="chatUL" ng-class="activeChatUser == chatData.userId ? 'activeChat' : 'inactive'">
+		<ul class="chatUL" ng-class="activeChatUser == chatData.threadId ? 'activeChat' : 'inactive'">
 			
 			<li class="chatheader" ng-click="setFocus()">
 				<div class="row">
-					<div class="col-md-10  h11 fw-bold" > {{userName}} ({{chatData.userId}})</div>
+					<div class="col-md-10  h11 fw-bold" > {{userName}} ({{contact[chatData.threadId].userId}})</div>
 					<div class="col-md-1  closeIcon" ng-click="closeUserChat()"></div>
 				</div>
 			</li>
 			<li class="productDetail" ng-click="setFocus()">
 					<div class="col-md-3" ng-click="getProductDetail()">
-						<img ng-src={{products[chatData.userId].imageUrl}} class="productImg"></img>
+						<img ng-src={{products[chatData.threadId].imageUrl}} class="productImg"></img>
 					</div>
 					<div class="col-md-9 productDescription">
-						<span class="detail">{{products[chatData.userId].description}}</span>
+						<span class="detail">{{products[chatData.threadId].description}}</span>
 					</div>
 				<div class="col-md-12">
 					<div class="col-md-4 price">
 						<span class="f11 fw-semi-bold">Price</span>
-						<div class="priceDiv"> Rs. {{products[chatData.userId].price}}</div>
+						<div class="priceDiv"> Rs. {{products[chatData.threadId].price}}</div>
 					</div>
 					<div class="col-md-1">
 					</div>
@@ -39,16 +39,16 @@
 				<div style="margin-bottom:10px;">
 					<!-- <span ng-click="loadHistory(chatData.userId)">Load Previous Message</span> -->
 					<div ng-repeat='message in messages'>
-						<div class='bubble fr reporter bgblue', , ng-class="message.sender== chatData.userId ? 'user-mesg' : 'bubble--alt agent-mesg'" ng-if="!message.isProductDetails && !message.isCloseChatMesg">
+						<div class='bubble fr reporter bgblue', , ng-class="message.sender== contact[chatData.threadId].userId ? 'user-mesg' : 'bubble--alt agent-mesg'" ng-if="!message.isProductDetails && !message.isCloseChatMesg">
 		                	<div class='chat-name' ng-if="!message.isCloseChatMesg && !message.isPromoCode">
 		                		{{message.txt}}
 		            		</div>
 		            		<div class='chat-name' ng-if="message.isPromoCode">
 		                		{{getJsonParsedMesg(message.txt).PRMCODE.message}}
 		            		</div>
-		            		<span ng-if="message.sender != chatData.userId" style='float:right;font-size:9px'>{{ getMesgState(message.state)}}</span>
+		            		<span ng-if="message.sender != contact[chatData.threadId].userId" style='float:right;font-size:9px'>{{ getMesgState(message.state)}}</span>
 	        			</div>
-	        			<div align="center" class="clear messageTime" ng-if="message.sender != chatData.userId" style='font-size:9px' >{{parsedDate(message.sent_on)}}</div>
+	        			<div align="center" class="clear messageTime" ng-if="message.sender != contact[chatData.threadId].userId" style='font-size:9px' >{{parsedDate(message.sent_on)}}</div>
 	        			<div class='leftConversation clear' ng-if="message.isCloseChatMesg">
 	                		User left the conversation
 	            		</div>

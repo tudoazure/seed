@@ -189,12 +189,12 @@
                 // Delivery Acknowledgment
                 if (deliveryAckID){
                   console.log("@on_message : Status -- DELIVERED From : " + response['full_jid']);
-                  UtilService.updateMessageStatus(deliveryAckID, 2, Strophe.getNodeFromJid(jid), timeInMilliSecond);
+                  UtilService.updateMessageStatus(deliveryAckID, 2, Strophe.getNodeFromJid(jid), timeInMilliSecond, threadId);
                 }
                 //read  Acknowledgment
                 if (readAckID){
                   console.log("@on_message : Status -- READ From : " + response['full_jid']);
-                  UtilService.updateMessageStatus(readAckID, 3, Strophe.getNodeFromJid(jid), timeInMilliSecond);
+                  UtilService.updateMessageStatus(readAckID, 3, Strophe.getNodeFromJid(jid), timeInMilliSecond, threadId);
                 }
                 $rootScope.$broadcast("ChatObjectChanged", $rootScope.plustxtcacheobj);
             }

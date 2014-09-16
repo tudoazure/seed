@@ -81,7 +81,7 @@
 					        angular.forEach($scope.allMessages, function(val, key){
 					        	var contactExists = false;
 					        	angular.forEach($scope.activeWindows, function(value, index){
-					        		if (value.userId == key){
+					        		if (value.threadId == key){
 					        			value.messages =  val;
 					        			contactExists = true;
 					        		}
@@ -91,7 +91,7 @@
 						        		$scope.activeChatUser = key;
 						        	}
 						        	var conversation = {};
-						        	conversation.userId = key;
+						        	conversation.threadId = key;
 						        	conversation.messages =  val;
 						        	$scope.activeWindows.push(conversation);
 					        	}
@@ -102,8 +102,8 @@
 
 				$scope.changeActiveWindow = function(user){
 					if(user){
-						$scope.activeChatUser = user.id;
-						var isChatExist = $filter('filter')($scope.activeWindows, {userId : user.id}, true);
+						$scope.activeChatUser = user.threadId;
+						var isChatExist = $filter('filter')($scope.activeWindows, {threadId : user.threadId}, true);
 						if(isChatExist.length){
 							return;
 						}
@@ -115,17 +115,17 @@
 								if(minTime){
 									if(minTime > contactTime){
 										minTime = contactTime;
-										deactiveContact = value.userId;
+										deactiveContact = value.threadId;
 									}
 								}else{
 									minTime = contactTime;
-									deactiveContact = value.userId;
+									deactiveContact = value.threadId;
 								}
 							});
 							angular.forEach($scope.activeWindows, function(value, index){
 								if(value.userId == deactiveContact){
 									var conversation = {};
-						        	conversation.userId = user.id;
+						        	conversation.threadId = user.threadId;
 						        	conversation.messages =  $scope.allMessages[user.id];
 						        	$scope.activeWindows[index] = conversation;
 								}
@@ -157,7 +157,7 @@
 				}
 
 				$scope.getUnReadMessageCount = function(user){
-					var userMessages = $filter('filter')($scope.allMessages[user.id], {sender : user.id, state : 0}, true);
+					var userMessages = $filter('filter')($scope.allMessages[user.threadId], {threadId : user.threadId, state : 0}, true);
 					return userMessages.length;
 	            };
 
