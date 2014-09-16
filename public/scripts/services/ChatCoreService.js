@@ -236,6 +236,7 @@
            var jid;
            var mid;
            var body;
+           var threadId;
            var timeInMilliSecond;
            var strTimeMii;
            var message;
@@ -250,11 +251,9 @@
                 jid=offmessageArray[i]['tegoid']+'@' + Globals.AppConfig.ChatHostURI;
                 mid=offmessageArray[i]['mid'];
                 body=offmessageArray[i]['body'];
+                threadId = offmessageArray[i]['threadId'];
 
-                // Thread Id for multithreading
-                var thread = $rootScope.plustxtcacheobj.contact[offmessageArray[i]['tegoid']].threadId;
-                console.log("THREAD : " + thread);
-                message = $msg({to: jid, "type": "chat", "id": mid}).c('body').t(body).up().c('thread').t(thread).up().c('active', {xmlns: "http://jabber.org/protocol/chatstates"}).up()
+                message = $msg({to: jid, "type": "chat", "id": mid}).c('body').t(body).up().c('thread').t(threadId).up().c('active', {xmlns: "http://jabber.org/protocol/chatstates"}).up()
                 .c('request', {xmlns: 'urn:xmpp:receipts'}).up().c('meta').c('acl', {deleteafter: "-1", canforward: "1", candownload: "1"});
                 $rootScope.chatSDK.connection.send(message);
                timeInMilliSecond = UtilService.getTimeInLongString();

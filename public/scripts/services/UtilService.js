@@ -172,6 +172,7 @@
 	                    offlinemessage['tegoid'] = messageArray[key1]['receiver'];
 	                    offlinemessage['body'] = messageArray[key1]['txt']
 	                    offlinemessage['mid'] = messageArray[key1]['mid'];
+	                    offlinemessage['threadId'] = messageArray[key1]['threadId'];
 	                    midread[midread.length] = offlinemessage;
 	                }
 	            }

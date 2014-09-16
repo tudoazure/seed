@@ -9,7 +9,7 @@
         scope: false,
         link: function(scope, element, attrs) {         
           scope.templates = scope.templates;
-          scope.userName = scope.contact[scope.chatData.threadId].name;
+          scope.contact = scope.contact[scope.chatData.threadId];
           scope.messages = scope.chatData.messages;
 
           scope.openDefaultTemplates = function(){
@@ -41,9 +41,9 @@
           //date picker
 
           scope.closeUserChat = function(){
-            console.log("Delete Chat from this user: ", scope.chatData.userId);
-            if(scope.contact[scope.chatData.userId].chatState != "closed"){
-              MessageService.confirm("Are you sure you want to close conversation with " + scope.userName + " ?")
+            console.log("Delete Chat from this user: ", scope.contact.id);
+            if(scope.contact.chatState != "closed"){
+              MessageService.confirm("Are you sure you want to close conversation with " + scope.contact.name + " ?")
               .then(function() {
                 var body = {CLSCHAT : "chat closed" };
                 body = UtilService.stringifyEmitUnicode(body, true);
@@ -60,7 +60,7 @@
           }
 
           scope.setFocus = function(){
-            scope.$emit('Active-User-Changed', scope.chatData.userId);
+            scope.$emit('Active-User-Changed', scope.chatData.threadId);
           }
           scope.removeFocus = function(){
           }
@@ -257,7 +257,7 @@
                 id: "",
                 last_ts: strTimeMii.substring(0, 10),
                 mid: mid,
-                receiver: scope.chatData.userId ,
+                receiver: scope.contact.id ,
                 sender: scope.agentId,
                 sent_on: strTimeMii.substring(0, 10),
                 state: 0,
@@ -267,8 +267,8 @@
                 threadId : scope.chatData.threadId
               }
               scope.chatData.messages.push(message);
-              var jId = scope.chatData.userId + "@" + Globals.AppConfig.ChatHostURI;
-              scope.sendMessage(message, jId, timeInMilliSecond, mid);
+              var jId = scope.contact.id + "@" + Globals.AppConfig.ChatHostURI;
+              scope.sendMessage(message, jId, timeInMilliSecond, mid, scope.chatData.threadId);
               scope.agentMessage = "";
             }
           }

@@ -4,7 +4,7 @@
 			
 			<li class="chatheader" ng-click="setFocus()">
 				<div class="row">
-					<div class="col-md-10  h11 fw-bold" > {{userName}} ({{contact[chatData.threadId].userId}})</div>
+					<div class="col-md-10  h11 fw-bold" > {{contact.name}} ({{contact.id}})</div>
 					<div class="col-md-1  closeIcon" ng-click="closeUserChat()"></div>
 				</div>
 			</li>
@@ -39,16 +39,16 @@
 				<div style="margin-bottom:10px;">
 					<!-- <span ng-click="loadHistory(chatData.userId)">Load Previous Message</span> -->
 					<div ng-repeat='message in messages'>
-						<div class='bubble fr reporter bgblue', , ng-class="message.sender== contact[chatData.threadId].userId ? 'user-mesg' : 'bubble--alt agent-mesg'" ng-if="!message.isProductDetails && !message.isCloseChatMesg">
+						<div class='bubble fr reporter bgblue', , ng-class="message.sender== contact.id ? 'user-mesg' : 'bubble--alt agent-mesg'" ng-if="!message.isProductDetails && !message.isCloseChatMesg">
 		                	<div class='chat-name' ng-if="!message.isCloseChatMesg && !message.isPromoCode">
 		                		{{message.txt}}
 		            		</div>
 		            		<div class='chat-name' ng-if="message.isPromoCode">
 		                		{{getJsonParsedMesg(message.txt).PRMCODE.message}}
 		            		</div>
-		            		<span ng-if="message.sender != contact[chatData.threadId].userId" style='float:right;font-size:9px'>{{ getMesgState(message.state)}}</span>
+		            		<span ng-if="message.sender != contact.id" style='float:right;font-size:9px'>{{ getMesgState(message.state)}}</span>
 	        			</div>
-	        			<div align="center" class="clear messageTime" ng-if="message.sender != contact[chatData.threadId].userId" style='font-size:9px' >{{parsedDate(message.sent_on)}}</div>
+	        			<div align="center" class="clear messageTime" ng-if="message.sender != contact.id" style='font-size:9px' >{{parsedDate(message.sent_on)}}</div>
 	        			<div class='leftConversation clear' ng-if="message.isCloseChatMesg">
 	                		User left the conversation
 	            		</div>
