@@ -34,26 +34,26 @@
     				$scope.activeChatUser = activeUser;
     			})
 
-    			$scope.$on('Close-User-Chat', function(event, closeChatUser){		
+    			$scope.$on('Close-User-Chat', function(event, threadId){		
     				$timeout(function(){
     					var closeChatUserIndex;
     					
-    					if($scope.contact[closeChatUser].chatState != "closed"){
-    						$scope.contact[closeChatUser].chatState = "closed";
-    						var threadId = $scope.contact[closeChatUser].threadId;
-	    					UtilService.chatClosed($rootScope.sessionid, closeChatUser, "",  threadId);
+    					if($scope.contact[threadId].chatState != "closed"){
+    						$scope.contact[threadId].chatState = "closed";
+    						var userId = $scope.contact[threadId].id;
+	    					UtilService.chatClosed($rootScope.sessionid, userId, "",  threadId);
     					}
     					angular.forEach($scope.activeWindows, function(value, index){
-    						if(value.userId ==closeChatUser){
+    						if(value.threadId == threadId){
     							closeChatUserIndex = index;
     						}
     					})
 	    				$scope.activeWindows.splice(closeChatUserIndex, 1);
-	    				delete $scope.allMessages[closeChatUser];
-	    				delete $scope.contact[closeChatUser];
-	    				delete $scope.products[closeChatUser];
+	    				delete $scope.allMessages[threadId];
+	    				delete $scope.contact[threadId];
+	    				delete $scope.products[threadId];
 	    				angular.forEach($scope.contact, function(value, index){
-	    					var isChatExist = $filter('filter')($scope.activeWindows, {userId : value.id}, true);
+	    					var isChatExist = $filter('filter')($scope.activeWindows, {threadId : index}, true);
 							if(isChatExist.length){
 								return;
 							}
@@ -65,7 +65,7 @@
 							}
 	    				})
 	    				if($scope.activeWindows.length > 0){
-	    					$scope.activeChatUser = $scope.activeWindows[0].userId;
+	    					$scope.activeChatUser = $scope.activeWindows[0].threadId;
 	    				}
                     });
     			})

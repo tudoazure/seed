@@ -264,7 +264,7 @@
                // For sending the closed message
                var closeChatMesg = {CLSCHAT : "chat closed" };
                if(body == JSON.stringify(closeChatMesg)){
-                 $rootScope.$broadcast("Close-User-Chat", Strophe.getNodeFromJid(jid));
+                 $rootScope.$broadcast("Close-User-Chat", threadId);
                }
             }
            }

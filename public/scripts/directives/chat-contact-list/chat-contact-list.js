@@ -12,7 +12,7 @@
             };
 
             scope.closeChatFromLeftNav = function(user){
-              scope.$emit("Close-User-Chat", user.id);
+              scope.$emit("Close-User-Chat", user.threadId);
             }
           }
         }
