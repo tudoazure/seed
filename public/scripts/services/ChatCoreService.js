@@ -308,7 +308,7 @@
           var strTimeMii;
           var messageId;
           var mid;
-          var midreadArray = UtilService.updateMessageStatusAsRead(tigo_id, timeStamp);
+          var midreadArray = UtilService.updateMessageStatusAsRead(tigo_id, timeStamp, threadId);
           for (var i = 0; i < midreadArray.length; i++) {
              //  utility.comn.consoleLogger('value of message id when clicking on left side panel'+midreadArray[i]);
               timeInMilliSecond = UtilService.getTimeInLongString();
