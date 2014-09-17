@@ -144,7 +144,7 @@
              			UtilService.updateMessageStatus(mid, -1, Strophe.getNodeFromJid(jid), timeInMilliSecond, threadId);
              			var jid_id = $rootScope.chatSDK.jid_to_id(jid);
              			var tigo_id = Strophe.getNodeFromJid(jid);
-						$rootScope.chatSDK.send_Read_Notification(jid, jid_id, tigo_id);
+						$rootScope.chatSDK.send_Read_Notification(jid, jid_id, tigo_id, threadId);
 			        }
 				};
 

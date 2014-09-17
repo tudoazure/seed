@@ -206,7 +206,7 @@
                 }
                 if (readAckID){
                   console.log("@on_message : Status -- READ From : " + response['full_jid']);
-                  UtilService.updateMessageStatus(readAckID, 3, Strophe.getNodeFromJid(jid), timeInMilliSecond);
+                  UtilService.updateMessageStatus(readAckID, 3, Strophe.getNodeFromJid(jid), timeInMilliSecond, threadId);
                 }
                 $rootScope.$broadcast("ChatObjectChanged", $rootScope.plustxtcacheobj);
             }
@@ -217,7 +217,7 @@
                 var messageId = $rootScope.tigoId + "-dv-" + strTimeMii;
                 var mid = messageId.toString();
                 // Sending delivery acknowledment back.
-                var message2 = $msg({to: response['full_jid'], "type": "chat", "id": mid}).c('delivered').t(messageID).up().c('meta');
+                var message2 = $msg({to: response['full_jid'], "type": "chat", "id": mid}).c('delivered').t(messageID).up().c('thread').t(threadId).up().c('meta');
                 // $('#mid-'+messageID).html('Delivered&nbsp;');
                 on_Message_Update_Chat(response);
                 $rootScope.chatSDK.connection.send(message2);
@@ -259,7 +259,7 @@
                timeInMilliSecond = UtilService.getTimeInLongString();
                strTimeMii = timeInMilliSecond.toString();
              //   utility.comn.consoleLogger(' local cache message status upadted from mid '+mid);
-               UtilService.updateMessageStatus(mid, 0, Strophe.getNodeFromJid(jid), strTimeMii);
+               UtilService.updateMessageStatus(mid, 0, Strophe.getNodeFromJid(jid), strTimeMii, threadId);
 
                // For sending the closed message
                var closeChatMesg = {CLSCHAT : "chat closed" };
@@ -280,7 +280,7 @@
              },1000);
             
        },
-        send_Read_Notification : function(jid, jid_id, tigo_id){
+        send_Read_Notification : function(jid, jid_id, tigo_id, threadId){
           var to = Strophe.getDomainFromJid($rootScope.chatSDK.connection.jid);
           var ping = $iq({to:to,type: "get",id: "readACK"}).c("ping", {xmlns: "urn:xmpp:ping"});
           $rootScope.chatSDK.connection.send(ping);
@@ -289,6 +289,7 @@
           informationObj['timeStamp']= UtilService.getTimeInLongString();
           informationObj['jid']=jid;
           informationObj['jid_id']=jid_id;
+          informationObj['threadId']=threadId;
           $rootScope.chatSDK.readACKO.push(informationObj);
         },
 
@@ -302,6 +303,7 @@
           var timeStamp=infoObjec['timeStamp'];
           var jid=infoObjec['jid'];
           var jid_id=infoObjec['jid_id'];
+          var threadId = infoObjec['threadId'];
           var timeInMilliSecond;
           var strTimeMii;
           var messageId;
@@ -315,7 +317,7 @@
               mid = messageId.toString();
               // Create read ack and send the corresoding jabber client/
               // Note that since it is an delivery/ read ack , message ID containd -div- attributes
-              var message2 = $msg({to: jid, "type": "chat", "id": mid}).c('read').t(midreadArray[i]).up().c('meta');
+              var message2 = $msg({to: jid, "type": "chat", "id": mid}).c('read').t(midreadArray[i]).up().c('thread').t(threadId).up().c('meta');
               $rootScope.chatSDK.connection.send(message2);
               console.log('Read Acknowledgement Sent: ' + message2);
             }
