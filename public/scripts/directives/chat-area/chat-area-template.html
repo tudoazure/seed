@@ -302,7 +302,7 @@
 					<div class="col-md-1 p0 promoIcon-Open" ng-click="closeWindow()" ng-if="showPromo" title="Close Promocode">
 					</div>
 					<div class="col-md-8 p0">
-						<textarea type="text" placeholder="Send a message" class="chatTextArea" ng-enter="submitMessage()" ng-model="agentMessage" ng-focus="setFocus()" ng-disabled="contact[chatData.userId].chatState =='closed'"></textarea>
+						<textarea type="text" placeholder="Send a message" class="chatTextArea" ng-enter="submitMessage()" ng-model="agentMessage" ng-focus="setFocus()" ng-disabled="contact.chatState =='closed'"></textarea>
 					</div>
 					<div class="col-md-1 p0 messageIcon" ng-click="openDefaultTemplates()" ng-if="!showTemplates" title="Message Templates">
 					  <!-- <i class="fa fa-envelope templateLink"></i> -->

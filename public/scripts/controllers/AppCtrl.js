@@ -104,8 +104,9 @@
 					$rootScope.chatSDK.connection.addHandler($rootScope.chatSDK.ping_handler, null, "iq", null, "ping1"); 
 				    $rootScope.chatSDK.connection.addHandler($rootScope.chatSDK.ping_handler_readACK, null, "iq", null, "readACK");   
 				    var iq = $iq({type: 'get'}).c('query', {xmlns: 'jabber:iq:roster'});
-				    $rootScope.chatSDK.connection.sendIQ(iq, $rootScope.chatSDK.on_roster); 
-				    $rootScope.chatSDK.write_to_log("IQ for fetching contact information is send : " + iq);
+				    //$rootScope.chatSDK.connection.sendIQ(iq, $rootScope.chatSDK.on_roster); 
+				    $rootScope.chatSDK.connection.send($pres());
+				    //$rootScope.chatSDK.write_to_log("IQ for fetching contact information is send : " + iq);
 				    $rootScope.chatSDK.connection.addHandler($rootScope.chatSDK.on_message, null, "message", "chat");
 				};
 
