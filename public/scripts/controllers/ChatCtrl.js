@@ -111,7 +111,7 @@
 							var minTime = '';
 							var deactiveContact ="";
 							angular.forEach($scope.activeWindows, function(value, index){
-								var contactTime = $scope.contact[value.userId].lastActive;
+								var contactTime = $scope.contact[user.threadId].lastActive;
 								if(minTime){
 									if(minTime > contactTime){
 										minTime = contactTime;
@@ -123,10 +123,10 @@
 								}
 							});
 							angular.forEach($scope.activeWindows, function(value, index){
-								if(value.userId == deactiveContact){
+								if(value.threadId == deactiveContact){
 									var conversation = {};
 						        	conversation.threadId = user.threadId;
-						        	conversation.messages =  $scope.allMessages[user.id];
+						        	conversation.messages =  $scope.allMessages[user.threadId];
 						        	$scope.activeWindows[index] = conversation;
 								}
 							});
