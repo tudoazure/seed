@@ -128,7 +128,10 @@
          */
         on_message: function(message) {
             console.log("ChatCoreService @on_message called :");
-            var threadId = $(message).find("thread").text();
+            var threadId = null;
+            if($(message).find("thread")){
+              threadId = $(message).find("thread").text();
+            }
             var body = $(message).find("html > body");
             if (body.length === 0) {
                 body = $(message).find('body');
@@ -153,9 +156,18 @@
             var response = {};
             response['full_jid'] = $(message).attr('from');
             response['id'] = $(message).attr('id');
-            response['id'] = $(message).attr('id');
-            response['threadId'] = threadId;
+
+
             var jid = $(message).attr('from');
+            if(!threadId){
+              threadId = Strophe.getNodeFromJid(jid);
+            }
+            else{
+              var res = threadId.match(/-/gi);
+              if(!res || res.length == 0){
+                threadId = Strophe.getNodeFromJid(jid);
+              }
+            }
             var messageID = $(message).attr('id');
             response['composing'] = $(message).find('composing');
             if(body){
@@ -168,6 +180,7 @@
             catch(e){
               response['isSpecialMessage'] = false;
             }
+            response['threadId'] = threadId;
 
             var DeliveryMessgae = messageID.search("-dv-");
             var readMessageAcknow = messageID.search("-r-");
@@ -227,9 +240,8 @@
         },
 
        ping_handler : function (iq){
-          console.log('ping_handler Called');
          if($rootScope.chatSDK.kill=="Yes"){
-                   return false;
+            return false;
          }
           $rootScope.chatSDK.PingCount=0;
           var offmessageArray= UtilService.getAllPendingMessages();       
