@@ -59,8 +59,8 @@
 							}
 							else if($scope.activeWindows.length < Globals.AppConfig.ConcurrentChats){
 								var conversation = {};
-								conversation.userId = value.id;
-								conversation.messages =  $scope.allMessages[value.id];
+								conversation.threadId = value.threadId;
+								conversation.messages =  $scope.allMessages[value.threadId];
 								$scope.activeWindows.push(conversation);
 							}
 	    				})
