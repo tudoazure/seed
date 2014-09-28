@@ -275,7 +275,7 @@
 
                // For sending the closed message
                var closeChatMesg = {CLSCHAT : "chat closed" };
-               if(body == JSON.stringify(closeChatMesg)){
+               if(body == angular.toJson(closeChatMesg)){
                  $rootScope.$broadcast("Close-User-Chat", threadId);
                }
             }

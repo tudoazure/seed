@@ -45,16 +45,16 @@
             if(scope.contact.chatState != "closed"){
               MessageService.confirm("Are you sure you want to close conversation with " + scope.contact.name + " ?")
               .then(function() {
-                var body = {CLSCHAT : "chat closed" };
-                body = UtilService.stringifyEmitUnicode(body, true);
-                scope.agentMessage = body;
+                var chatClose = {CLSCHAT : "chat closed"};
+                chatClose = angular.toJson(chatClose);
+                scope.agentMessage = chatClose;
                 scope.submitMessage(false);
               });
             }
             else{
-              var body = {CLSCHAT : "chat closed" };
-              body = UtilService.stringifyEmitUnicode(body, true);
-              scope.agentMessage = body;
+              var chatClose = {CLSCHAT : "chat closed"};
+              chatClose = angular.toJson(chatClose);
+              scope.agentMessage = chatClose;
               scope.submitMessage(false);
             }
           }
@@ -214,7 +214,7 @@
                       minQuantity : promoObj.qty
                     } 
                     var promoCodeMessage = {PRMCODE: promoCodeData} ;
-                    scope.agentMessage = UtilService.stringifyEmitUnicode(promoCodeMessage, true);
+                    scope.agentMessage = angular.toJson(promoCodeMessage);
                     scope.submitMessage(true);
                     scope.showPromo = !scope.showPromo;
                     MessageService.displaySuccess("Promo code generated for " + scope.userName );
