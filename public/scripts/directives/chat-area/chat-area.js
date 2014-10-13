@@ -113,7 +113,7 @@
                 }
                 scope.showLoader=false;
               }, function(error){
-                MessageService.displayError("Error occured in fetching the product details for " + scope.userName);
+                MessageService.displayError("Error occured in fetching the product details for " + scope.contact.name);
                 console.log(error);
                 scope.showLoader=false;
               });
@@ -217,17 +217,17 @@
                     scope.agentMessage = angular.toJson(promoCodeMessage);
                     scope.submitMessage(true);
                     scope.showPromo = !scope.showPromo;
-                    MessageService.displaySuccess("Promo code generated for " + scope.userName );
+                    MessageService.displaySuccess("Promo code generated for " + scope.contact.name );
                   }
                   scope.showLoader=false;
                 }, function(errorObj){
-                  MessageService.displayError("Error in generating the promo code for " + scope.userName + " : " + errorObj.error);
+                  MessageService.displayError("Error in generating the promo code for " + scope.contact.name + " : " + errorObj.error);
                   scope.showLoader=false;
                 });
               }
               else{
                 scope.showLoader=false;
-                MessageService.displayError("No product details available. Promo code could not be generated for  " + scope.userName);
+                MessageService.displayError("No product details available. Promo code could not be generated for  " + scope.contact.name);
               }
             }
           };

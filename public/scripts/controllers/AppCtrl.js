@@ -27,7 +27,7 @@
 							IntimationService.agentLogoutRequest.query({
 								session_id : $rootScope.sessionid
 							}, function success(response){
-								if(response.message == "success" && response.status === 0){
+								if((response.message == "success" && response.status === 0) || response.status === 3){
 									$rootScope.$broadcast("Agent-Logout-Request");
 								}
 							}, function failure(error){
