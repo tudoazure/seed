@@ -273,12 +273,11 @@
             }
           }
 
-          scope.loadHistory = function(userId){
-            alert("History Called for " + userId);  
+          scope.loadHistory = function(threadId){
+            alert("History Called for " + threadId);  
             ChatServerService.fetchUserHistory.query({
               session_id : $rootScope.sessionid,
-              converser : userId,
-              merchant_id : 1
+              thread_id : threadId
             }, function success(response){
               console.log(response.data.messages);
               if(response && response.data && response.data.messages){
