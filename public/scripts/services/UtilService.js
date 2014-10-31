@@ -121,38 +121,41 @@
 	        return Strophe.getBareJidFromJid(jid).replace("@", "-").replace(/\./g, "-");
     	};
 
-    	var syncHistory = function(messageList){
+    	var syncHistory = function(messageList, threadId){
         	var messageArray = []; var state = 0;
         	angular.forEach(messageList, function(value, index){
-        		var messageObj ={};
-        		messageObj['deleted_on_sender'] = value['deleted_on_sender'];
-	            messageObj['sender'] = value['sender'];
-	            messageObj['receiver'] = value['receiver'];
-	            messageObj['can_forward'] = value['can_forward'];
-	            messageObj['delete_after'] = value['delete_after'];
-	            messageObj['last_ts'] = value['last_ts'];
-	            messageObj['sent_on'] = value['sent_on'];
-	            try{
-	                messageObj['txt'] = decode64(value['txt']);
-	            }
-	            catch(e){
-	                
-	            }
-	            messageObj['id'] = value['id'];
-	            messageObj['mid'] = value['mid'];
-	            messageObj['flags'] = 0;
-	            if (value['read_on'] != undefined)
-	                state = 3;
-	            else if (value['received_on'] != undefined)
-	                state = 2;
-	            else if (value['sent_on'] != undefined)
-	                state = 1;
-	            else
-	                state = 0;
-	            messageObj['state'] = state;//0-sending;1-sent;2-Delivered;3-read
-	            if(value['sender'] && value['receiver']){
-	                messageArray.push(messageObj);
-	            }
+        		if(index != 0){
+	        		var messageObj ={};
+	        		messageObj['deleted_on_sender'] = value['deleted_on_sender'];
+		            messageObj['sender'] = value['sender'];
+		            messageObj['receiver'] = value['receiver'];
+		            messageObj['can_forward'] = value['can_forward'];
+		            messageObj['delete_after'] = value['delete_after'];
+		            messageObj['last_ts'] = value['last_ts'];
+		            messageObj['sent_on'] = value['sent_on'];
+		            messageObj['threadId'] = threadId;
+		            try{
+		                messageObj['txt'] = decode64(value['txt']);
+		            }
+		            catch(e){
+		                
+		            }
+		            messageObj['id'] = value['id'];
+		            messageObj['mid'] = value['mid'];
+		            messageObj['flags'] = 0;
+		            if (value['sent_on'] != undefined)
+		                state = 3;
+		            else if (value['received_on'] != undefined)
+		                state = 2;
+		            else if (value['sent_on'] != undefined)
+		                state = 1;
+		            else
+		                state = 0;
+		            messageObj['state'] = state;//0-sending;1-sent;2-Delivered;3-read
+		            if(value['sender'] && value['receiver']){
+		                messageArray.push(messageObj);
+		            }
+	        	}
         	})
 			return messageArray;
 	    };

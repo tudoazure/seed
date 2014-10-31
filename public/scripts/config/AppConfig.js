@@ -9,7 +9,7 @@ var Globals = {
   Globals.AppConfig = {
   	ConcurrentChats : 3,
     DefaultPromoCodeValidityDays : 3,
-    DefaultHistoryFetchDays : 7,
+    DefaultHistoryFetch : 11,
   	ChatHostURI : chatHostBaseURI.replace(/.*?:\/\//g, ""),
     ChatServerConnect :  chatHostBaseURI + "/accounts/connect/",
     MessageTemplates : chatHostBaseURI + "/one97/get-template-messages/",

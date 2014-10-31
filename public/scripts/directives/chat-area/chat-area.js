@@ -11,6 +11,7 @@
           scope.templates = scope.templates;
           scope.contact = scope.contact[scope.chatData.threadId];
           scope.messages = scope.chatData.messages;
+          scope.showHistory = true;
 
           scope.openDefaultTemplates = function(){
             scope.showPromo = false;
@@ -107,7 +108,6 @@
               var svc = httpService.callFunc(productUrl);
               svc.get().then(function(response){
                 if (response) {
-                  console.log(response);
                   scope.productDetail = response;
                   scope.showProductDetail();
                 }
@@ -274,29 +274,35 @@
           }
 
           scope.loadHistory = function(threadId){
-            alert("History Called for " + threadId);  
+            scope.showLoader=true;
+            var timeStamp = scope.chatData.messages[0].sent_on;  
             ChatServerService.fetchUserHistory.query({
               session_id : $rootScope.sessionid,
+              last_ts : timeStamp,
+              no_of_messages : Globals.AppConfig.DefaultHistoryFetch,
               thread_id : threadId
             }, function success(response){
               console.log(response.data.messages);
               if(response && response.data && response.data.messages){
-                //$timeout(function(){
-                  var messageArray = UtilService.syncHistory(response.data.messages);
-                  $timeout(function(){
-                    scope.chatData.messages = messageArray;
-                    scope.messages = messageArray;
-                  })
-                  // $scope.allMessages[userId] = messageArray;
-                  // angular.forEach($scope.activeWindows, function(value, index){
-                  //       if (value.userId == userId){
-                  //         value.messages =  messageArray;
-                  //       }
-                  //     });
-                // });
-              }       
+                  var messageArray = UtilService.syncHistory(response.data.messages, threadId);
+                  if(messageArray.length){
+                    $timeout(function(){
+                      angular.forEach(messageArray, function(value, index){
+                        scope.chatData.messages.unshift(value);
+                      })
+                      scope.messages =  scope.chatData.messages;
+                    })
+                  }
+                  else{
+                    $timeout(function(){
+                      scope.showHistory = false;
+                    })
+                  }
+              }
+              scope.showLoader=false;       
             }, function failure(error){
-              // console.log("Templates could not be loaded.")
+              scope.showLoader=false;  
+              console.log("History could not be loaded.")
             })
         }
 

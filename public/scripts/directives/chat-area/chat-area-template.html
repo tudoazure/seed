@@ -37,7 +37,7 @@
 			</li>
 			<li class="chatArea" ng-show="!showPromo && !showTemplates && !showProduct" ng-click="setFocus()" chat-scroll-down>
 				<div style="margin-bottom:10px;">
-					<span ng-click="loadHistory(chatData.threadId)">Load Previous Message</span>
+					<a ng-if="showHistory" ng-click="loadHistory(chatData.threadId)" href="javascript:void(0)">Load Earlier Messages</a>
 					<div ng-repeat='message in messages'>
 						<div class='bubble fr reporter bgblue', , ng-class="message.sender== contact.id ? 'user-mesg' : 'bubble--alt agent-mesg'" ng-if="!message.isProductDetails && !message.isCloseChatMesg">
 		                	<div class='chat-name' ng-if="!message.isCloseChatMesg && !message.isPromoCode">
